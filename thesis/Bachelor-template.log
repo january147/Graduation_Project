@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  1 APR 2019 23:50
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  23 APR 2019 13:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1481,8 +1481,7 @@ Package tocloft Info: The document has chapter divisions on input line 51.
 \cfttabindent=\skip116
 \cfttabnumwidth=\skip117
 ))
-(./Bachelor-template.aux (./includefile/frontmatter.aux)
-(./includefile/backmatter.aux))
+(./Bachelor-template.aux (./includefile/frontmatter.aux))
 \openout1 = `Bachelor-template.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
@@ -1505,7 +1504,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 6.
 LaTeX Font Info:    ... okay on input line 6.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 6.
 LaTeX Font Info:    ... okay on input line 6.
- ABD: EverySelectfont initializing macros
+
+ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 6.
 .................................................
 . fontspec info: "setup-math"
@@ -1711,159 +1711,72 @@ Underfull \hbox (badness 10000) in paragraph at lines 57--62
 
 [2] [3
 
-]) [4
+]
+Overfull \hbox (3.9062pt too wide) in paragraph at lines 100--101
+\TU/TimesNewRoman(0)/bx/n/12.045 existing Android application behavior monitori
+ng systems, and present a high-performance
+ []
 
-] (./Bachelor-template.toc [5
+Missing character: There is no ​ in font Times New Roman/OT:mapping=tex-text;!
+Missing character: There is no ​ in font Times New Roman/OT:mapping=tex-text;!
+) [4
 
-])
+] [5] (./Bachelor-template.toc)
 \tf@toc=\write4
 \openout4 = `Bachelor-template.toc'.
 
- [6]
+ [6
+
+]
 \zihao {-2}1
-*************************************************
-* fontspec warning: "script-not-exist"
-* 
-* Font 'FandolFang-Regular' does not contain script 'CJK'.
-*************************************************
-\g__fontspec_family_FandolFang-Regular_int=\count324
-.................................................
-. fontspec info: "defining-font"
-. 
-. Font family 'FandolFang-Regular(0)' created for font 'FandolFang-Regular'
-. with options [Script={CJK},Extension={.otf}].
-.  
-.  This font family consists of the following NFSS series/shapes:
-.  
-. - 'normal' (m/n) with NFSS spec.: <->"[FandolFang-Regular.otf]/OT"
-. - 'small caps'  (m/sc) with NFSS spec.: 
-.................................................
 [1
 
 
 ]
-*************************************************
-* fontspec warning: "script-not-exist"
-* 
-* Font 'FandolKai-Regular' does not contain script 'CJK'.
-*************************************************
-\g__fontspec_family_FandolKai-Regular_int=\count325
-.................................................
-. fontspec info: "defining-font"
-. 
-. Font family 'FandolKai-Regular(0)' created for font 'FandolKai-Regular' with
-. options [Script={CJK},Extension={.otf}].
-.  
-.  This font family consists of the following NFSS series/shapes:
-.  
-. - 'normal' (m/n) with NFSS spec.: <->"[FandolKai-Regular.otf]/OT"
-. - 'small caps'  (m/sc) with NFSS spec.: 
-.................................................
-[2]
 \zihao {-2}2
-Missing character: There is no 俍 in font [FandolSong-Regular.otf]/OT!
+[2
+
+]
+\zihao {-2}3
 [3
 
 ]
-*************************************************
-* fontspec warning: "script-not-exist"
-* 
-* Font 'FandolFang-Regular' does not contain script 'CJK'.
-*************************************************
-[4] [5]
-Overfull \hbox (5.2893pt too wide) in paragraph at lines 230--232
-[]\TU/FandolKai-Regular(0)/m/n/12.045 关 于 此 问 题\TU/TimesNewRoman(0)/bx/n/12.045
- , \TU/FandolKai-Regular(0)/m/n/12.045 请 参 见 文 献 []\TU/lmtt/m/n/12.045 \cite{r2
-}\TU/TimesNewRoman(0)/bx/n/12.045 . \TU/FandolKai-Regular(0)/m/n/12.045 作 者 某 某
- 还 提 到 了 某 某 概 念 []\TU/lmtt/m/n/12.045 \upcite{r1}\TU/TimesNewRoman(0)/bx/n/12.
-045 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 230--232
-
- []
-
-Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
-t line 243.
-Package hyperref Info: bookmark level for unknown proof defaults to 0 on input 
-line 248.
-[6]
-Package hyperref Info: bookmark level for unknown definition defaults to 0 on i
-nput line 265.
-Package hyperref Info: bookmark level for unknown remark defaults to 0 on input
- line 270.
-Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
-input line 274.
-Package hyperref Info: bookmark level for unknown example defaults to 0 on inpu
-t line 278.
-Package hyperref Info: bookmark level for unknown corollary defaults to 0 on in
-put line 282.
-File: figures/Daisy.jpg Graphic file (type bmp)
-<figures/Daisy.jpg>
- [7] [8]
-\zihao {-2}3
-[9
+\zihao {-2}4
+[4
 
 ]
-
-LaTeX Font Warning: Font shape `TU/TimesNewRoman(0)/m/it' undefined
-(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 362.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 364--365
-[]\TU/TimesNewRoman(0)/bx/n/12.045 Herbert Voß, Mathmode, []$[][][][] [] [] [] 
-[][][] [] [][][] [] [][] [] [][] [] [][][][] [] [][][][] [] [][][][] [] [][][][
-] []
- []
-
-[10
-
-
-]
-\openout2 = `includefile/backmatter.aux'.
-
- (./includefile/backmatter.tex) [11
-
-
-]
-附录 A
-[12
-
-
-]
-附录 B
-[13
-
-]
-附录 C
-[14
+\zihao {-2}5
+[5
 
 ]
 \tf@thm=\write5
 \openout5 = `Bachelor-template.thm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 406.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 406.
- (./Bachelor-template.aux (./includefile/frontmatter.aux)
-(./includefile/backmatter.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 406.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 406.
+
+
+Package caption Warning: Unused \captionsetup[table] on input line 225.
+See the caption package documentation for explanation.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 52.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 52.
+(./Bachelor-template.aux (./includefile/frontmatter.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 52.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 52.
 Package rerunfilecheck Info: File `Bachelor-template.out' has not changed.
-(rerunfilecheck)             Checksum: 876A569D2D9412DC82ED1728A2DEDED4.
+(rerunfilecheck)             Checksum: 99ABDFEACF5E34C86592D2A4D1260A10.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 406.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 52.
  ) 
 Here is how much of TeX's memory you used:
- 26051 strings out of 492970
- 525836 string characters out of 6133939
- 597046 words of memory out of 5000000
- 29752 multiletter control sequences out of 15000+600000
- 544847 words of font info for 132 fonts, out of 8000000 for 9000
+ 25840 strings out of 492970
+ 515685 string characters out of 6133939
+ 592927 words of memory out of 5000000
+ 29572 multiletter control sequences out of 15000+600000
+ 544703 words of font info for 114 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 59i,12n,76p,10453b,504s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 59i,11n,76p,10453b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Bachelor-template.pdf (21 pages).
+Output written on Bachelor-template.pdf (12 pages).
