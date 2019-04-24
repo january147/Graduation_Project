@@ -7,7 +7,7 @@ function listExportFunction(module_name){
         send(exports[i].name);
     }
 }
-//
+//获取所有导入函数
 function listImportFunction(module_name){
     var module = Process.findModuleByName(module_name);
     send(module.name);
@@ -48,18 +48,41 @@ function listModules(){
     }
 }
 
-hook_code = {
-    onEnter:function(args){
-        name = Memory.readUtf8String(args[0]);
-        send(name)
+
+options = {
+    events: {
+        exec:true
+    },
+    onReceive: function (events) {
+        send(Stalker.parse(events, {
+          annotate: true, // to display the type of event
+          stringify: true
+            // to format pointer values as strings instead of `NativePointer`
+            // values, i.e. less overhead if you're just going to `send()` the 
+            // thing not actually parse the data agent-side
+        }));
+      },
+    
+};
+    
+
+code = {
+    onEnter: function(args){
+        Stalker.follow(Process.getCurrentThreadId(), options);
+    },
+    onLeave: function(ret){
+        Stalker.unfollow();
+        Interceptor.detachAll();
     }
 }
 
-Java.perform(function () {
-    // Function to hook is defined here
-    var VMRuntime = Java.use('dalvik.system.VMRuntime');
-
-    var path = VMRuntime.getRuntime().properties();
-    console.log(path[1]);
-    
-});
+Java.perform(function(){
+    mainact = Java.use('top.january147.noticer.MainActivity');
+    mainact.onButton1Click.implementation = function(view){
+        Stalker.follow(Process.getCurrentThreadId(), options);
+        send('stalker on');
+        this.onButton1Click(view);
+        Stalker.unfollow();
+        send('stalker off');
+    }
+})

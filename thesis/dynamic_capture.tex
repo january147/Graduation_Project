@@ -1,0 +1,64 @@
+% !Mode:: "TeX:UTF-8"
+%% 请使用 XeLaTeX 编译本文.
+% \documentclass{WHUBachelor}% 选项 forprint: 交付打印时添加, 避免彩色链接字迹打印偏淡. 即使用下一行:
+ \documentclass[forprint]{WHUBachelor}
+
+\begin{document}
+%%%%%%% 下面的内容, 据实填
+
+\miji{ }                                      % 密级. 没有就空着.
+\StudentNumber{2015301500150} % 填写自己的学号
+
+\title{安卓应用的动态行为捕获}
+\Etitle{Dynamic behavior capture for Android apps} % 英文题目
+\author{蹇奇芮}                            % 作者名字
+\Eauthor{QiRui Jian}            %作者英文名
+\Csupervisor{傅建明\quad 教授}        %指导教师中文名、职称
+\Esupervisor{Prof.~JianMing Fu}     %指导教师英文名、职称
+\Cmajor{信息安全}                  % 专业中文名
+\Emajor{Information Security}% 专业英文名
+\Cschoolname{国家网络安全学院}          % 学院名
+\Eschoolname{School of Cyber Science and Engineering} %学院英文名. 不确定的话, 请看一下自己学院的网页上是怎么写的. 别搞错了!
+\date{二〇一九年五月}                    % 日期, 要注意和英文日期一致!!
+\Edate{May, 2019}                       % 英文封面日期
+
+%-----------------------------------------------------------------------------
+\pdfbookmark[0]{封面}{title}         % 封面页加到 pdf 书签
+\maketitle
+\frontmatter
+\pagenumbering{Roman}              % 正文之前的页码用大写罗马字母编号.
+%-----------------------------------------------------------------------------
+\include{includefile/frontmatter}    % 加入摘要, 申明.
+%==========================把目录加入到书签==============================%%%%%%
+\pdfbookmark[0]{目录}{toc}
+\tableofcontents
+\mainmatter %% 以下是正文
+%%%%%%%%%%%%%%%%%%%%%%%%%%%--------main matter-------%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{绪论}
+\section{研究背景与意义}
+随着移动互联网和物联网的蓬勃发展, 智能移动终端设备迅速普及. 据统计, 截止2018年9月,国内智能手机用户数量达到7.8亿\upcite{smartphone2018statistics}
+\section{国内外研究现状}
+
+\section{论文主要工作}
+
+\section{论文组织结构}
+ 
+\chapter{背景技术分析}
+\chapter{系统设计实现}
+\chapter{实验与结果分析}
+\chapter{总结与展望}
+
+
+\phantomsection
+\addcontentsline{toc}{chapter}{参考文献} %将“参考文献加入目录中”
+\bibliographystyle{siam}
+\bibliography{ref}
+
+
+\backmatter
+\include{includefile/backmatter}
+\cleardoublepage
+\end{document}
+
+
+

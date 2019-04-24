@@ -29,7 +29,9 @@ if len(sys.argv) >= 3:
     hook_code = read_hook_code(sys.argv[2])
 else:
     hook_code = read_hook_code()
+
 session = frida.get_usb_device().attach(int(sys.argv[1]))
+# session = frida.attach(int(sys.argv[1]))
 script = session.create_script(hook_code)
 script.on('message', on_message)
 script.load()
