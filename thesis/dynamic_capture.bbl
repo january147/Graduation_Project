@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{droidbox}
+A.~Desnos and P.~Lantz.
+\newblock Droidbox: An android application sandbox for dynamic analysis.
+\newblock {\em Lund Univ., Lund, Sweden, Tech. Rep}, 2011.
+
 \bibitem{mobileOSSalesMarketshare2019}
 Kantar.
 \newblock Smartphone os sales market share evolution.
