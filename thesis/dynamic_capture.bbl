@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{mobileOSSalesMarketshare2019}
+Kantar.
+\newblock Smartphone os sales market share evolution.
+\newblock https://www.kantarworldpanel.com/global/smartphone-os-market-share/,
+  2019.
+
 \bibitem{smartphone2018statistics}
 newzoo.
 \newblock Top 50 countries/markets by smartphone users and penetration.
@@ -7,9 +13,19 @@ newzoo.
   https://newzoo.com/insights/rankings/top-50-countries-by-smartphone-penetration-and-users/,
   2018.
 
-\bibitem{app_amount2018}
+\bibitem{mobileOSMarketshare2019}
+statcounter.
+\newblock Mobile operating system market share worldwide.
+\newblock http://gs.statcounter.com/os-market-share/mobile/worldwide.
+
+\bibitem{appAmount2018}
 statista.
-\newblock App stores - statistics & facts.
+\newblock App stores - statistics \& facts.
 \newblock https://www.statista.com/topics/1729/app-stores/.
+
+\bibitem{malwareStat}
+腾讯移动安全实验室.
+\newblock 腾讯移动安全实验室2018年手机安全报告.
+\newblock https://m.qq.com/security\_lab/news\_detail\_489.html, 2018.
 
 \end{thebibliography}

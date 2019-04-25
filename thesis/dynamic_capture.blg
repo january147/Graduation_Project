@@ -3,51 +3,51 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: dynamic_capture.aux
 The style file: abbrv.bst
 A level-1 auxiliary file: includefile/frontmatter.aux
-Illegal, another \bibstyle command---line 41 of file dynamic_capture.aux
+Illegal, another \bibstyle command---line 45 of file dynamic_capture.aux
  : \bibstyle
  :          {siam}
 I'm skipping whatever remains of this command
 A level-1 auxiliary file: includefile/backmatter.aux
 Database file #1: ref.bib
-You've used 2 entries,
+You've used 5 entries,
             2118 wiz_defined-function locations,
-            508 strings with 4060 characters,
-and the built_in function-call counts, 432 in all, are:
-= -- 39
-> -- 14
+            525 strings with 4563 characters,
+and the built_in function-call counts, 1052 in all, are:
+= -- 98
+> -- 35
 < -- 0
-+ -- 6
-- -- 4
-* -- 13
-:= -- 78
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 8
++ -- 15
+- -- 10
+* -- 30
+:= -- 182
+add.period$ -- 15
+call.type$ -- 5
+change.case$ -- 20
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 14
-empty$ -- 45
-format.name$ -- 4
-if$ -- 92
+cite$ -- 5
+duplicate$ -- 35
+empty$ -- 111
+format.name$ -- 10
+if$ -- 229
 int.to.chr$ -- 0
-int.to.str$ -- 2
+int.to.str$ -- 5
 missing$ -- 0
-newline$ -- 13
-num.names$ -- 4
-pop$ -- 16
+newline$ -- 28
+num.names$ -- 10
+pop$ -- 40
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 15
 quote$ -- 0
-skip$ -- 15
+skip$ -- 37
 stack$ -- 0
-substring$ -- 10
-swap$ -- 2
+substring$ -- 25
+swap$ -- 5
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
+type$ -- 20
 warning$ -- 0
-while$ -- 4
-width$ -- 3
-write$ -- 21
+while$ -- 10
+width$ -- 6
+write$ -- 50
 (There was 1 error message)
