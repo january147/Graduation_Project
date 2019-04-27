@@ -5,11 +5,24 @@ A.~Desnos and P.~Lantz.
 \newblock Droidbox: An android application sandbox for dynamic analysis.
 \newblock {\em Lund Univ., Lund, Sweden, Tech. Rep}, 2011.
 
+\bibitem{taintdroid}
+W.~Enck, P.~Gilbert, B.-G. Chun, L.~P. Cox, J.~Jung, P.~McDaniel, and A.~N.
+  Sheth.
+\newblock Taintdroid: An information-flow tracking system for realtime privacy
+  monitoring on smartphones [c].
+\newblock In {\em Proceedings of the 9th USENIX conference on Operating systems
+  design and implementation. USENIX}, pages 1--6, 2010.
+
 \bibitem{mobileOSSalesMarketshare2019}
 Kantar.
 \newblock Smartphone os sales market share evolution.
 \newblock https://www.kantarworldpanel.com/global/smartphone-os-market-share/,
   2019.
+
+\bibitem{googlebouncer}
+H.~Lockheimer.
+\newblock Android and security.
+\newblock http://googlemobile.blogspot.com/2012/02/android-and-security.html.
 
 \bibitem{smartphone2018statistics}
 newzoo.
@@ -27,6 +40,13 @@ statcounter.
 statista.
 \newblock App stores - statistics \& facts.
 \newblock https://www.statista.com/topics/1729/app-stores/.
+
+\bibitem{droidscope}
+L.~K. Yan and H.~Yin.
+\newblock Droidscope: Seamlessly reconstructing the $\{$OS$\}$ and dalvik
+  semantic views for dynamic android malware analysis.
+\newblock In {\em Presented as part of the 21st $\{$USENIX$\}$ Security
+  Symposium ($\{$USENIX$\}$ Security 12)}, pages 569--584, 2012.
 
 \bibitem{malwareStat}
 腾讯移动安全实验室.
