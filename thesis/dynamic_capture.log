@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  28 APR 2019 00:05
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  29 APR 2019 00:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1732,24 +1732,24 @@ Missing character: There is no ​ in font Times New Roman/OT:mapping=tex-text;!
 (./introduction.tex [1
 
 
-] [2]) [3]
+] [2] [3]) [4]
 \zihao {-2}2
 (./background.tex
-File: figures/android_structure.png Graphic file (type bmp)
-<figures/android_structure.png>
-) [4
+File: figures/android_structure.jpg Graphic file (type bmp)
+<figures/android_structure.jpg>
+) [5
 
-] [5]
+] [6]
 \zihao {-2}3
-(./implementation.tex) [6
+(./implementation.tex) [7
 
 ]
 \zihao {-2}4
-(./experiment.tex) [7
+(./experiment.tex) [8
 
 ]
 \zihao {-2}5
-(./summary.tex) (./dynamic_capture.bbl [8
+(./summary.tex) (./dynamic_capture.bbl [9
 
 ]
 
@@ -1794,12 +1794,12 @@ wRoman(0)/m/it/12.045 2018 \TU/FandolSong-Regular(0)/m/n/12.045 年 手 机 安 
 U/TimesNewRoman(0)/m/it/12.045 .
  []
 
-) [9
+) [10
 
 ]
 \openout2 = `includefile/backmatter.aux'.
 
- (./includefile/backmatter.tex) [10
+ (./includefile/backmatter.tex) [11
 
 
 
@@ -1819,7 +1819,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 59.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 59.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 59.
 Package rerunfilecheck Info: File `dynamic_capture.out' has not changed.
-(rerunfilecheck)             Checksum: FA3CAC22FCC3C3548945635802BDC0B5.
+(rerunfilecheck)             Checksum: D438FC14FB04CA05A070904920AA1B78.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1828,11 +1828,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 59.
  ) 
 Here is how much of TeX's memory you used:
  25924 strings out of 492970
- 518951 string characters out of 6133939
- 602481 words of memory out of 5000000
+ 518962 string characters out of 6133939
+ 602479 words of memory out of 5000000
  29628 multiletter control sequences out of 15000+600000
  544703 words of font info for 114 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  59i,12n,76p,10451b,389s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dynamic_capture.pdf (18 pages).
+Output written on dynamic_capture.pdf (19 pages).
