@@ -1,13 +1,56 @@
 \section{Android系统架构}
-Android是由Google开发的一种移动操作系统, 该系统基于修改后的Linux内核构建, 由5层结构的软件栈构成, 如图\ref{androidStructure}所示\juhao
+Android系统由多个软件层次构成, 这些层次功能分明, 每一层都对其上的一层提供服务, 构成一个5层的软件栈\juhao 软件栈最底层为Linux内核层, 其上为硬件抽象层, 之后为本地函数库层, 该层次包括了Android Runtime和其他的一些本地函数库, 再上层为Android框架层, 该层包括了提供给应用程序的API和系统管理服务程序, 最上层为应用层, 该层次为用户直接交互的应用程序运行的层次\juhao  图\ref{androidStructure}给出了各层次的组件和关系\juhao
 \begin{figure}[ht]
-	\centering
-	\includegraphics[width=\textwidth]{android_structure.jpg}
-	\caption{Android系统架构}
-	\label{androidStructure}
+\centering
+\includegraphics[width=\textwidth]{android_structure.jpg}
+\caption{Android系统架构}
+\label{androidStructure}
 \end{figure}
 
+\subsection*{Linux内核层} 
+Android基于修改的Linux内核构建, Linux内核为Android系统提供了操作系统的基本功能, 包括进程管理, 内存管理, 文件管理, 进程间通信(共享内存和Binder), 网络协议栈, 电源管理, 许多设备驱动程序(音频, 视频, 蓝牙, 相机, 键盘, USB, WIFI等)以及访问控制机制(基于用户和用户组的访问控制和selinux)\juhao 这些功能通过系统调用的方式提供给上层使用, 因此, 监控系统调用的使用情况能够获取到应用对关键资源的访问行为\juhao
+
+\subsection*{硬件抽象层}
+硬件抽象层是定义了用于更高层次调用对应硬件驱动的接口, 屏蔽了不同厂商的同种设备驱动的差异, 降低Android系统与硬件的耦合度, 便于Android系统的移植\juhao 硬件抽象层包含多个库模块，其中每个模块都为特定类型的硬件组件实现一个接口，例如相机或蓝牙模块。当更高层次要求访问设备硬件时，Android系统将为该硬件组件加载库模块。
+
+\subsection*{本地库层}
+本地库层由许多由C/C++开发的系统运行库组成\juhao 这些运行库主要分为两部分, 第一分部为Android运行时环境相关的库, 第二部分为其他系统运行库\juhao 
+
+Android运行时环境由给应用提供Java运行环境的虚拟机实现和实现Java API的核心运行时库组成\juhao 虚拟机实现在Android4.4之前为Dalvik虚拟机, Android4.4时ndroid Runtime(ART)虚拟机作为实验特性加入, 并喝Dalvik虚拟机共存, Android5.0之后只保留了ART虚拟机\juhao Android框架层的许多服务程序和应用层的应用软件就运行在自身的虚拟机实例中\juhao 核心运行时库，可提供Java API框架使用的Java编程语言大部分功能\juhao
+
+其他系统运行库包括许多重要的功能的实现, 主要包括以下部分: 
+AUDIO MANAGER用于管理音频输入输出; 
+LIBC提供了c语言标准函数库; 
+MEDIA FRAMEWORK提供了对常见音频和视频处理的支持; 
+OPENGL/ES提供了2D/3D图形绘制功能;
+SQLITE提供了访问SQLite数据库的函数;
+SSL提供了常见的加密功能;
+SURFACE MANAGER提供对显示子系统的支持和管理;
+WEBKIT提供了浏览器引擎的实现\juhao
+
+本地库层的各种功能函数除了提供给Android系统自身以实现系统服务功能, 还可以通过Android Native Development Kit(NDK)让应用程序通过Java Native Interface(JNI)调用, 因此对本层函数调用情况的监控可以获取到应用的行为\juhao
+
+\subsection*{Android框架层}
+Android框架层包括了许多系统服务程序和组件以及提供给应用程序的访问系统资源的Java API\juhao 这些服务程序和组件主要包括以下几部分:
+
+1. 资源管理器，用于访问非代码资源，例如本地化的字符串、图形和布局文件
+
+2. 通知管理器，可让所有应用在状态栏中显示自定义提醒
+
+3. Activity管理器，用于管理应用的生命周期，提供常见的导航返回栈
+
+4. 内容提供程序，可让应用访问其他应用（例如“联系人”应用）中的数据或者共享其自己的数据
+
+5. 丰富、可扩展的视图系统，可用以构建应用的 UI，包括列表、网格、文本框、按钮甚至可嵌入的网络浏览器
+
+Android框架层是与应用程序联系最紧密的层次, 也是应用程序最容易访问系统资源的层次, 因此对该层次提供的API的监控能够显示应用的主要行为\juhao
+
+\subsection*{应用层}
+应用层包括了所有用户直接使用的应用软件,例如电话、短信、浏览器、微信、支付宝等\juhao 这些应用软件主要由Java语言开发, 通过调用Android框架层提供的API和Java语言的标准API实现功能, 每个应用运行于自己独立的虚拟机实例中, 多个应用间借助框架层提供的API通信(最终由内核实现)\juhao 利用NDK, 应用也可以实现自己的本地库, 访问Android系统本地库层的开放甚至隐藏的函数, 并通过JNI在应用的Java部分调用自身的本地库中的本地函数\juhao 由于应用能够直接执行本地代码, 增加了应用程序行为涉及的层次， 需要同时在Java层次和本地层次监控应用的执行才能获取到应用的所有行为\juhao
+
 \section{Android应用结构}
+Android应用程序主要以Android Package(apk)的文件形式分发\juhao
+
 \section{Android动态分析技术}
 \section{Android加壳和混淆技术}
 \section{Android Runtime}
@@ -15,4 +58,4 @@ Android是由Google开发的一种移动操作系统, 该系统基于修改后�
 \subsection{应用的启动}
 \subsection{应用的加载}
 \subsection{方法的执行}
-\section{frida框架}
+\section{frida}

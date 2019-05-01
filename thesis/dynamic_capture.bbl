@@ -1,4 +1,9 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{apimonitor}
+droidbox - apimonitor.wiki.
+\newblock
+  \url{https://code.google.com/archive/p/droidbox/wikis/APIMonitor.wiki}.
 
 \bibitem{droidbox}
 A.~Desnos and P.~Lantz.
@@ -16,30 +21,38 @@ W.~Enck, P.~Gilbert, B.-G. Chun, L.~P. Cox, J.~Jung, P.~McDaniel, and A.~N.
 \bibitem{mobileOSSalesMarketshare2019}
 Kantar.
 \newblock Smartphone os sales market share evolution.
-\newblock https://www.kantarworldpanel.com/global/smartphone-os-market-share/,
+\newblock
+  \url{https://www.kantarworldpanel.com/global/smartphone-os-market-share/},
   2019.
-
-\bibitem{googlebouncer}
-H.~Lockheimer.
-\newblock Android and security.
-\newblock http://googlemobile.blogspot.com/2012/02/android-and-security.html.
 
 \bibitem{smartphone2018statistics}
 newzoo.
 \newblock Top 50 countries/markets by smartphone users and penetration.
 \newblock
-  https://newzoo.com/insights/rankings/top-50-countries-by-smartphone-penetration-and-users/,
+  \url{https://newzoo.com/insights/rankings/top-50-countries-by-smartphone-penetration-and-users/},
   2018.
 
 \bibitem{mobileOSMarketshare2019}
 statcounter.
 \newblock Mobile operating system market share worldwide.
-\newblock http://gs.statcounter.com/os-market-share/mobile/worldwide.
+\newblock \url{http://gs.statcounter.com/os-market-share/mobile/worldwide}.
 
 \bibitem{appAmount2018}
 statista.
 \newblock App stores - statistics \& facts.
-\newblock https://www.statista.com/topics/1729/app-stores/.
+\newblock \url{https://www.statista.com/topics/1729/app-stores/}.
+
+\bibitem{copperdroid}
+K.~Tam, S.~J. Khan, A.~Fattori, and L.~Cavallaro.
+\newblock Copperdroid: Automatic reconstruction of android malware behaviors.
+\newblock In {\em Ndss}, 2015.
+
+\bibitem{malton}
+L.~Xue, Y.~Zhou, T.~Chen, X.~Luo, and G.~Gu.
+\newblock Malton: Towards on-device non-invasive mobile malware analysis for
+  $\{$ART$\}$.
+\newblock In {\em 26th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$
+  Security 17)}, pages 289--306, 2017.
 
 \bibitem{droidscope}
 L.~K. Yan and H.~Yin.
@@ -51,6 +64,6 @@ L.~K. Yan and H.~Yin.
 \bibitem{malwareStat}
 腾讯移动安全实验室.
 \newblock 腾讯移动安全实验室2018年手机安全报告.
-\newblock https://m.qq.com/security\_lab/news\_detail\_489.html, 2018.
+\newblock \url{https://m.qq.com/security\_lab/news\_detail\_489.html}, 2018.
 
 \end{thebibliography}

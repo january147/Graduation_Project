@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  29 APR 2019 00:33
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  2 MAY 2019 01:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1737,69 +1737,73 @@ Missing character: There is no ​ in font Times New Roman/OT:mapping=tex-text;!
 (./background.tex
 File: figures/android_structure.jpg Graphic file (type bmp)
 <figures/android_structure.jpg>
-) [5
+ [5
 
-] [6]
+]
+Overfull \hbox (7.5224pt too wide) in paragraph at lines 21--30
+[]\TU/FandolSong-Regular(0)/m/n/12.045 其 他 系 统 运 行 库 包 括 许 多 重 要 的 功 能 的 实 现\TU
+/TimesNewRoman(0)/bx/n/12.045 , \TU/FandolSong-Regular(0)/m/n/12.045 主 要 包 括 以 
+下 部 分\TU/TimesNewRoman(0)/bx/n/12.045 : AUDIO MAN-
+ []
+
+[6] [7]) [8]
 \zihao {-2}3
-(./implementation.tex) [7
+(./implementation.tex) [9
 
 ]
 \zihao {-2}4
-(./experiment.tex) [8
+(./experiment.tex) [10
 
 ]
 \zihao {-2}5
-(./summary.tex) (./dynamic_capture.bbl [9
+(./summary.tex) (./dynamic_capture.bbl [11
 
 ]
+*************************************************
+* fontspec warning: "script-not-exist"
+* 
+* Font 'FandolFang-Regular' does not contain script 'CJK'.
+*************************************************
+\g__fontspec_family_FandolFang-Regular_int=\count324
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'FandolFang-Regular(0)' created for font 'FandolFang-Regular'
+. with options [Script={CJK},Extension={.otf}].
+.  
+.  This font family consists of the following NFSS series/shapes:
+.  
+. - 'normal' (m/n) with NFSS spec.: <->"[FandolFang-Regular.otf]/OT"
+. - 'small caps'  (m/sc) with NFSS spec.: 
+.................................................
 
 LaTeX Font Warning: Font shape `TU/TimesNewRoman(0)/m/it' undefined
-(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 6.
+(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 11.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 17--21
+Underfull \hbox (badness 4899) in paragraph at lines 22--27
 []\TU/TimesNewRoman(0)/m/it/12.045 Kantar.  Smartphone os sales market share ev
-olution.
+olution.  []$[][][][][] [] [] [] [][][] []
  []
 
 
-Overfull \hbox (24.66368pt too wide) in paragraph at lines 23--26
-[]\TU/TimesNewRoman(0)/m/it/12.045 H. Lockheimer.  Android and security.  http:
-//googlemobile.blogspot.com/2012/02/android-
- []
-
-
-Underfull \hbox (badness 4505) in paragraph at lines 28--33
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
 []\TU/TimesNewRoman(0)/m/it/12.045 newzoo.  Top 50 countries/markets by smartph
-one users and penetration.
+one users and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--33
-\TU/TimesNewRoman(0)/m/it/12.045 https://newzoo.com/insights/rankings/top-50-co
-untries-by-smartphone-penetration-
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
+\TU/TimesNewRoman(0)/m/it/12.045 penetration.  []$[][][][][] [] [] [] [][][][][
+][] [] [][][] [] [][][][][][][][] [] [][][][][][][][] []
  []
 
+[12
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--38
-[]\TU/TimesNewRoman(0)/m/it/12.045 statcounter.  Mobile operating system market
- share worldwide.
- []
-
-
-Underfull \hbox (badness 3449) in paragraph at lines 52--55
-[]\TU/FandolSong-Regular(0)/m/n/12.045 腾 讯 移 动 安 全 实 验 室\TU/TimesNewRoman(0)/m/
-it/12.045 .  \TU/FandolSong-Regular(0)/m/n/12.045 腾 讯 移 动 安 全 实 验 室 \TU/TimesNe
-wRoman(0)/m/it/12.045 2018 \TU/FandolSong-Regular(0)/m/n/12.045 年 手 机 安 全 报 告\T
-U/TimesNewRoman(0)/m/it/12.045 .
- []
-
-) [10
-
-]
+]) [13]
 \openout2 = `includefile/backmatter.aux'.
 
- (./includefile/backmatter.tex) [11
+ (./includefile/backmatter.tex) [14
 
 
 
@@ -1819,7 +1823,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 59.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 59.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 59.
 Package rerunfilecheck Info: File `dynamic_capture.out' has not changed.
-(rerunfilecheck)             Checksum: D438FC14FB04CA05A070904920AA1B78.
+(rerunfilecheck)             Checksum: 7652D875ADC57E893AD367532BE5F5DB.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1827,12 +1831,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 59.
  ) 
 Here is how much of TeX's memory you used:
- 25924 strings out of 492970
- 518962 string characters out of 6133939
- 602479 words of memory out of 5000000
- 29628 multiletter control sequences out of 15000+600000
- 544703 words of font info for 114 fonts, out of 8000000 for 9000
+ 25980 strings out of 492970
+ 522437 string characters out of 6133939
+ 604539 words of memory out of 5000000
+ 29679 multiletter control sequences out of 15000+600000
+ 544719 words of font info for 116 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 59i,12n,76p,10451b,389s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 59i,12n,76p,10451b,453s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dynamic_capture.pdf (19 pages).
+Output written on dynamic_capture.pdf (22 pages).
