@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  2 MAY 2019 01:13
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  2 MAY 2019 15:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1746,17 +1746,27 @@ Overfull \hbox (7.5224pt too wide) in paragraph at lines 21--30
 下 部 分\TU/TimesNewRoman(0)/bx/n/12.045 : AUDIO MAN-
  []
 
-[6] [7]) [8]
+[6]
+File: figures/package_structure.jpg Graphic file (type bmp)
+<figures/package_structure.jpg>
+ [7] [8]
+Overfull \hbox (12.11494pt too wide) in paragraph at lines 72--73
+ \TU/TimesNewRoman(0)/bx/n/12.045 lib \TU/FandolSong-Regular(0)/m/n/12.045 该 文 
+件 夹 包 括 了 应 用 的 本 地 库 文 件，|  根 据 适 用 的 \TU/TimesNewRoman(0)/bx/n/12.045 Applica
+tion Binary Interface(ABI)
+ []
+
+) [9] [10]
 \zihao {-2}3
-(./implementation.tex) [9
+(./implementation.tex) [11
 
 ]
 \zihao {-2}4
-(./experiment.tex) [10
+(./experiment.tex) [12
 
 ]
 \zihao {-2}5
-(./summary.tex) (./dynamic_capture.bbl [11
+(./summary.tex) (./dynamic_capture.bbl [13
 
 ]
 *************************************************
@@ -1798,12 +1808,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--34
 ][] [] [][][] [] [][][][][][][][] [] [][][][][][][][] []
  []
 
-[12
+[14
 
-]) [13]
+]) [15]
 \openout2 = `includefile/backmatter.aux'.
 
- (./includefile/backmatter.tex) [14
+ (./includefile/backmatter.tex) [16
 
 
 
@@ -1822,21 +1832,27 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 59.
 (./includefile/backmatter.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 59.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 59.
-Package rerunfilecheck Info: File `dynamic_capture.out' has not changed.
-(rerunfilecheck)             Checksum: 7652D875ADC57E893AD367532BE5F5DB.
 
+
+Package rerunfilecheck Warning: File `dynamic_capture.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `dynamic_capture.out':
+(rerunfilecheck)             Before: B7D7DCAF62DD4230713395D97A5DDD63
+(rerunfilecheck)             After:  DAA459BCD3E39D557277567003B56F36.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 59.
  ) 
 Here is how much of TeX's memory you used:
- 25980 strings out of 492970
- 522437 string characters out of 6133939
- 604539 words of memory out of 5000000
- 29679 multiletter control sequences out of 15000+600000
+ 25985 strings out of 492970
+ 522576 string characters out of 6133939
+ 604574 words of memory out of 5000000
+ 29683 multiletter control sequences out of 15000+600000
  544719 words of font info for 116 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  59i,12n,76p,10451b,453s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dynamic_capture.pdf (22 pages).
+Output written on dynamic_capture.pdf (24 pages).

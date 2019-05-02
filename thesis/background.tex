@@ -46,16 +46,63 @@ Android框架层包括了许多系统服务程序和组件以及提供给应用�
 Android框架层是与应用程序联系最紧密的层次, 也是应用程序最容易访问系统资源的层次, 因此对该层次提供的API的监控能够显示应用的主要行为\juhao
 
 \subsection*{应用层}
-应用层包括了所有用户直接使用的应用软件,例如电话、短信、浏览器、微信、支付宝等\juhao 这些应用软件主要由Java语言开发, 通过调用Android框架层提供的API和Java语言的标准API实现功能, 每个应用运行于自己独立的虚拟机实例中, 多个应用间借助框架层提供的API通信(最终由内核实现)\juhao 利用NDK, 应用也可以实现自己的本地库, 访问Android系统本地库层的开放甚至隐藏的函数, 并通过JNI在应用的Java部分调用自身的本地库中的本地函数\juhao 由于应用能够直接执行本地代码, 增加了应用程序行为涉及的层次， 需要同时在Java层次和本地层次监控应用的执行才能获取到应用的所有行为\juhao
+应用层包括了所有用户直接使用的应用软件,例如电话、短信、浏览器、微信、支付宝等\juhao 这些应用软件主要由Java语言开发, 通过调用Android框架层提供的API和Java语言的标准API实现功能, 每个应用运行于自己独立进程中的虚拟机实例中, 多个应用间借助框架层提供的API通信(进程间通信最终由内核实现)\juhao 利用NDK, 应用也可以实现自己的本地库, 访问Android系统本地库层的开放甚至隐藏的函数, 并通过JNI在应用的Java部分调用自身的本地库中的本地函数\juhao 由于应用能够直接执行本地代码, 增加了应用程序行为涉及的层次， 需要同时在Java层次和本地层次监控应用的执行才能获取到应用的所有行为\juhao
 
 \section{Android应用结构}
-Android应用程序主要以Android Package(apk)的文件形式分发\juhao
+Android应用程序主要以Android Package(APK)的文件形式分发和安装\juhao APK文件本质上是一种zip压缩文件, 由多个文件和文件夹组成 其中包含了应用的代码文件、资源文件、证书文件和清单文件, 以apk作为文件后缀名\juhao 图\ref{packageStructure}给出了APK文件的内部结构\juhao
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=8cm]{package_structure.jpg}
+	\caption{APK文件结构}
+	\label{packageStructure}
+\end{figure}
+\paragraph*{META-INF} 
+该文件夹包含了与APK文件的签名和校验相关的文件, 一般应该包括至少3个文件:MANIFEST.MF、*.RSA、*.SF(“*”表示文件名不确定)\juhao 
+其中MANIFEST.MF记录了APK中的所有文件名和经过base64编码的SHA256校验值(不包括自身);
+*.SF记录了MANIFEST.MF文件的经过base64编码的SHA256校验值以及MANIFEST.MF中每一项记录的经过base64编码的SHA256校验值;
+*.RSA文件中保存了公钥、所采用的加密算法以及对CERT.SF中的内容的用私钥进行加密之后的值\juhao
+
+\paragraph*{assets} 
+该文件夹包括了res中定义类型之外的其他类型的资源文件，例如音频文件，视频文件等媒体文件\juhao 应用还可以把本地库文件放在这个文件里在运行时根据需要动态的加载\juhao
+
+\paragraph*{res}
+该文件夹包括了没有编译到resource.arsc中的常用的预定义类型的资源文件\juhao 
+
+\paragraph*{lib}
+该文件夹包括了应用的本地库文件， 根据适用的Application Binary Interface(ABI)不同，这些本地库文件会被放在不同的子文件夹里\juhao 当APK被安装时, 系统会选择合适的本地库文件进行安装, 在启动应用时系统会自动加载对应的本地库文件\juhao
+
+\paragraph*{AndroidManifest.xml}
+该文件包含了应用的配置信息, 具体来说包含以下几个方面:
+
+1.描述了应用包名;
+
+2.描述了应用的所有组件, 包括构成应用的 Activity、服务、广播接收器和内容提供程序, 以及这些组件可以处理的Intent消息;
+
+3.描述了应用需要使用的权限
+
+4.声明了应用所需的最低Android API级别(与Android版本相对应)
+
+5.列出应用必须链接到的本地库
+
+通过AndroidManifest.xml我们可以得到应用的基本信息\juhao
+
+
+\paragraph*{classes.dex}
+该文件为应用的Java代码编译后的运行于ART或者Dalvik虚拟机的可执行文件\juhao 该文件包含了应用自定义的类的实现代码, 通过反编译该文件可以得到应用的Java源代码, 因此通常会使用加壳和混淆的手段隐藏该文件真正的内容\juhao 对于大型应用, 可能会有多个dex文件\juhao
+
+\paragraph*{resources.arsc}
+该文件为编译后的资源文件, 包括xml布局文件, 字符串资源文件等等\juhao
+
 
 \section{Android动态分析技术}
+
+
 \section{Android加壳和混淆技术}
-\section{Android Runtime}
+\section{Android运行时环境}
 \subsection{简介}
 \subsection{应用的启动}
 \subsection{应用的加载}
 \subsection{方法的执行}
-\section{frida}
+\section{Frida}
+Frida是一个著名的开源hook框架\juhao
+

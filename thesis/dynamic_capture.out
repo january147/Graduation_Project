@@ -12,12 +12,12 @@
 \BOOKMARK [1][-]{section.2.2}{Android应用结构}{chapter.2}% 12
 \BOOKMARK [1][-]{section.2.3}{Android动态分析技术}{chapter.2}% 13
 \BOOKMARK [1][-]{section.2.4}{Android加壳和混淆技术}{chapter.2}% 14
-\BOOKMARK [1][-]{section.2.5}{Android\040Runtime}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.5}{Android运行时环境}{chapter.2}% 15
 \BOOKMARK [2][-]{subsection.2.5.1}{简介}{section.2.5}% 16
 \BOOKMARK [2][-]{subsection.2.5.2}{应用的启动}{section.2.5}% 17
 \BOOKMARK [2][-]{subsection.2.5.3}{应用的加载}{section.2.5}% 18
 \BOOKMARK [2][-]{subsection.2.5.4}{方法的执行}{section.2.5}% 19
-\BOOKMARK [1][-]{section.2.6}{frida}{chapter.2}% 20
+\BOOKMARK [1][-]{section.2.6}{Frida}{chapter.2}% 20
 \BOOKMARK [0][-]{chapter.3}{系统设计实现}{}% 21
 \BOOKMARK [1][-]{section.3.1}{概览}{chapter.3}% 22
 \BOOKMARK [1][-]{section.3.2}{启动监控}{chapter.3}% 23
@@ -28,5 +28,5 @@
 \BOOKMARK [1][-]{section.4.1}{监控数据}{chapter.4}% 28
 \BOOKMARK [1][-]{section.4.2}{性能}{chapter.4}% 29
 \BOOKMARK [0][-]{chapter.5}{总结与展望}{}% 30
-\BOOKMARK [0][-]{section*.9}{参考文献}{}% 31
-\BOOKMARK [0][-]{chapter*.11}{致谢}{}% 32
+\BOOKMARK [0][-]{section*.17}{参考文献}{}% 31
+\BOOKMARK [0][-]{chapter*.19}{致谢}{}% 32
