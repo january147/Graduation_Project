@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  3 MAY 2019 10:52
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  4 MAY 2019 00:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1756,13 +1756,7 @@ Overfull \hbox (14.12245pt too wide) in paragraph at lines 70--71
 ion Binary Interface(ABI)
  []
 
-[9]
-Overfull \hbox (5.48744pt too wide) in paragraph at lines 95--97
-[]\TU/FandolSong-Regular(0)/m/n/12.045 内 容 提 供 程 序 管 理 一 组 共 享 的 应 用 数 据。|  您 可
- 以 将 数 据 存 储 在 文 件 系 统、| \TU/TimesNewRoman(0)/bx/n/12.045 SQLite
- []
-
-) [10] [11]
+[9] [10]) [11]
 \zihao {-2}3
 (./implementation.tex) [12
 
@@ -1845,18 +1839,18 @@ Package rerunfilecheck Warning: File `dynamic_capture.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `dynamic_capture.out':
-(rerunfilecheck)             Before: A1E4EB21F3D8FBB0A97D8C65C89E85BD
-(rerunfilecheck)             After:  CFA74A9C52D317CF3B8948A41F0D6ECB.
+(rerunfilecheck)             Before: CFA74A9C52D317CF3B8948A41F0D6ECB
+(rerunfilecheck)             After:  0E1888095CEFF783519EAF4C504B722F.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 59.
  ) 
 Here is how much of TeX's memory you used:
- 26044 strings out of 492970
- 527162 string characters out of 6133939
+ 26012 strings out of 492970
+ 524655 string characters out of 6133939
  604716 words of memory out of 5000000
- 29742 multiletter control sequences out of 15000+600000
+ 29710 multiletter control sequences out of 15000+600000
  544719 words of font info for 116 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  59i,12n,76p,10451b,453s stack positions out of 5000i,500n,10000p,200000b,80000s

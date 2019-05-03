@@ -11,6 +11,11 @@
 \contentsline {subsection}{\numberline {2.2.1}应用安装包结构}{8}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}应用组织结构}{10}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}Android动态分析技术}{11}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Virtual Machine Introspection}{11}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}ptrace系统调用}{11}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Application Instrumentation}{11}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}DVM/ART Instrumentation}{11}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}hook技术}{11}{subsection.2.3.5}
 \contentsline {section}{\numberline {2.4}Android加壳和混淆技术}{11}{section.2.4}
 \contentsline {section}{\numberline {2.5}Android运行时环境}{11}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}简介}{11}{subsection.2.5.1}
