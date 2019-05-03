@@ -8,23 +8,25 @@
 \contentsline {chapter}{\numberline {\zihao {-2}2\hspace {.3em}}背景技术分析}{5}{chapter.2}
 \contentsline {section}{\numberline {2.1}Android系统架构}{5}{section.2.1}
 \contentsline {section}{\numberline {2.2}Android应用结构}{8}{section.2.2}
-\contentsline {section}{\numberline {2.3}Android动态分析技术}{10}{section.2.3}
-\contentsline {section}{\numberline {2.4}Android加壳和混淆技术}{10}{section.2.4}
-\contentsline {section}{\numberline {2.5}Android运行时环境}{10}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}简介}{10}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}应用的启动}{10}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}应用的加载}{10}{subsection.2.5.3}
-\contentsline {subsection}{\numberline {2.5.4}方法的执行}{10}{subsection.2.5.4}
-\contentsline {section}{\numberline {2.6}Frida}{10}{section.2.6}
-\contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{11}{chapter.3}
-\contentsline {section}{\numberline {3.1}概览}{11}{section.3.1}
-\contentsline {section}{\numberline {3.2}启动监控}{11}{section.3.2}
-\contentsline {section}{\numberline {3.3}Java方法执行监控}{11}{section.3.3}
-\contentsline {section}{\numberline {3.4}native函数调用监控}{11}{section.3.4}
-\contentsline {section}{\numberline {3.5}log系统}{11}{section.3.5}
-\contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{12}{chapter.4}
-\contentsline {section}{\numberline {4.1}监控数据}{12}{section.4.1}
-\contentsline {section}{\numberline {4.2}性能}{12}{section.4.2}
-\contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{13}{chapter.5}
-\contentsline {chapter}{参考文献}{13}{section*.17}
-\contentsline {chapter}{致谢}{16}{chapter*.19}
+\contentsline {subsection}{\numberline {2.2.1}应用安装包结构}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}应用组织结构}{10}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}Android动态分析技术}{11}{section.2.3}
+\contentsline {section}{\numberline {2.4}Android加壳和混淆技术}{11}{section.2.4}
+\contentsline {section}{\numberline {2.5}Android运行时环境}{11}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}简介}{11}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}应用的启动}{11}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}应用的加载}{11}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}方法的执行}{11}{subsection.2.5.4}
+\contentsline {section}{\numberline {2.6}Frida}{11}{section.2.6}
+\contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{12}{chapter.3}
+\contentsline {section}{\numberline {3.1}概览}{12}{section.3.1}
+\contentsline {section}{\numberline {3.2}启动监控}{12}{section.3.2}
+\contentsline {section}{\numberline {3.3}Java方法执行监控}{12}{section.3.3}
+\contentsline {section}{\numberline {3.4}native函数调用监控}{12}{section.3.4}
+\contentsline {section}{\numberline {3.5}log系统}{12}{section.3.5}
+\contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{13}{chapter.4}
+\contentsline {section}{\numberline {4.1}监控数据}{13}{section.4.1}
+\contentsline {section}{\numberline {4.2}性能}{13}{section.4.2}
+\contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{14}{chapter.5}
+\contentsline {chapter}{参考文献}{14}{section*.10}
+\contentsline {chapter}{致谢}{17}{chapter*.12}
