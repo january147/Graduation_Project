@@ -48,6 +48,7 @@ Android框架层是与应用程序联系最紧密的层次, 也是应用程序�
 \subsection*{应用层}
 应用层包括了所有用户直接使用的应用软件,例如电话、短信、浏览器、微信、支付宝等\juhao 这些应用软件主要由Java语言开发, 通过调用Android框架层提供的API和Java语言的标准API实现功能, 每个应用运行于自己独立进程中的虚拟机实例中, 多个应用间借助框架层提供的API通信(进程间通信最终由内核实现)\juhao 利用NDK, 应用也可以实现自己的本地库, 访问Android系统本地库层的开放甚至隐藏的函数, 并通过JNI在应用的Java部分调用自身的本地库中的本地函数\juhao 由于应用能够直接执行本地代码, 增加了应用程序行为涉及的层次， 需要同时在Java层次和本地层次监控应用的执行才能获取到应用的所有行为\juhao
 
+
 \section{Android应用结构}
 \subsection{应用安装包结构}
 Android应用程序主要以Android Package(APK)的文件形式分发和安装\juhao APK文件本质上是一种zip压缩文件, 由多个文件和文件夹组成 其中包含了应用的代码文件、资源文件、证书文件和清单文件, 以apk作为文件后缀名\juhao 图\ref{packageStructure}给出了APK文件的内部结构\juhao
@@ -97,20 +98,66 @@ Activity表示一个用户能够直接交互的界面\juhao 例如，电子邮�
 
 广播接收器是一种用于响应系统范围广播通知的组件\juhao 许多广播都是由系统发起的, 例如，通知屏幕已关闭、电池电量不足或已拍摄照片的广播\juhao 应用也可以发起广播, 例如，通知其他应用某些数据已下载至设备，并且可供其使用\juhao 尽管广播接收器不会显示用户界面，但它们可以创建状态栏通知，在发生广播事件时提醒用户\juhao 但广播接收器更常见的用途只是作为通向其他组件的“通道”，例如，它可以在接收到某个事件广播后启动一项服务来执行某项工作\juhao
 
-\section{Android动态分析技术}
-Android平台的动态分析同传统PC环境有相似之处, 即都是通过追踪应用软件的控制流和数据流实现对应用软件行为的揭示\juhao 但Android系统的多层次架构使得动态分析系统需要能够同时对本地层和Java层对应用的执行进行监控才能够获取到应用的完整行为\juhao 对各层次的监控, 常用的实现技术如下:
-\subsection{Virtual Machine Introspection}
-\subsection{ptrace系统调用}
-\subsection{Application Instrumentation}
-\subsection{DVM/ART Instrumentation}
-\subsection{hook技术}
-
-\section{Android加壳和混淆技术}
 \section{Android运行时环境}
-\subsection{简介}
+\label{androidRuntime}
+Android运行时环境是Android系统中十分重要的一部分, Android应用和许多系统服务都运行在Android运行时环境中\juhao 
+Android运行时环境本质上是一个虚拟机, 用于执行Android应用中dex文件内的字节码, 
+
 \subsection{应用的启动}
-\subsection{应用的加载}
+
+\subsection{类的加载}
+
 \subsection{方法的执行}
+
+
+\section{Android动态分析技术}
+Android平台的动态分析同传统PC环境有相似之处, 即都是通过追踪应用软件的控制流和数据流实现对应用软件行为的揭示\juhao 但Android系统的多层次架构使得动态分析系统需要能够同时对本地层和Java层对应用的执行进行监控才能够获取到应用的完整行为\juhao 对各层次的监控, 常用的技术如下:
+
+\subsection{Virtual Machine Introspection}
+Virtual Machine Introspection(VMI)是一种实时监控虚拟机运行状态的技术\juhao 通过该技术, 能够实现在指令层面监控应用的运行, 因此也可以实现对系统调用, 本地函数调用的监控\juhao 并且由于监控代码运行于客户系统之外, 客户系统内被监控的应用无法检测到自己处于被监控状态, 因此是一种十分有效的监控应用运行的技术\juhao 对于Android平台的动态监控而言, 使用VMI技术无需修改Android源代码, 可以适应Android版本的变化, 但该技术的运用依赖于模拟器, 一般通过修改模拟器加入监控代码来实现, 但由于依赖模拟器, 容易受到应用对模拟器环境检测的影响\juhao Cooperdroid\upcite{copperdroid}、DroidScope\upcite{droidscope}使用了该技术来实现动态监控\juhao
+
+\subsection{ptrace系统调用}
+ptrace系统调用是Unix和一些类Unix系统中的一种系统调用\juhao 通过使用ptrace系统调用, 一个进程可以监控另外一个进程的执行, 读取和修改其内存和寄存器\juhao 具体来说, ptrace系统调用能够实现监控应用调用系统调用的情况, 能够实现指令单步执行和断点, 许多调试工具都依赖于ptrace系统调用实现, 如gdb, lldb, strace, ltrace等\juhao 由于ptrace系统调用能够实现单步执行, 通过ptrace系统调用也能实现在指令层面监控应用的执行\juhao 加上ptrace系统调用能够监控应用调用系统调用的情况, 通过ptrace系统调用可以实现对本地函数调用的监控\juhao 对于Android平台的动态监控而言, 使用ptrace系统调用也无需修改Android源代码, 可以适应Android版本的变化, 并且相比VMI技术, ptrace系统调用不依赖于模拟器, 可以运行于真机上, 但存在一些反ptrace跟踪的技术, 例如一个进程只能被一个进程跟踪, 所以应用可以跟踪自身, 从而防止被其他工具跟踪\juhao ptrace系统调用一般还会和hooking技术结合起来使用, 可以实现对目标函数的劫持和监控\juhao Crowdroid\upcite{crowdroid}\dunhao Glassbox\upcite{glassbox}使用了该技术来实现动态监控\juhao
+
+\subsection{Application Instrumentation}
+Application Instrumentation指通过修改需要监控的目标应用, 向其中插入监控代码实现监控应用执行的技术\juhao 对于Android平台而言, 该技术一般用于监控应用调用Java层API的情况, 具体来说, 通过反编译应用的dex文件得到smali代码, 搜索其中调用敏感API的代码, 将监控代码插入调用敏感API代码的周围, 再将修改后的smali代码编译重新打包成包含监控代码的应用, 这样在应用执行时就会执行监控代码, 输出监控信息\juhao 该技术不需要修改Android系统源代码, 但受到Android系统API变化的影响, 因此会在一定程度上受Android版本变化的影响\juhao 此外, 由于应用完整性校验以及加壳和混淆技术的广泛应用, 修改后的应用很可能无法运行, 并且一般无法从应用安装包获取到包含应用真实逻辑的dex文件, 因此该技术目前几乎已经失效\juhao APIMonitor\upcite{apimonitor}使用了该技术实现动态监控\juhao
+
+\subsection{DVM/ART Instrumentation}
+DVM/ART Instrumentation指通过修改Android系统的DVM或者ART运行时环境, 在关键的部分加入监控逻辑实现监控应用在Java层执行情况的技术\juhao 一般来说, 可以修改Android运行时环境中方法执行相关的函数来实现对应用执行的方法以及其参数和返回值的监控, 也可以修改Android运行时环境中的字节码解释器实现对Java层指令级别的监控, 在\ref{androidRuntime}节有关于Android运行时环境更详细的描述\juhao 该方法有些类似于上面提到的VMI技术, 在虚拟机层面监控虚拟机内部运行的应用, 在实现全面监控应用运行的同时也使得应用无法检测到自己处于受监控状态, 因此是监控应用Java层行为的一种十分有效的技术\juhao 并且该技术不依赖于模拟器, 利用其开发的动态监控系统可以运行于真机上, 不受应用检测模拟器机制的影响\juhao 但该技术的实现依赖于对
+Android源代码的修改, 并且Android运行时环境在不同版本上变化较大, 特别是Android5.0之前和Android5.0之后Android运行时环境有DVM替换为了ART, 因此需要经常调整以适用于最新的Android版本\juhao DroidScope\upcite{droidscope}\dunhao Glassbox\upcite{glassbox}使用了该技术实现动态监控\juhao
+
+\subsection{Hooking技术}
+hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们可以获取目标函数的参数和返回值, 可以改变目标函数的行为从而实现对目标函数的监控\juhao 对于Android平台, hooking技术可以用于监控本地函数也可以用于监控Java方法, 其具体的实现方式有很多种, 例如针对本地函数有Procedure Link Table(PLT) hooking\dunhao inline hooking\dunhao Import Address Table(IAT) hooking; 针对Java方法有修改vtable, 修改ArtMethod对象的入口地址等\juhao hooking技术一般比较灵活, 结合一些动态代码追踪工具, 例如frida, 能够动态的调整监控目标\juhao 由于ptrace系统调用能够修改被追踪进程的内存, linux系统的hooking技术一般会利用ptrace系统调用实现\juhao REAPER\upcite{reaper}使用了该技术实现动态监控\juhao
+
+
+\section{Android应用加固技术}
+为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括名称混淆\dunhao 方执行混淆\dunhao dex文件动态加载\dunhao dex文件动态修改\dunhao 类动态加载\dunhao 方法本地实现\dunhao 模拟器检测\dunhao 反调试等\juhao
+
+\paragraph*{名称混淆}
+该技术即在应用发布时按照一定的规则将开发应用时定义的有意义的类名\dunhao 方法名\dunhao 和变量名替换称无意义的字符, 从而增加了逆向分析方法用途的难度\juhao
+
+\paragraph*{方法执行混淆}
+该技术通过hooking技术使用将一个方法的代码用另外一个方法替换从而使得动态监控系统记录的方法调用和实际的方法调用不同, 因此能够隐藏应用行为, 极大地增加了动态分析的难度\juhao
+
+\paragraph*{dex文件动态加载}
+该技术通过先将包含应用真实逻辑的dex文件加密, 在应用运行时再调用解密代码释放dex文件并动态加载来实现隐藏包含应用真实逻辑的dex文件\juhao 该技术用于对抗静态分析十分有效, 可以使得静态分析无法获取到应用的真实逻辑\juhao
+
+\paragraph*{dex文件动态修改}
+该技术为dex文件动态加载技术的改进\juhao 采用该技术时, 加载到内存的dex文件并不完全解密, 而是在具体的方法调用前修改方法对应dex文件中的部分为方法的真正指令, 在方法执行后又抹去对应指令\juhao 该技术用于对抗一些Android平台的脱壳工具, 使其无法得到完整的dex文件\juhao
+
+\paragraph*{类动态加载}
+该技术把类方法的字节码分散到多个dex文件中, 在某个类被调用时动态的解密对应的dex文件来加载被调用的类, 从而极大地增加了脱壳工具获取包含应用真实逻辑的dex文件的难度\juhao
+
+\paragraph*{方法本地实现}
+该技术将某些方法替换成本地方法, 使用本地指令实现方法的内容, 从而加大了分析方法用途的难度\juhao 有些应用加固工具还结合了Virtual Machine Protection(VMP)技术, 将原始指令转换成自己的私有指令集并通过私有虚拟机执行, 进一步增加了分析方法内容的难度\juhao
+
+\paragraph*{模拟器检测}
+该技术使用了许多Android模拟器的特征来识别应用的运行环境是否为模拟器, 例如许多模拟器的International Mobile Equipment Identity(IMEI)为全0\juhao 由于许多动态分析工具依赖于模拟器, 所以一旦识别出当前运行在模拟器环境, 应用就可以退出或者表现出一些不同于真机上的行为, 从而阻碍动态分析\juhao
+
+\paragraph*{反调试}
+该技术通过多种方式检测应用是否处于被调试状态, 并阻止对应用的调试\juhao 例如, 应用通过调用ptrace追踪自身从而避免被其他监控进程追踪; 应用通过搜索内存中某些著名调试工具的名称, 如strace, ltrace, valgrind等来确定自身是否被调试; 应用hook自身的某些函数,如open, wrtie等来阻止自己的数据被调试工具输出\juhao 反调试技术给真机上的动态分析系统带来了较大的障碍\juhao
+
+
 \section{Frida}
 Frida是一个著名的开源hook框架\juhao
 

@@ -5,10 +5,23 @@ droidbox - apimonitor.wiki.
 \newblock
   \url{https://code.google.com/archive/p/droidbox/wikis/APIMonitor.wiki}.
 
+\bibitem{crowdroid}
+I.~Burguera, U.~Zurutuza, and S.~Nadjm-Tehrani.
+\newblock Crowdroid: behavior-based malware detection system for android.
+\newblock In {\em Proceedings of the 1st ACM workshop on Security and privacy
+  in smartphones and mobile devices}, pages 15--26. ACM, 2011.
+
 \bibitem{droidbox}
 A.~Desnos and P.~Lantz.
 \newblock Droidbox: An android application sandbox for dynamic analysis.
 \newblock {\em Lund Univ., Lund, Sweden, Tech. Rep}, 2011.
+
+\bibitem{reaper}
+M.~Diamantaris, E.~P. Papadopoulos, E.~P. Markatos, S.~Ioannidis, and
+  J.~Polakis.
+\newblock Reaper: Real-time app analysis for augmenting the android permission
+  system.
+\newblock 2019.
 
 \bibitem{taintdroid}
 W.~Enck, P.~Gilbert, B.-G. Chun, L.~P. Cox, J.~Jung, P.~McDaniel, and A.~N.
@@ -17,6 +30,12 @@ W.~Enck, P.~Gilbert, B.-G. Chun, L.~P. Cox, J.~Jung, P.~McDaniel, and A.~N.
   monitoring on smartphones [c].
 \newblock In {\em Proceedings of the 9th USENIX conference on Operating systems
   design and implementation. USENIX}, pages 1--6, 2010.
+
+\bibitem{glassbox}
+P.~Irolla and E.~Filiol.
+\newblock Glassbox: Dynamic analysis platform for malware android applications
+  on real devices.
+\newblock {\em arXiv preprint arXiv:1609.04718}, 2016.
 
 \bibitem{mobileOSSalesMarketshare2019}
 Kantar.

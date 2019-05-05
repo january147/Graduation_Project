@@ -3,7 +3,7 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: dynamic_capture.aux
 The style file: abbrv.bst
 A level-1 auxiliary file: includefile/frontmatter.aux
-Illegal, another \bibstyle command---line 72 of file dynamic_capture.aux
+Illegal, another \bibstyle command---line 90 of file dynamic_capture.aux
  : \bibstyle
  :          {siam}
 I'm skipping whatever remains of this command
@@ -17,46 +17,55 @@ Repeated entry---line 121 of file ref.bib
  : @inproceedings{malton
  :                      ,
 I'm skipping whatever remains of this entry
+Repeated entry---line 129 of file ref.bib
+ : @inproceedings{crowdroid
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 138 of file ref.bib
+ : @article{reaper
+ :                ,
+I'm skipping whatever remains of this entry
 Warning--to sort, need author or key in apimonitor
-You've used 11 entries,
+Warning--empty journal in reaper
+You've used 14 entries,
             2118 wiz_defined-function locations,
-            556 strings with 5836 characters,
-and the built_in function-call counts, 3312 in all, are:
-= -- 310
-> -- 151
-< -- 3
-+ -- 61
-- -- 50
-* -- 171
-:= -- 528
-add.period$ -- 32
-call.type$ -- 11
-change.case$ -- 58
+            570 strings with 6419 characters,
+and the built_in function-call counts, 4342 in all, are:
+= -- 410
+> -- 210
+< -- 4
++ -- 84
+- -- 70
+* -- 236
+:= -- 702
+add.period$ -- 42
+call.type$ -- 14
+change.case$ -- 77
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 131
-empty$ -- 296
-format.name$ -- 50
-if$ -- 724
+cite$ -- 16
+duplicate$ -- 172
+empty$ -- 368
+format.name$ -- 70
+if$ -- 940
 int.to.chr$ -- 0
-int.to.str$ -- 11
-missing$ -- 5
-newline$ -- 57
-num.names$ -- 20
-pop$ -- 96
+int.to.str$ -- 14
+missing$ -- 8
+newline$ -- 72
+num.names$ -- 26
+pop$ -- 120
 preamble$ -- 1
-purify$ -- 47
+purify$ -- 63
 quote$ -- 0
-skip$ -- 114
+skip$ -- 144
 stack$ -- 0
-substring$ -- 135
-swap$ -- 38
-text.length$ -- 3
+substring$ -- 174
+swap$ -- 48
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 44
-warning$ -- 1
-while$ -- 29
-width$ -- 13
-write$ -- 110
-(There were 3 error messages)
+type$ -- 56
+warning$ -- 2
+while$ -- 38
+width$ -- 16
+write$ -- 141
+(There were 5 error messages)
