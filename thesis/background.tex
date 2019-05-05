@@ -100,17 +100,44 @@ Activity表示一个用户能够直接交互的界面\juhao 例如，电子邮�
 
 \section{Android运行时环境}
 \label{androidRuntime}
-Android运行时环境是Android系统中十分重要的一部分, Android应用和许多系统服务都运行在Android运行时环境中\juhao 
-Android运行时环境本质上是一个虚拟机, 用于执行Android应用中dex文件内的字节码, 
+Android运行时环境本质上是一个虚拟机, 用于执行Android应用中dex文件内的字节码, Android应用和许多Android系统服务都运行在Android运行时环境中\juhao 从2008年第一个Android版本发布至今, Android运行时环境经历了许多变化, 其中最大的变化是从Android4.4前的Dalvik虚拟机变成了Android5.0之后的ART虚拟机\juhao 下面的内容将会根据Android8.1的ART虚拟机从应用启动\dunhao 类的加载\dunhao 方法的执行\dunhao 三个方面分析应用在Java层执行流程\juhao
 
 \subsection{应用的启动}
+Android系统中有一个十分重要的进程叫做Zygote, 大多数应用进程和系统进程都是由Zygote产生的\juhao 图\ref{zygoteStart}描述了Zygote进程的启动过程\juhao
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{zygote_start.jpg}
+	\caption{Zygote进程启动过程}
+	\label{zygoteStart}
+\end{figure}
+
+首先系统会启动/system/bin目录下的本地程序app\_process, app\_process解析自身参数后若发现参数中有--zygote就会将进程名改为Zygote然后调用AndroidRuntime::start启动Android运行时环境, 并把入口类设置为com.android.internal.os.ZygoteInit\juhao 进入AndroidRuntime后, 会调用startVM启动ART虚拟机, 之后就会开始执行上述入口类ZygoteInit的main方法\juhao 该类的main方法中首先调用registerZygoteSocket注册一个socket用于之后从该socket接收创建应用进程的命令并执行, 然后会调用preload加载许多重要的类, 最后会调用ZygoteServer.runselectLoop进入一个死循环\juhao 至此, Zygote进程就启动完成了\juhao 在runselectLoop的死循环中, 其会调用acceptCommandPeer等待创建应用的命令, 接收到命令后调用ZygoteConnection.processOneCommand使用fork机制来创建新进程, 所以Zygote在启动后会一直执行runselectLoop直到关机\juhao
+
+了解了Zygote进程的启动过程后, 下面是Android应用的启动过程\juhao Android应用是通过四大组件构成的, 这里通过启动一个Activity的过程来介绍应用的启动过程\juhao 图\ref{appStart}和\ref{appStart2}描述了启动一个没有运行的应用的过程(省略了一些不需要关心的调用过程)\juhao
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{app_start.jpg}
+	\caption{应用启动过程-1}
+	\label{appStart}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{app_start2.jpg}
+	\caption{应用启动过程-2}
+	\label{appStart2}
+\end{figure}
+首先启动器调用Activity类的startActivity方法用于启动一个Activity, 该方法又会调用Instrumentation类的execStartActivity方法; execStartActivity通过Binder机制远程调用系统服务ActivityManagerService(AMS)的startActivity方法来创建Activity\juhao 由于应用还没有启动, AMS会调用startProcessLocked来创建新应用的进程, 该方法最终会调用ZygoteProcess类的zygoteSendArgsAndGetResult方法通过在介绍Zygote进程启动部分提到的socket方法参数来然Zygote进程生成一个新的应用进程\juhao Zygote进程接收到创建新进程的命令后执行forkAndSpecialize方法产生一个新的进程, 并把该进程pid返回给AMS\juhao 新创建的进程通过handleChildProc来做一些初始化操作, 比如关闭Zygote进程的socket, 之后会找到android.app.ActivityThread类并开始执行其main函数\juhao
+
+
 
 \subsection{类的加载}
+
 
 \subsection{方法的执行}
 
 
-\section{Android动态分析技术}
+\section{Android动态分析相关技术和实现工具}
 Android平台的动态分析同传统PC环境有相似之处, 即都是通过追踪应用软件的控制流和数据流实现对应用软件行为的揭示\juhao 但Android系统的多层次架构使得动态分析系统需要能够同时对本地层和Java层对应用的执行进行监控才能够获取到应用的完整行为\juhao 对各层次的监控, 常用的技术如下:
 
 \subsection{Virtual Machine Introspection}
@@ -129,6 +156,12 @@ Android源代码的修改, 并且Android运行时环境在不同版本上变化�
 \subsection{Hooking技术}
 hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们可以获取目标函数的参数和返回值, 可以改变目标函数的行为从而实现对目标函数的监控\juhao 对于Android平台, hooking技术可以用于监控本地函数也可以用于监控Java方法, 其具体的实现方式有很多种, 例如针对本地函数有Procedure Link Table(PLT) hooking\dunhao inline hooking\dunhao Import Address Table(IAT) hooking; 针对Java方法有修改vtable, 修改ArtMethod对象的入口地址等\juhao hooking技术一般比较灵活, 结合一些动态代码追踪工具, 例如frida, 能够动态的调整监控目标\juhao 由于ptrace系统调用能够修改被追踪进程的内存, linux系统的hooking技术一般会利用ptrace系统调用实现\juhao REAPER\upcite{reaper}使用了该技术实现动态监控\juhao
 
+\subsection{Frida}
+Frida是一个著名的开源hook框架\juhao
+
+\subsection{Xposed}
+
+\subsection{Valgrind}
 
 \section{Android应用加固技术}
 为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括名称混淆\dunhao 方执行混淆\dunhao dex文件动态加载\dunhao dex文件动态修改\dunhao 类动态加载\dunhao 方法本地实现\dunhao 模拟器检测\dunhao 反调试等\juhao
@@ -158,6 +191,5 @@ hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们�
 该技术通过多种方式检测应用是否处于被调试状态, 并阻止对应用的调试\juhao 例如, 应用通过调用ptrace追踪自身从而避免被其他监控进程追踪; 应用通过搜索内存中某些著名调试工具的名称, 如strace, ltrace, valgrind等来确定自身是否被调试; 应用hook自身的某些函数,如open, wrtie等来阻止自己的数据被调试工具输出\juhao 反调试技术给真机上的动态分析系统带来了较大的障碍\juhao
 
 
-\section{Frida}
-Frida是一个著名的开源hook框架\juhao
+
 

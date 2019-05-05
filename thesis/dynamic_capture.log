@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  5 MAY 2019 17:27
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  6 MAY 2019 02:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1756,20 +1756,36 @@ Overfull \hbox (14.12245pt too wide) in paragraph at lines 71--72
 ion Binary Interface(ABI)
  []
 
-[9] [10] [11] [12] [13] [14]) [15]
+[9] [10]
+File: figures/zygote_start.jpg Graphic file (type bmp)
+<figures/zygote_start.jpg>
+
+Overfull \hbox (28.3233pt too wide) in paragraph at lines 114--115
+\TU/TimesNewRoman(0)/bx/n/12.045 time::start \TU/FandolSong-Regular(0)/m/n/12.0
+45 启 动 \TU/TimesNewRoman(0)/bx/n/12.045 Android \TU/FandolSong-Regular(0)/m/n/1
+2.045 运 行 时 环 境\TU/TimesNewRoman(0)/bx/n/12.045 , \TU/FandolSong-Regular(0)/m/n
+/12.045 并 把 入 口 类 设 置 为 \TU/TimesNewRoman(0)/bx/n/12.045 com.android.internal.o
+s.ZygoteInit\TU/FandolSong-Regular(0)/m/n/12.045 。|
+ []
+
+File: figures/app_start.jpg Graphic file (type bmp)
+<figures/app_start.jpg>
+File: figures/app_start2.jpg Graphic file (type bmp)
+<figures/app_start2.jpg>
+[11] [12] [13] [14] [15] [16] [17]) [18]
 \zihao {-2}3
 (./implementation.tex
 File: figures/android_structure.jpg Graphic file (type bmp)
 <figures/android_structure.jpg>
-) [16
+) [19
 
-] [17]
+] [20]
 \zihao {-2}4
-(./experiment.tex) [18
+(./experiment.tex) [21
 
 ]
 \zihao {-2}5
-(./summary.tex) (./dynamic_capture.bbl [19
+(./summary.tex) (./dynamic_capture.bbl [22
 
 ]
 *************************************************
@@ -1811,12 +1827,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 48--53
 ][] [] [][][] [] [][][][][][][][] [] [][][][][][][][] []
  []
 
-[20
+[23
 
-]) [21]
+]) [24]
 \openout2 = `includefile/backmatter.aux'.
 
- (./includefile/backmatter.tex) [22
+ (./includefile/backmatter.tex) [25
 
 
 
@@ -1836,7 +1852,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 60.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 60.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 60.
 Package rerunfilecheck Info: File `dynamic_capture.out' has not changed.
-(rerunfilecheck)             Checksum: 0E49CC8ABD5BDDE06A569F03FFF8DF82.
+(rerunfilecheck)             Checksum: AA691F11E31E1F713D7CA14D877B3E28.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1844,12 +1860,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 60.
  ) 
 Here is how much of TeX's memory you used:
- 26019 strings out of 492970
- 524737 string characters out of 6133939
- 605315 words of memory out of 5000000
- 29717 multiletter control sequences out of 15000+600000
+ 26034 strings out of 492970
+ 525054 string characters out of 6133939
+ 605600 words of memory out of 5000000
+ 29729 multiletter control sequences out of 15000+600000
  544719 words of font info for 116 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  59i,12n,76p,10451b,451s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dynamic_capture.pdf (30 pages).
+Output written on dynamic_capture.pdf (33 pages).
