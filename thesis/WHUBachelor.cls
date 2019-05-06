@@ -235,7 +235,7 @@
 \renewcommand\cftaftertoctitle{\hfill}
  
 %%===参考文献===%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliographystyle{abbrv}        % 参考文献样式,  plain,unsrt,alpha,abbrv,chinesebst 等等
+\bibliographystyle{unsrt}        % 参考文献样式,  plain,unsrt,alpha,abbrv,chinesebst 等等
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \graphicspath{{figures/}}        % 图片文件路径
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

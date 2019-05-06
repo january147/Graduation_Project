@@ -103,6 +103,7 @@ Activity表示一个用户能够直接交互的界面\juhao 例如，电子邮�
 Android运行时环境本质上是一个虚拟机, 用于执行Android应用中dex文件内的字节码, Android应用和许多Android系统服务都运行在Android运行时环境中\juhao 从2008年第一个Android版本发布至今, Android运行时环境经历了许多变化, 其中最大的变化是从Android4.4前的Dalvik虚拟机变成了Android5.0之后的ART虚拟机\juhao 下面的内容将会根据Android8.1的ART虚拟机从应用启动\dunhao 类的加载\dunhao 方法的执行\dunhao 三个方面分析应用在Java层执行流程\juhao
 
 \subsection{应用的启动}
+\label{appStartA}
 Android系统中有一个十分重要的进程叫做Zygote, 大多数应用进程和系统进程都是由Zygote产生的\juhao 图\ref{zygoteStart}描述了Zygote进程的启动过程\juhao
 \begin{figure}[ht]
 	\centering
@@ -113,7 +114,7 @@ Android系统中有一个十分重要的进程叫做Zygote, 大多数应用进�
 
 首先系统会启动/system/bin目录下的本地程序app\_process, app\_process解析自身参数后若发现参数中有--zygote就会将进程名改为Zygote然后调用AndroidRuntime::start启动Android运行时环境, 并把入口类设置为com.android.internal.os.ZygoteInit\juhao 进入AndroidRuntime后, 会调用startVM启动ART虚拟机, 之后就会开始执行上述入口类ZygoteInit的main方法\juhao 该类的main方法中首先调用registerZygoteSocket注册一个socket用于之后从该socket接收创建应用进程的命令并执行, 然后会调用preload加载许多重要的类, 最后会调用ZygoteServer.runselectLoop进入一个死循环\juhao 至此, Zygote进程就启动完成了\juhao 在runselectLoop的死循环中, 其会调用acceptCommandPeer等待创建应用的命令, 接收到命令后调用ZygoteConnection.processOneCommand使用fork机制来创建新进程, 所以Zygote在启动后会一直执行runselectLoop直到关机\juhao
 
-了解了Zygote进程的启动过程后, 下面是Android应用的启动过程\juhao Android应用是通过四大组件构成的, 这里通过启动一个Activity的过程来介绍应用的启动过程\juhao 图\ref{appStart}和\ref{appStart2}描述了启动一个没有运行的应用的过程(省略了一些不需要关心的调用过程)\juhao
+了解了Zygote进程的启动过程后, 下面是Android应用的启动过程\juhao Android应用是通过四大组件构成的, 这里通过启动一个Activity的过程来介绍应用的启动过程\juhao 图\ref{appStart}和\ref{appStart2}描述了启动一个没有运行的应用的过程(省略了一些不需要关心的调用)\juhao
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{app_start.jpg}
@@ -127,14 +128,41 @@ Android系统中有一个十分重要的进程叫做Zygote, 大多数应用进�
 	\caption{应用启动过程-2}
 	\label{appStart2}
 \end{figure}
-首先启动器调用Activity类的startActivity方法用于启动一个Activity, 该方法又会调用Instrumentation类的execStartActivity方法; execStartActivity通过Binder机制远程调用系统服务ActivityManagerService(AMS)的startActivity方法来创建Activity\juhao 由于应用还没有启动, AMS会调用startProcessLocked来创建新应用的进程, 该方法最终会调用ZygoteProcess类的zygoteSendArgsAndGetResult方法通过在介绍Zygote进程启动部分提到的socket方法参数来然Zygote进程生成一个新的应用进程\juhao Zygote进程接收到创建新进程的命令后执行forkAndSpecialize方法产生一个新的进程, 并把该进程pid返回给AMS\juhao 新创建的进程通过handleChildProc来做一些初始化操作, 比如关闭Zygote进程的socket, 之后会找到android.app.ActivityThread类并开始执行其main函数\juhao
-
-
+首先启动器调用Activity类的startActivity方法用于启动一个Activity, 该方法又会调用Instrumentation类的execStartActivity方法\juhao  execStartActivity通过Binder机制远程调用系统服务ActivityManagerService(AMS)的startActivity方法来创建Activity\juhao 由于应用还没有启动, AMS会调用startProcessLocked来创建新应用的进程, 该方法最终会调用ZygoteProcess类的zygoteSendArgsAndGetResult方法通过在介绍Zygote进程启动部分提到的socket来传递参数让Zygote进程生成一个新的应用进程\juhao Zygote进程接收到创建新进程的命令后执行forkAndSpecialize方法产生一个新的进程, 并把该进程pid返回给AMS\juhao 新创建的进程通过handleChildProc来做一些初始化操作, 比如关闭Zygote进程的socket, 之后会找到android.app.ActivityThread类并开始执行其main函数\juhao 这时候应用APK文件还没有被加载, 该进程还没有与具体的应用程序关联起来, 加载应用APK文件中的数据的操作通过ActivityThread类的attach方法完成\juhao ActivityThread类的main函数会调用本类的attach方法, 该方法又会通过Binder机制远程调用AMS中的attachApplication方法\juhao attachAppication方法完成新建应用的注册操作后会通过Binder机制远程调用新启动应用ActivityThread类中的ApplicationThread类的bindApplication方法\juhao ApplicationThread类是一个Binder类, 其bindApplication通过Handle机制调用ActivityThread类中的handleBindApplication方法完成应用的绑定与加载工作, 并创建Application实例\juhao bindApplication操作完成后, AMS会通过类似机制最终调用handlelaunchActivity完成Activity的启动, 至此, 应用就成功启动了\juhao 
 
 \subsection{类的加载}
+Android应用的类保存在dex文件里, 从dex文件加载类一般有3个过程:首先时加载dex文件, 之后加载类, 最后链接类\juhao 图\ref{classLoad}描述了使用Android系统的PathClassLoader加载一个类的过程\juhao 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{class_load.jpg}
+	\caption{类的加载过程}
+	\label{classLoad}
+\end{figure}
+PathClassLoader用于加载应用APK文件中包含的dex文件中的类\juhao PathClassLoader的构造函数通过其父类的构造函数调用了DexPathList的构造函数来加载应用的所有dex文件\juhao 在DexPathList的构造函数中, 其调用了makeDexElements来加载每一个dex文件\juhao makeDexElements又会调用DexFile类的构造函数来获取一个dex文件对象\juhao DexFile类的构造函数通过openDexFileNative等一系列JNI方法进入本地层调用相关函数将dex文件加载到内存中, 最后调用了本地层的DexFile类的构造函数完成对dex文件各字段的解析得到本地层的DexFile对象\juhao 该对象最后被传递给Java层的DexFile对象, 并记录在其mCookie成员变量中, 完成了dex文件的加载\juhao
 
+当某个类需要被加载时, 会调用PathClassLoader的loadClass方法\juhao 在该类还未被加载过时, loadClass方法会调用findClass方法, findClass方法会接着调用记录着DexFile对象的DexPathList对象的findClass方法\juhao DexPathList对象的findClass方法会尝试遍历所有的DexFile对象, 并调用每一个DexFile对象的loadClassBinaryName对象来加载目标类, 直到在某个DexFile对象成功加载该类为止\juhao DexFile对象的loadClassBinaryName会通过defineClassNative这个JNI方法调用本地层的OatDexFile::FindClassDef方法找到该类在dex文件中的位置, 之后调用ClassLinker::DefineClass完成类的加载和链接工作, 并生成本地层的mirror::Class对象代表该类\juhao 通过该对象构造的Java层的Class对象最终会成为findClass的返回值, 这样一个类就完成了加载和链接, 可以被调用了\juhao 
 
 \subsection{方法的执行}
+\label{methodExecA}
+为了提高运行效率ART虚拟机的运行机制一直在发生变化, 在Android8.1中, 应用的dex文件已经不会在安装时通过dex2oat全部编译而是在之后根据应用运行的情况按需编译, 同时JIT机制被再次启用, 并增加了对方法执行情况的统计用于在系统空闲时按需编译特定方法\juhao 因此, 一个非JNI方法有三种执行方式:第一种是通过解释器执行; 第二种是通过Just-In-Time(JIT)编译后的机器码执行; 第三种是通过Ahead Of Time(AOT)编译后的机器码执行\juhao 但总的说来, 方法的执行只有两种, 一种是解释执行字节码, 另一种是执行机器码\juhao 
+所有执行机器码的方法, 都会调用Android源代码中的/art/runtime/ArtMethod.cc中的ArtMethod::Invoke函数来执行, 所有执行字节码的方法都会调用Android源代码中的/art/runtime/interpreter/interpreter.cc中的Execute函数来执行, 此外经过Java反射机制从Java层或者JNI反射机制从本地层调用Java方法会经过ArtMethod::Invoke来执行\juhao 图\ref{methodExec}和\ref{methodExec2}描述了ART几种不同的方法的执行流程\juhao 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{method_exec.jpg}
+	\caption{ART中方法执行过程-1}
+	\label{methodExec}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{method_exec2.jpg}
+	\caption{ART中方法执行过程-2}
+	\label{methodExec2}
+\end{figure}
+图\ref{methodExec}主要描述了调用ArtMethod::Invoke来执行一个方法的情况\juhao ArtMethod::Invoke有两个入口, 第一个入口是使用Java反射(Java.lang.reflect.method.invoke方法)或JNI反射机制(Android源代码/art/runtime/reflection.cc中的一系列Call*Method函数)经过一系列调用后会调用InvokeWithArgArray\juhao InvokeWithArgArray会打包好方法的参数然后调用ArtMethod::Invoke来执行方法\juhao 该路径的调用的方法可能没有本地代码可以执行, 因此方法的入口点(entry\_point\_from\_quick\_code)可能会为artQuickToInterpreterBridge, 执行方法的入口后会进入解释模式并调用Execute来完成方法的执行; 第二个入口是解释模式执行的方法通过ArtInterpreterToCompiledCodeBridge调用有本地代码的方法, 此时若应用没有运行在调试模式, 会执行应用的本地代码\juhao 以上两个入口, 在应用处于调试模式时, 都会调用EnterInterpreterFromInvoke进入解释模式最后调用Execute执行目标方法\juhao 
+
+图\ref{methodExec}主要描述了调用Execute来执行一个方法的情况\juhao Execute函数有三个入口, 第一个是EnterInterpreterFromInvoke, 用于从ArtMethod::Invoke中进入解释模式执行; 第二个是ArtInterpreterToInterpreterBridge, 用于解释执行的方法调用解释执行的方法; 第三个是artQuickToInterpreterBridge, 用于从本地代码中进入解释模式执行\juhao
+在通过Execute函数解释执行方法时, 可能会启动JIT机制编译当前方法然后通过ArtInterpreterToCompiledCodeBridge进入ArtMethod::Invoke执行编译生成的本地代码\juhao 在没有JIT机制没有启动时会调用解释器函数开始执行方法\juhao Android8.1系统中有两个不同实现方案的解释器函数:第一个是ExecuteMterpImpl, 该函数通过汇编代码实现, 效率很高, 但实现复杂, 不支持调试; 第二个是ExecuteSwitchImpl, 该函数通过switch语句实现, 支持单步调试, 实现也比较简单但运行效率很低, 只有在调试模式的情况下使用\juhao 解释器函数在执行到调用其他方法的字节码时, 会依次调用DoInvoke\dunhao DoCall\dunhao performCall\juhao performCall会根据方法的类型和是否处于调试模式来决定调用ArtInterpreterToInterpreterBridge以解释模式执行还是调用ArtInterpreterToCompiledCodeBridge执行方法的本地代码\juhao 
 
 
 \section{Android动态分析相关技术和实现工具}
@@ -150,6 +178,7 @@ ptrace系统调用是Unix和一些类Unix系统中的一种系统调用\juhao �
 Application Instrumentation指通过修改需要监控的目标应用, 向其中插入监控代码实现监控应用执行的技术\juhao 对于Android平台而言, 该技术一般用于监控应用调用Java层API的情况, 具体来说, 通过反编译应用的dex文件得到smali代码, 搜索其中调用敏感API的代码, 将监控代码插入调用敏感API代码的周围, 再将修改后的smali代码编译重新打包成包含监控代码的应用, 这样在应用执行时就会执行监控代码, 输出监控信息\juhao 该技术不需要修改Android系统源代码, 但受到Android系统API变化的影响, 因此会在一定程度上受Android版本变化的影响\juhao 此外, 由于应用完整性校验以及加壳和混淆技术的广泛应用, 修改后的应用很可能无法运行, 并且一般无法从应用安装包获取到包含应用真实逻辑的dex文件, 因此该技术目前几乎已经失效\juhao APIMonitor\upcite{apimonitor}使用了该技术实现动态监控\juhao
 
 \subsection{DVM/ART Instrumentation}
+\label{artInstr}
 DVM/ART Instrumentation指通过修改Android系统的DVM或者ART运行时环境, 在关键的部分加入监控逻辑实现监控应用在Java层执行情况的技术\juhao 一般来说, 可以修改Android运行时环境中方法执行相关的函数来实现对应用执行的方法以及其参数和返回值的监控, 也可以修改Android运行时环境中的字节码解释器实现对Java层指令级别的监控, 在\ref{androidRuntime}节有关于Android运行时环境更详细的描述\juhao 该方法有些类似于上面提到的VMI技术, 在虚拟机层面监控虚拟机内部运行的应用, 在实现全面监控应用运行的同时也使得应用无法检测到自己处于受监控状态, 因此是监控应用Java层行为的一种十分有效的技术\juhao 并且该技术不依赖于模拟器, 利用其开发的动态监控系统可以运行于真机上, 不受应用检测模拟器机制的影响\juhao 但该技术的实现依赖于对
 Android源代码的修改, 并且Android运行时环境在不同版本上变化较大, 特别是Android5.0之前和Android5.0之后Android运行时环境有DVM替换为了ART, 因此需要经常调整以适用于最新的Android版本\juhao DroidScope\upcite{droidscope}\dunhao Glassbox\upcite{glassbox}使用了该技术实现动态监控\juhao
 
@@ -157,14 +186,16 @@ Android源代码的修改, 并且Android运行时环境在不同版本上变化�
 hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们可以获取目标函数的参数和返回值, 可以改变目标函数的行为从而实现对目标函数的监控\juhao 对于Android平台, hooking技术可以用于监控本地函数也可以用于监控Java方法, 其具体的实现方式有很多种, 例如针对本地函数有Procedure Link Table(PLT) hooking\dunhao inline hooking\dunhao Import Address Table(IAT) hooking; 针对Java方法有修改vtable, 修改ArtMethod对象的入口地址等\juhao hooking技术一般比较灵活, 结合一些动态代码追踪工具, 例如frida, 能够动态的调整监控目标\juhao 由于ptrace系统调用能够修改被追踪进程的内存, linux系统的hooking技术一般会利用ptrace系统调用实现\juhao REAPER\upcite{reaper}使用了该技术实现动态监控\juhao
 
 \subsection{Frida}
-Frida是一个著名的开源hook框架\juhao
+Frida\upcite{frida}是一个著名的开源跨平台动态代码追踪工具\juhao 
 
 \subsection{Xposed}
+ Xposed框架是由rovo89开发的一款针对Android平台的动态劫持工具，是一款可以在不修改APK的情况下影响程序运行, 修改系统的框架服务\juhao Xposed通过替换/system/bin/app\_process 程序控制Zygote进程，使app\_process 在启动过程中加载XposedBridge.jar这个jar包，从而完成对Zygote进程及其创建的Dalvik虚拟机的劫持\juhao Reaper\upcite{reaper}, 文献\cite{chinese1}中的系统使用该技术实现了动态监控\juhao 
 
 \subsection{Valgrind}
+Valgrind\upcite{valgrind}是一个用于构建动态分析工具的代码追踪框架\juhao Malton\upcite{malton}\dunhao PackerGrind\upcite{packergrind}使用了该技术来实现动态监控\juhao 
 
 \section{Android应用加固技术}
-为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括名称混淆\dunhao 方执行混淆\dunhao dex文件动态加载\dunhao dex文件动态修改\dunhao 类动态加载\dunhao 方法本地实现\dunhao 模拟器检测\dunhao 反调试等\juhao
+为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括名称混淆\dunhao 方法执行混淆\upcite{tiro}\dunhao dex文件动态加载\dunhao dex文件动态修改\dunhao 类动态加载\dunhao 方法本地实现\dunhao 模拟器检测\dunhao 反调试等\juhao
 
 \paragraph*{名称混淆}
 该技术即在应用发布时按照一定的规则将开发应用时定义的有意义的类名\dunhao 方法名\dunhao 和变量名替换称无意义的字符, 从而增加了逆向分析方法用途的难度\juhao

@@ -1,41 +1,21 @@
 \begin{thebibliography}{10}
 
-\bibitem{apimonitor}
-droidbox - apimonitor.wiki.
+\bibitem{smartphone2018statistics}
+newzoo.
+\newblock Top 50 countries/markets by smartphone users and penetration.
 \newblock
-  \url{https://code.google.com/archive/p/droidbox/wikis/APIMonitor.wiki}.
+  \url{https://newzoo.com/insights/rankings/top-50-countries-by-smartphone-penetration-and-users/},
+  2018.
 
-\bibitem{crowdroid}
-I.~Burguera, U.~Zurutuza, and S.~Nadjm-Tehrani.
-\newblock Crowdroid: behavior-based malware detection system for android.
-\newblock In {\em Proceedings of the 1st ACM workshop on Security and privacy
-  in smartphones and mobile devices}, pages 15--26. ACM, 2011.
+\bibitem{appAmount2018}
+statista.
+\newblock App stores - statistics \& facts.
+\newblock \url{https://www.statista.com/topics/1729/app-stores/}.
 
-\bibitem{droidbox}
-A.~Desnos and P.~Lantz.
-\newblock Droidbox: An android application sandbox for dynamic analysis.
-\newblock {\em Lund Univ., Lund, Sweden, Tech. Rep}, 2011.
-
-\bibitem{reaper}
-M.~Diamantaris, E.~P. Papadopoulos, E.~P. Markatos, S.~Ioannidis, and
-  J.~Polakis.
-\newblock Reaper: Real-time app analysis for augmenting the android permission
-  system.
-\newblock 2019.
-
-\bibitem{taintdroid}
-W.~Enck, P.~Gilbert, B.-G. Chun, L.~P. Cox, J.~Jung, P.~McDaniel, and A.~N.
-  Sheth.
-\newblock Taintdroid: An information-flow tracking system for realtime privacy
-  monitoring on smartphones [c].
-\newblock In {\em Proceedings of the 9th USENIX conference on Operating systems
-  design and implementation. USENIX}, pages 1--6, 2010.
-
-\bibitem{glassbox}
-P.~Irolla and E.~Filiol.
-\newblock Glassbox: Dynamic analysis platform for malware android applications
-  on real devices.
-\newblock {\em arXiv preprint arXiv:1609.04718}, 2016.
+\bibitem{mobileOSMarketshare2019}
+statcounter.
+\newblock Mobile operating system market share worldwide.
+\newblock \url{http://gs.statcounter.com/os-market-share/mobile/worldwide}.
 
 \bibitem{mobileOSSalesMarketshare2019}
 Kantar.
@@ -44,45 +24,85 @@ Kantar.
   \url{https://www.kantarworldpanel.com/global/smartphone-os-market-share/},
   2019.
 
-\bibitem{smartphone2018statistics}
-newzoo.
-\newblock Top 50 countries/markets by smartphone users and penetration.
+\bibitem{malwareStat}
+腾讯移动安全实验室.
+\newblock 腾讯移动安全实验室2018年手机安全报告.
+\newblock \url{https://m.qq.com/security\_lab/news\_detail\_489.html}, 2018.
+
+\bibitem{taintdroid}
+William Enck, Peter Gilbert, Byung-Gon Chun, Landon~P Cox, Jaeyeon Jung,
+  Patrick McDaniel, and Anmol~N Sheth.
+\newblock Taintdroid: An information-flow tracking system for realtime privacy
+  monitoring on smartphones [c].
+\newblock In {\em Proceedings of the 9th USENIX conference on Operating systems
+  design and implementation. USENIX}, pages 1--6, 2010.
+
+\bibitem{droidbox}
+Anthony Desnos and Patrik Lantz.
+\newblock Droidbox: An android application sandbox for dynamic analysis.
+\newblock {\em Lund Univ., Lund, Sweden, Tech. Rep}, 2011.
+
+\bibitem{apimonitor}
+droidbox - apimonitor.wiki.
 \newblock
-  \url{https://newzoo.com/insights/rankings/top-50-countries-by-smartphone-penetration-and-users/},
-  2018.
-
-\bibitem{mobileOSMarketshare2019}
-statcounter.
-\newblock Mobile operating system market share worldwide.
-\newblock \url{http://gs.statcounter.com/os-market-share/mobile/worldwide}.
-
-\bibitem{appAmount2018}
-statista.
-\newblock App stores - statistics \& facts.
-\newblock \url{https://www.statista.com/topics/1729/app-stores/}.
-
-\bibitem{copperdroid}
-K.~Tam, S.~J. Khan, A.~Fattori, and L.~Cavallaro.
-\newblock Copperdroid: Automatic reconstruction of android malware behaviors.
-\newblock In {\em Ndss}, 2015.
-
-\bibitem{malton}
-L.~Xue, Y.~Zhou, T.~Chen, X.~Luo, and G.~Gu.
-\newblock Malton: Towards on-device non-invasive mobile malware analysis for
-  $\{$ART$\}$.
-\newblock In {\em 26th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$
-  Security 17)}, pages 289--306, 2017.
+  \url{https://code.google.com/archive/p/droidbox/wikis/APIMonitor.wiki}.
 
 \bibitem{droidscope}
-L.~K. Yan and H.~Yin.
+Lok~Kwong Yan and Heng Yin.
 \newblock Droidscope: Seamlessly reconstructing the $\{$OS$\}$ and dalvik
   semantic views for dynamic android malware analysis.
 \newblock In {\em Presented as part of the 21st $\{$USENIX$\}$ Security
   Symposium ($\{$USENIX$\}$ Security 12)}, pages 569--584, 2012.
 
-\bibitem{malwareStat}
-腾讯移动安全实验室.
-\newblock 腾讯移动安全实验室2018年手机安全报告.
-\newblock \url{https://m.qq.com/security\_lab/news\_detail\_489.html}, 2018.
+\bibitem{copperdroid}
+Kimberly Tam, Salahuddin~J Khan, Aristide Fattori, and Lorenzo Cavallaro.
+\newblock Copperdroid: Automatic reconstruction of android malware behaviors.
+\newblock In {\em Ndss}, 2015.
+
+\bibitem{malton}
+Lei Xue, Yajin Zhou, Ting Chen, Xiapu Luo, and Guofei Gu.
+\newblock Malton: Towards on-device non-invasive mobile malware analysis for
+  $\{$ART$\}$.
+\newblock In {\em 26th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$
+  Security 17)}, pages 289--306, 2017.
+
+\bibitem{crowdroid}
+Iker Burguera, Urko Zurutuza, and Simin Nadjm-Tehrani.
+\newblock Crowdroid: behavior-based malware detection system for android.
+\newblock In {\em Proceedings of the 1st ACM workshop on Security and privacy
+  in smartphones and mobile devices}, pages 15--26. ACM, 2011.
+
+\bibitem{glassbox}
+Paul Irolla and Eric Filiol.
+\newblock Glassbox: Dynamic analysis platform for malware android applications
+  on real devices.
+\newblock {\em arXiv preprint arXiv:1609.04718}, 2016.
+
+\bibitem{reaper}
+Michalis Diamantaris, Elias~P Papadopoulos, Evangelos~P Markatos, Sotiris
+  Ioannidis, and Jason Polakis.
+\newblock Reaper: Real-time app analysis for augmenting the android permission
+  system.
+\newblock 2019.
+
+\bibitem{frida}
+Frida.
+\newblock https://www.frida.re/.
+
+\bibitem{chinese1}
+文伟平, 汤炀, and 谌力.
+\newblock 一种基于android内核的app敏感行为检测方法及实现.
+\newblock {\em 信息网络安全}, (8):18--23, 2016.
+
+\bibitem{valgrind}
+Nicholas Nethercote and Julian Seward.
+\newblock Valgrind: a framework for heavyweight dynamic binary instrumentation.
+\newblock In {\em ACM Sigplan notices}, volume~42, pages 89--100. ACM, 2007.
+
+\bibitem{packergrind}
+Lei Xue, Xiapu Luo, Le~Yu, Shuai Wang, and Dinghao Wu.
+\newblock Adaptive unpacking of android apps.
+\newblock In {\em 2017 IEEE/ACM 39th International Conference on Software
+  Engineering (ICSE)}, pages 358--369. IEEE, 2017.
 
 \end{thebibliography}

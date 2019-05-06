@@ -27,7 +27,7 @@ Tam Kimberly等构建了名为CopperDroid\upcite{copperdroid}的动态分析系�
 2. 没有对Java层进行具体的监控, 会丢失掉一些Java层的行为
 3. 重构应用行为依赖于特定Java层行为与系统调用的映射关系, 而这个关系可能发生变化而使得结果不准确
 
-Xue Lei等构建了名为Malton\upcite{malton}的动态分析系统\juhao
+Xue Lei等构建了名为Malton\upcite{malton}的动态分析系统\juhao 该系统使用了Valgrind框架, 被设计用于部署到真机环境进行动态分析，从而避免针对虚拟分析环境的攻击。同时该系统针对安卓5.0以后的ART运行环境构建了一个多层次的动态分析系统，能够获取到应用java层次的方法调用，art runtime层次的内部函数调用和native code层面的函数和系统调用的细节，此外还包括执行路径扫描和分支强制执行的策列从而扩大动态分析的代码覆盖。
 
 
 \section{论文主要工作}
