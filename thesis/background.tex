@@ -131,6 +131,7 @@ Android系统中有一个十分重要的进程叫做Zygote, 大多数应用进�
 首先启动器调用Activity类的startActivity方法用于启动一个Activity, 该方法又会调用Instrumentation类的execStartActivity方法\juhao  execStartActivity通过Binder机制远程调用系统服务ActivityManagerService(AMS)的startActivity方法来创建Activity\juhao 由于应用还没有启动, AMS会调用startProcessLocked来创建新应用的进程, 该方法最终会调用ZygoteProcess类的zygoteSendArgsAndGetResult方法通过在介绍Zygote进程启动部分提到的socket来传递参数让Zygote进程生成一个新的应用进程\juhao Zygote进程接收到创建新进程的命令后执行forkAndSpecialize方法产生一个新的进程, 并把该进程pid返回给AMS\juhao 新创建的进程通过handleChildProc来做一些初始化操作, 比如关闭Zygote进程的socket, 之后会找到android.app.ActivityThread类并开始执行其main函数\juhao 这时候应用APK文件还没有被加载, 该进程还没有与具体的应用程序关联起来, 加载应用APK文件中的数据的操作通过ActivityThread类的attach方法完成\juhao ActivityThread类的main函数会调用本类的attach方法, 该方法又会通过Binder机制远程调用AMS中的attachApplication方法\juhao attachAppication方法完成新建应用的注册操作后会通过Binder机制远程调用新启动应用ActivityThread类中的ApplicationThread类的bindApplication方法\juhao ApplicationThread类是一个Binder类, 其bindApplication通过Handle机制调用ActivityThread类中的handleBindApplication方法完成应用的绑定与加载工作, 并创建Application实例\juhao bindApplication操作完成后, AMS会通过类似机制最终调用handlelaunchActivity完成Activity的启动, 至此, 应用就成功启动了\juhao 
 
 \subsection{类的加载}
+\label{clasLoadA}
 Android应用的类保存在dex文件里, 从dex文件加载类一般有3个过程:首先时加载dex文件, 之后加载类, 最后链接类\juhao 图\ref{classLoad}描述了使用Android系统的PathClassLoader加载一个类的过程\juhao 
 \begin{figure}[ht]
 	\centering
@@ -186,16 +187,17 @@ Android源代码的修改, 并且Android运行时环境在不同版本上变化�
 hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们可以获取目标函数的参数和返回值, 可以改变目标函数的行为从而实现对目标函数的监控\juhao 对于Android平台, hooking技术可以用于监控本地函数也可以用于监控Java方法, 其具体的实现方式有很多种, 例如针对本地函数有Procedure Link Table(PLT) hooking\dunhao inline hooking\dunhao Import Address Table(IAT) hooking; 针对Java方法有修改vtable, 修改ArtMethod对象的入口地址等\juhao hooking技术一般比较灵活, 结合一些动态代码追踪工具, 例如frida, 能够动态的调整监控目标\juhao 由于ptrace系统调用能够修改被追踪进程的内存, linux系统的hooking技术一般会利用ptrace系统调用实现\juhao REAPER\upcite{reaper}使用了该技术实现动态监控\juhao
 
 \subsection{Frida}
+\label{frida}
 Frida\upcite{frida}是一个著名的开源跨平台动态代码追踪工具\juhao 
 
 \subsection{Xposed}
- Xposed框架是由rovo89开发的一款针对Android平台的动态劫持工具，是一款可以在不修改APK的情况下影响程序运行, 修改系统的框架服务\juhao Xposed通过替换/system/bin/app\_process 程序控制Zygote进程，使app\_process 在启动过程中加载XposedBridge.jar这个jar包，从而完成对Zygote进程及其创建的Dalvik虚拟机的劫持\juhao Reaper\upcite{reaper}, 文献\cite{chinese1}中的系统使用该技术实现了动态监控\juhao 
+ Xposed框架\upcite{xposed} 是由rovo89开发的一款针对Android平台的动态劫持工具，是一款可以在不修改APK的情况下影响程序运行, 修改系统的框架服务\juhao Xposed通过替换/system/bin/app\_process 程序控制Zygote进程，使app\_process 在启动过程中加载XposedBridge.jar这个jar包，从而完成对Zygote进程及其创建的Dalvik虚拟机的劫持\juhao Reaper\upcite{reaper}\dunhao Inspeckage\upcite{inspeckage}\dunhao InsightDroid\upcite{chinese1} 文献\cite{chinese2}中的系统使用该技术实现了动态监控\juhao 
 
 \subsection{Valgrind}
 Valgrind\upcite{valgrind}是一个用于构建动态分析工具的代码追踪框架\juhao Malton\upcite{malton}\dunhao PackerGrind\upcite{packergrind}使用了该技术来实现动态监控\juhao 
 
-\section{Android应用加固技术}
-为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括名称混淆\dunhao 方法执行混淆\upcite{tiro}\dunhao dex文件动态加载\dunhao dex文件动态修改\dunhao 类动态加载\dunhao 方法本地实现\dunhao 模拟器检测\dunhao 反调试等\juhao
+\section{Android应用保护技术}
+为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括完整性校验\upcite{androidsecure}\dunhao 名称混淆\dunhao 方法执行混淆\upcite{tiro}\dunhao dex文件动态加载\dunhao dex文件动态修改\dunhao 类动态加载\dunhao 方法本地实现\dunhao 模拟器检测\upcite{emdetection}\dunhao 反调试等\juhao
 
 \paragraph*{名称混淆}
 该技术即在应用发布时按照一定的规则将开发应用时定义的有意义的类名\dunhao 方法名\dunhao 和变量名替换称无意义的字符, 从而增加了逆向分析方法用途的难度\juhao

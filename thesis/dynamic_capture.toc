@@ -23,17 +23,18 @@
 \contentsline {subsection}{\numberline {2.4.6}Frida}{21}{subsection.2.4.6}
 \contentsline {subsection}{\numberline {2.4.7}Xposed}{22}{subsection.2.4.7}
 \contentsline {subsection}{\numberline {2.4.8}Valgrind}{22}{subsection.2.4.8}
-\contentsline {section}{\numberline {2.5}Android应用加固技术}{22}{section.2.5}
+\contentsline {section}{\numberline {2.5}Android应用保护技术}{22}{section.2.5}
 \contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{24}{chapter.3}
 \contentsline {section}{\numberline {3.1}概览}{24}{section.3.1}
 \contentsline {section}{\numberline {3.2}监控应用启动}{24}{section.3.2}
-\contentsline {section}{\numberline {3.3}Java方法调用监控}{25}{section.3.3}
+\contentsline {section}{\numberline {3.3}Java方法调用监控}{26}{section.3.3}
 \contentsline {section}{\numberline {3.4}本地函数调用监控}{26}{section.3.4}
 \contentsline {section}{\numberline {3.5}脱壳功能}{26}{section.3.5}
 \contentsline {section}{\numberline {3.6}日志系统}{26}{section.3.6}
 \contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{27}{chapter.4}
-\contentsline {section}{\numberline {4.1}监控数据}{27}{section.4.1}
-\contentsline {section}{\numberline {4.2}性能}{27}{section.4.2}
+\contentsline {section}{\numberline {4.1}实验环境}{27}{section.4.1}
+\contentsline {section}{\numberline {4.2}功能测试}{27}{section.4.2}
+\contentsline {section}{\numberline {4.3}性能测试}{27}{section.4.3}
 \contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{28}{chapter.5}
 \contentsline {chapter}{参考文献}{28}{section*.25}
-\contentsline {chapter}{致谢}{31}{chapter*.27}
+\contentsline {chapter}{致谢}{32}{chapter*.27}

@@ -86,11 +86,26 @@ Michalis Diamantaris, Elias~P Papadopoulos, Evangelos~P Markatos, Sotiris
 \newblock 2019.
 
 \bibitem{frida}
-Frida.
+oleavr.
+\newblock Frida.
 \newblock https://www.frida.re/.
 
+\bibitem{xposed}
+rovo89.
+\newblock Xposed.
+\newblock https://github.com/rovo89/Xposed.
+
+\bibitem{inspeckage}
+ac~pm.
+\newblock Inspeckage.
+\newblock https://github.com/ac-pm/Inspeckage.
+
 \bibitem{chinese1}
-文伟平, 汤炀, and 谌力.
+孙国梓 邱凌志, 张梓雄.
+\newblock Insightdroid—动态追踪android应用方法.
+
+\bibitem{chinese2}
+谌力 文伟平, 汤炀.
 \newblock 一种基于android内核的app敏感行为检测方法及实现.
 \newblock {\em 信息网络安全}, (8):18--23, 2016.
 
@@ -104,5 +119,16 @@ Lei Xue, Xiapu Luo, Le~Yu, Shuai Wang, and Dinghao Wu.
 \newblock Adaptive unpacking of android apps.
 \newblock In {\em 2017 IEEE/ACM 39th International Conference on Software
   Engineering (ICSE)}, pages 358--369. IEEE, 2017.
+
+\bibitem{androidsecure}
+丰生强.
+\newblock {\em Android软件安全权威指南}.
+\newblock 电子工业出版社, 2019.
+
+\bibitem{emdetection}
+Yiming Jing, Ziming Zhao, Gail~Joon Ahn, and Hongxin Hu.
+\newblock Morpheus: Automatically generating heuristics to detect android
+  emulators.
+\newblock In {\em Computer Security Applications Conference}, 2014.
 
 \end{thebibliography}

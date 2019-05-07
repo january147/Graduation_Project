@@ -25,7 +25,7 @@
 \BOOKMARK [2][-]{subsection.2.4.6}{Frida}{section.2.4}% 25
 \BOOKMARK [2][-]{subsection.2.4.7}{Xposed}{section.2.4}% 26
 \BOOKMARK [2][-]{subsection.2.4.8}{Valgrind}{section.2.4}% 27
-\BOOKMARK [1][-]{section.2.5}{Android应用加固技术}{chapter.2}% 28
+\BOOKMARK [1][-]{section.2.5}{Android应用保护技术}{chapter.2}% 28
 \BOOKMARK [0][-]{chapter.3}{系统设计实现}{}% 29
 \BOOKMARK [1][-]{section.3.1}{概览}{chapter.3}% 30
 \BOOKMARK [1][-]{section.3.2}{监控应用启动}{chapter.3}% 31
@@ -34,8 +34,9 @@
 \BOOKMARK [1][-]{section.3.5}{脱壳功能}{chapter.3}% 34
 \BOOKMARK [1][-]{section.3.6}{日志系统}{chapter.3}% 35
 \BOOKMARK [0][-]{chapter.4}{实验与结果分析}{}% 36
-\BOOKMARK [1][-]{section.4.1}{监控数据}{chapter.4}% 37
-\BOOKMARK [1][-]{section.4.2}{性能}{chapter.4}% 38
-\BOOKMARK [0][-]{chapter.5}{总结与展望}{}% 39
-\BOOKMARK [0][-]{section*.25}{参考文献}{}% 40
-\BOOKMARK [0][-]{chapter*.27}{致谢}{}% 41
+\BOOKMARK [1][-]{section.4.1}{实验环境}{chapter.4}% 37
+\BOOKMARK [1][-]{section.4.2}{功能测试}{chapter.4}% 38
+\BOOKMARK [1][-]{section.4.3}{性能测试}{chapter.4}% 39
+\BOOKMARK [0][-]{chapter.5}{总结与展望}{}% 40
+\BOOKMARK [0][-]{section*.25}{参考文献}{}% 41
+\BOOKMARK [0][-]{chapter*.27}{致谢}{}% 42

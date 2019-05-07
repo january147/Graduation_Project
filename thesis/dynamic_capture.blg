@@ -21,49 +21,56 @@ Repeated entry---line 138 of file ref.bib
  : @article{reaper
  :                ,
 I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 182 of file ref.bib
+ :  
+ :  journal={小型微型计算机系统},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "tiro"
 Warning--empty journal in reaper
-Warning--there's a number but no volume in chinese1
+Warning--empty journal in chinese1
+Warning--empty year in chinese1
+Warning--there's a number but no volume in chinese2
 Warning--can't use both volume and number fields in valgrind
-You've used 18 entries,
+You've used 23 entries,
             1791 wiz_defined-function locations,
-            542 strings with 6735 characters,
-and the built_in function-call counts, 3989 in all, are:
-= -- 348
-> -- 164
+            563 strings with 7197 characters,
+and the built_in function-call counts, 4708 in all, are:
+= -- 401
+> -- 190
 < -- 7
-+ -- 63
-- -- 45
-* -- 190
-:= -- 579
-add.period$ -- 55
-call.type$ -- 18
-change.case$ -- 18
++ -- 75
+- -- 52
+* -- 205
+:= -- 698
+add.period$ -- 70
+call.type$ -- 23
+change.case$ -- 22
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 198
-empty$ -- 433
-format.name$ -- 45
-if$ -- 949
+cite$ -- 28
+duplicate$ -- 238
+empty$ -- 527
+format.name$ -- 52
+if$ -- 1113
 int.to.chr$ -- 0
-int.to.str$ -- 18
-missing$ -- 11
-newline$ -- 91
-num.names$ -- 16
-pop$ -- 94
+int.to.str$ -- 23
+missing$ -- 15
+newline$ -- 116
+num.names$ -- 22
+pop$ -- 123
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 126
+skip$ -- 143
 stack$ -- 0
 substring$ -- 178
-swap$ -- 72
+swap$ -- 77
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 3
-while$ -- 35
-width$ -- 20
-write$ -- 184
-(There were 4 error messages)
+warning$ -- 5
+while$ -- 41
+width$ -- 25
+write$ -- 231
+(There were 5 error messages)
