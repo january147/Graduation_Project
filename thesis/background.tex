@@ -2,7 +2,7 @@
 Android系统由多个软件层次构成, 这些层次功能分明, 每一层都对其上的一层提供服务, 构成一个5层的软件栈\juhao 软件栈最底层为Linux内核层, 其上为硬件抽象层, 之后为本地函数库层, 该层次包括了Android Runtime和其他的一些本地函数库, 再上层为Android框架层, 该层包括了提供给应用程序的API和系统管理服务程序, 最上层为应用层, 该层次为用户直接交互的应用程序运行的层次\juhao  图\ref{androidStructure}给出了各层次的组件和关系\juhao
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{android_structure.jpg}
+\includegraphics[width=9cm]{android_structure.jpg}
 \caption{Android系统架构}
 \label{androidStructure}
 \end{figure}
@@ -89,14 +89,15 @@ resources.arsc文件为资源文件索引文件, 其本身包含了全局常量�
 \subsection{应用组织结构}
 Android应用的功能主要由四种组件实现, 这四种组件为Activity、服务、内容提供程序、广播接收器\juhao 这些组件可能会存在相互依赖的情况，但每个组件都以独立实体形式存在，发挥特定作用, 能够被单独的调用\juhao 各组件的具体功能如下:
 
-Activity表示一个用户能够直接交互的界面\juhao 例如，电子邮件应用可能具有一个显示新电子邮件列表的Activity、一个用于撰写电子邮件的Activity以及一个用于阅读电子邮件的Activity。 尽管这些 Activity 通过协作在电子邮件应用中形成了一种紧密结合的用户体验，但每一个 Activity 都独立于其他 Activity 而存在。 因此，其他应用可以启动其中任何一个 Activity（如果电子邮件应用允许）\juhao 例如，相机应用可以启动电子邮件应用内用于撰写新电子邮件的 Activity，以便用户共享图片\juhao
+Activity代表用户能够直接看到并进行操作的界面, 一个应用可以有多个Activity来表示多个不同界面\juhao 例如，联系人应用会有一个显示所有联系人列表的Activity, 一个查看某个联系人详细信息的Activity\juhao 
+尽管这些Activity共同组成了联系人应用，但每一个Activity都独立于其他Activity而存在\juhao 因此，在权限允许的情况下其他应用可以启动其中任何一个 Activity\juhao 例如，QQ可以启动联系人应用的查看联系人详细信息的Activity用来查看接收的联系人文件\juhao
 
-服务是一种在后台运行的组件，没有用户界面, 用户无法直接与之交互, 常用于执行长时间运行的操作或为远程进程执行作业\juhao 例如，当用户位于其他应用中时，服务可能在后台播放音乐或者通过网络获取数据，但不会阻断用户与 Activity 的交互。 诸如 Activity 等其他组件可以启动服务，让其运行或与其绑定以便与其进行交互\juhao
+服务是一种在后台运行的组件，没有用户界面, 用户无法直接与之交互, 常用于执行需要长时间运行的工作\juhao 例如，音乐播放应用可以启动一个服务用来在后台播放音乐, 这样即使用户切换到其他应用的Activity时也能继续播放音乐并且不会阻碍用户与当前Activity的交互\juhao  Activity等其他组件可以启动服务，服务启动后可以单独运行, 拥有单独的生命周期,也可以与启动服务的组件绑定从而与其进行交互\juhao
 
-内容提供程序管理一组共享的应用数据\juhao 应用数据可以被存储在文件系统、SQLite 数据库、网络上或任何应用可以访问的永久性存储位置, 其他应用可以通过内容提供程序查询数据，甚至修改数据（如果内容提供程序允许）\juhao 例如，Android 系统可提供管理用户联系人信息的内容提供程序。 因此，任何具有适当权限的应用都可以查询内容提供程序的某一部分（如 ContactsContract.Data）, 以读取和写入有关特定人员的信息\juhao
-内容提供程序也适用于读取和写入您的应用不共享的私有数据\juhao 例如，记事本示例应用使用内容提供程序来保存笔记\juhao
+内容提供程序管理一组共享的应用数据\juhao 应用数据可以被存储在文件系统、SQLite 数据库、网络上或任何应用可以访问的永久性存储位置, 在权限允许的情况下, 其他应用可以通过内容提供程序来查询或者修改被内容提供程序管理的数据\juhao 例如，Android系统提供了管理用户联系人信息的内容提供程序, 因此，任何具有访问联系人数据权限的应用都可以通过该内容提供器读取和写入联系人数据\juhao
+内容提供程序也可以被用于用于读取和写入应用本身的私有数据\juhao 例如，便签应用可以使用内容提供程序来保存便签数据\juhao
 
-广播接收器是一种用于响应系统范围广播通知的组件\juhao 许多广播都是由系统发起的, 例如，通知屏幕已关闭、电池电量不足或已拍摄照片的广播\juhao 应用也可以发起广播, 例如，通知其他应用某些数据已下载至设备，并且可供其使用\juhao 尽管广播接收器不会显示用户界面，但它们可以创建状态栏通知，在发生广播事件时提醒用户\juhao 但广播接收器更常见的用途只是作为通向其他组件的“通道”，例如，它可以在接收到某个事件广播后启动一项服务来执行某项工作\juhao
+广播接收器是一种用于接收系统范围的广播通知的组件\juhao 许多广播都是由系统发起的, 例如，通知开机\dunhao 来电\dunhao 收到短信等\juhao 应用也可以发起广播, 例如，通知其他应用某项任务已经完成了，可以进行下一步操作\juhao 广播接收器不会显示用户界面，但可以创建状态栏通知，在发生广播事件时提醒用户\juhao 但广播接收器常见的用法是在特定广播事件发生后启动其他相应组件的一个事件监听器，例如，它可以在接收到某个事件广播后启动一项服务来执行某项工作\juhao
 
 \section{Android运行时环境}
 \label{androidRuntime}
@@ -173,10 +174,10 @@ Android平台的动态分析同传统PC环境有相似之处, 即都是通过追
 Virtual Machine Introspection(VMI)是一种实时监控虚拟机运行状态的技术\juhao 通过该技术, 能够实现在指令层面监控应用的运行, 因此也可以实现对系统调用, 本地函数调用的监控\juhao 并且由于监控代码运行于客户系统之外, 客户系统内被监控的应用无法检测到自己处于被监控状态, 因此是一种十分有效的监控应用运行的技术\juhao 对于Android平台的动态监控而言, 使用VMI技术无需修改Android源代码, 可以适应Android版本的变化, 但该技术的运用依赖于模拟器, 一般通过修改模拟器加入监控代码来实现, 但由于依赖模拟器, 容易受到应用对模拟器环境检测的影响\juhao Cooperdroid\upcite{copperdroid}、DroidScope\upcite{droidscope}使用了该技术来实现动态监控\juhao
 
 \subsection{ptrace系统调用}
-ptrace系统调用是Unix和一些类Unix系统中的一种系统调用\juhao 通过使用ptrace系统调用, 一个进程可以监控另外一个进程的执行, 读取和修改其内存和寄存器\juhao 具体来说, ptrace系统调用能够实现监控应用调用系统调用的情况, 能够实现指令单步执行和断点, 许多调试工具都依赖于ptrace系统调用实现, 如gdb, lldb, strace, ltrace等\juhao 由于ptrace系统调用能够实现单步执行, 通过ptrace系统调用也能实现在指令层面监控应用的执行\juhao 加上ptrace系统调用能够监控应用调用系统调用的情况, 通过ptrace系统调用可以实现对本地函数调用的监控\juhao 对于Android平台的动态监控而言, 使用ptrace系统调用也无需修改Android源代码, 可以适应Android版本的变化, 并且相比VMI技术, ptrace系统调用不依赖于模拟器, 可以运行于真机上, 但存在一些反ptrace跟踪的技术, 例如一个进程只能被一个进程跟踪, 所以应用可以跟踪自身, 从而防止被其他工具跟踪\juhao ptrace系统调用一般还会和hooking技术结合起来使用, 可以实现对目标函数的劫持和监控\juhao Crowdroid\upcite{crowdroid}\dunhao Glassbox\upcite{glassbox}使用了该技术来实现动态监控\juhao
+ptrace系统调用是Unix和一些类Unix系统中的一种系统调用\juhao 通过使用ptrace系统调用, 一个进程可以监控另外一个进程的执行, 读取和修改其内存和寄存器\juhao 具体来说, ptrace系统调用能够实现监控应用调用系统调用的情况, 能够实现指令单步执行和断点, 许多调试工具都依赖于ptrace系统调用实现, 如gdb, lldb, strace, ltrace等\juhao 由于ptrace系统调用能够实现单步执行, 通过ptrace系统调用也能实现在指令层面监控应用的执行\juhao 加上ptrace系统调用能够监控应用调用系统调用的情况, 通过ptrace系统调用可以实现对本地函数调用的监控\juhao 对于Android平台的动态监控而言, 使用ptrace系统调用也无需修改Android源代码, 可以适应Android版本的变化, 并且相比VMI技术, ptrace系统调用不依赖于模拟器, 可以运行于真机上, 但存在一些反ptrace跟踪的技术, 例如一个进程只能被一个进程跟踪, 所以应用可以跟踪自身, 从而防止被其他工具跟踪\juhao ptrace系统调用一般还会和hooking技术结合起来使用, 可以实现对目标函数的劫持和监控\juhao Crowdroid\upcite{crowdroid}\dunhao Glassbox\upcite{glassbox}和DroidTrace\upcite{droidtrace}使用了该技术来实现动态监控\juhao
 
 \subsection{Application Instrumentation}
-Application Instrumentation指通过修改需要监控的目标应用, 向其中插入监控代码实现监控应用执行的技术\juhao 对于Android平台而言, 该技术一般用于监控应用调用Java层API的情况, 具体来说, 通过反编译应用的dex文件得到smali代码, 搜索其中调用敏感API的代码, 将监控代码插入调用敏感API代码的周围, 再将修改后的smali代码编译重新打包成包含监控代码的应用, 这样在应用执行时就会执行监控代码, 输出监控信息\juhao 该技术不需要修改Android系统源代码, 但受到Android系统API变化的影响, 因此会在一定程度上受Android版本变化的影响\juhao 此外, 由于应用完整性校验以及加壳和混淆技术的广泛应用, 修改后的应用很可能无法运行, 并且一般无法从应用安装包获取到包含应用真实逻辑的dex文件, 因此该技术目前几乎已经失效\juhao APIMonitor\upcite{apimonitor}使用了该技术实现动态监控\juhao
+Application Instrumentation指通过修改需要监控的目标应用, 向其中插入监控代码实现监控应用执行的技术\juhao 对于Android平台而言, 该技术一般用于监控应用调用Java层API的情况, 具体来说, 通过反编译应用的dex文件得到smali代码, 搜索其中调用敏感API的代码, 将监控代码插入调用敏感API代码的周围, 再将修改后的smali代码编译重新打包成包含监控代码的应用, 这样在应用执行时就会执行监控代码, 输出监控信息\juhao 该技术不需要修改Android系统源代码, 但受到Android系统API变化的影响, 因此会在一定程度上受Android版本变化的影响\juhao 此外, 由于应用完整性校验以及加壳和混淆技术的广泛应用, 修改后的应用很可能无法运行, 并且一般无法从应用安装包获取到包含应用真实逻辑的dex文件, 因此该技术目前几乎已经失效\juhao APIMonitor\upcite{apimonitor}\dunhao Droidward\upcite{droidward}\dunhao ConDroid\upcite{condroid} 和Droidcat\upcite{droidcat} 使用了该技术实现动态监控\juhao
 
 \subsection{DVM/ART Instrumentation}
 \label{artInstr}
@@ -184,11 +185,11 @@ DVM/ART Instrumentation指通过修改Android系统的DVM或者ART运行时环�
 Android源代码的修改, 并且Android运行时环境在不同版本上变化较大, 特别是Android5.0之前和Android5.0之后Android运行时环境有DVM替换为了ART, 因此需要经常调整以适用于最新的Android版本\juhao DroidScope\upcite{droidscope}\dunhao Glassbox\upcite{glassbox}使用了该技术实现动态监控\juhao
 
 \subsection{Hooking技术}
-hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们可以获取目标函数的参数和返回值, 可以改变目标函数的行为从而实现对目标函数的监控\juhao 对于Android平台, hooking技术可以用于监控本地函数也可以用于监控Java方法, 其具体的实现方式有很多种, 例如针对本地函数有Procedure Link Table(PLT) hooking\dunhao inline hooking\dunhao Import Address Table(IAT) hooking; 针对Java方法有修改vtable, 修改ArtMethod对象的入口地址等\juhao hooking技术一般比较灵活, 结合一些动态代码追踪工具, 例如frida, 能够动态的调整监控目标\juhao 由于ptrace系统调用能够修改被追踪进程的内存, linux系统的hooking技术一般会利用ptrace系统调用实现\juhao REAPER\upcite{reaper}使用了该技术实现动态监控\juhao
+hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们可以获取目标函数的参数和返回值, 可以改变目标函数的行为从而实现对目标函数的监控\juhao 对于Android平台, hooking技术可以用于监控本地函数也可以用于监控Java方法, 其具体的实现方式有很多种, 例如针对本地函数有Procedure Link Table(PLT) hooking\dunhao inline hooking\dunhao Import Address Table(IAT) hooking; 针对Java方法有修改vtable, 修改ArtMethod对象的入口地址等\juhao hooking技术一般比较灵活, 结合一些动态代码追踪工具, 例如frida, 能够动态的调整监控目标\juhao 由于ptrace系统调用能够修改被追踪进程的内存, linux系统的hooking技术一般会利用ptrace系统调用实现\juhao ARTdroid\upcite{artdroid}和REAPER\upcite{reaper}使用了该技术实现动态监控\juhao
 
 \subsection{Frida}
 \label{frida}
-Frida\upcite{frida}是一个著名的开源跨平台动态代码追踪工具\juhao 
+Frida\upcite{frida}是一个著名的开源跨平台动态代码追踪工具\juhao 该工具支持几乎所有常见的桌面或者移动操作系统, 并且提供了Javascript API来实现简单快速的开发\juhao 利用该工具的Javascript API, 可以实现劫持本地或者Java层的函数, 调用本地函数, 读写内存, 操作文件和socket, 修改指令等许多操作\juhao 但Frida框架在Andriod系统下存在一些兼容性问题, 容易导致应用崩溃\juhao 
 
 \subsection{Xposed}
  Xposed\upcite{xposed} 是一个著名的Android平台的开源动态代码劫持框架\juhao
@@ -199,7 +200,7 @@ Frida\upcite{frida}是一个著名的开源跨平台动态代码追踪工具\juh
 Valgrind\upcite{valgrind}是一个用于构建动态分析工具的开源代码追踪框架, 可以被编译运行在许多类Unix系统中\juhao Android系统基于Linux构建, 因此利用Valgrind来构建动态分析系统\juhao Malton\upcite{malton}\dunhao PackerGrind\upcite{packergrind}使用了该技术来实现动态监控\juhao 
 
 \section{Android应用保护技术}
-为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括完整性校验\upcite{androidsecure}\dunhao 名称混淆\dunhao 方法执行混淆\upcite{tiro}\dunhao dex文件动态加载\dunhao dex文件动态修改\dunhao 类动态加载\dunhao 方法本地实现\dunhao 模拟器检测\upcite{emdetection}\dunhao 反调试等\juhao
+为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括完整性校验\upcite{androidsecure}\dunhao 名称混淆\dunhao 方法执行混淆\upcite{tiro}\dunhao dex文件动态加载\upcite{packergrind}\dunhao dex文件动态修改\upcite{packergrind}\dunhao 类动态加载\upcite{packergrind}\dunhao 方法本地实现\upcite{packergrind}\dunhao 模拟器检测\upcite{emdetection}\dunhao 反调试\upcite{packergrind} 等\juhao
 
 \paragraph*{完整性校验}
 该技术为应用在运行具体的业务逻辑前先对自身的代码文件, 资源文件等文件计算校验值, 然后把校验值与应用未经过修改时的校验值进行比较, 如果相同则表示应用没有被修改, 可以运行; 如果不同则表示应用被篡改, 停止执行\juhao 完整性校验可以只在应用启动时执行,但容易被绕过, 也可以在应用内随机执行, 极大地增加绕过的难度\juhao 

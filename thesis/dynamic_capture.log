@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  8 MAY 2019 09:16
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  8 MAY 2019 11:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1802,7 +1802,7 @@ ion Binary Interface(ABI)
 File: figures/zygote_start.jpg Graphic file (type bmp)
 <figures/zygote_start.jpg>
 
-Overfull \hbox (28.3233pt too wide) in paragraph at lines 115--116
+Overfull \hbox (28.3233pt too wide) in paragraph at lines 116--117
 \TU/TimesNewRoman(0)/bx/n/12.045 time::start \TU/FandolSong-Regular(0)/m/n/12.0
 45 启 动 \TU/TimesNewRoman(0)/bx/n/12.045 Android \TU/FandolSong-Regular(0)/m/n/1
 2.045 运 行 时 环 境\TU/TimesNewRoman(0)/bx/n/12.045 , \TU/FandolSong-Regular(0)/m/n
@@ -1824,18 +1824,14 @@ File: figures/method_exec.jpg Graphic file (type bmp)
 File: figures/method_exec2.jpg Graphic file (type bmp)
 <figures/method_exec2.jpg>
 
-Overfull \hbox (26.53406pt too wide) in paragraph at lines 163--164
+Overfull \hbox (26.53406pt too wide) in paragraph at lines 164--165
 []\TU/FandolSong-Regular(0)/m/n/12.045 图[]\TU/TimesNewRoman(0)/bx/n/12.045 2.7[
 ]\TU/FandolSong-Regular(0)/m/n/12.045 主 要 描 述 了 调 用 \TU/TimesNewRoman(0)/bx/n/1
 2.045 ArtMethod::Invoke \TU/FandolSong-Regular(0)/m/n/12.045 来 执 行 一 个 方 法 的 情 
 况。| \TU/TimesNewRoman(0)/bx/n/12.045 ArtMethod::Invoke
  []
 
-[17] [18] [19] [20] [21]
-
-LaTeX Warning: Citation `tiro' on page 22 undefined on input line 202.
-
-[22] [23]) [24]
+[17] [18] [19] [20] [21] [22] [23]) [24]
 \zihao {-2}3
 (./implementation.tex
 File: figures/em_overview.jpg Graphic file (type bmp)
@@ -1956,7 +1952,7 @@ olution.  []$[][][][][] [] [] [] [][][] []
 
 
 LaTeX Font Warning: Font shape `TU/TimesNewRoman(0)/m/it' undefined
-(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 37.
+(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 35.
 
 [39
 
@@ -1983,18 +1979,15 @@ Package rerunfilecheck Info: File `dynamic_capture.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 76.
  ) 
 Here is how much of TeX's memory you used:
- 27414 strings out of 492970
- 548141 string characters out of 6133939
+ 27412 strings out of 492970
+ 547582 string characters out of 6133939
  649178 words of memory out of 5000000
- 31070 multiletter control sequences out of 15000+600000
+ 31068 multiletter control sequences out of 15000+600000
  544719 words of font info for 116 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 59i,12n,76p,10472b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 59i,12n,76p,10472b,538s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on dynamic_capture.pdf (50 pages).

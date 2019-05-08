@@ -29,7 +29,7 @@ ART虚拟机中的每个Java方法都使用一个ArtMethod类型的对象来表�
 本系统在ArtMethod::Invoke和Execute函数的入口和所有出口位置调用了上述log\_em函数记录方法执行的开始和结束\juhao 
 
 \section{监控本地函数调用}
-本功能由EvMonitor-Frida实现\juhao 本系统使用Frida工具的动态链接库形式(frida-gadget), 通过在应用加载自身代码之前加载frida-gadget并执行监控代码来实现对本地层函数调用的监控\juhao 目前的监控较为简单, 主要是利用了Frida工具提供的Interceptor来hook了open\dunhao execve\dunhao socket\dunhao dlopen\dunhao dlsym函数来监控它们的调用情况\juhao 由于Frida工具实现了Javascript的API, 因此可以灵活的添加监控函数和其他监控逻辑, 增强本系统\juhao 
+本功能由EvMonitor-Frida实现\juhao 本系统使用Frida工具的动态链接库形式(frida-gadget), 通过在应用加载自身代码之前加载frida-gadget并执行监控代码来实现对本地层函数调用的监控\juhao 目前的监控较为简单, 主要是利用了Frida工具提供的Interceptor来hook了open\dunhao execve\dunhao connect\dunhao dlsym函数来监控它们的调用情况\juhao 由于Frida工具实现了Javascript的API, 因此可以灵活的添加监控函数和其他监控逻辑, 增强本系统\juhao 
 
 
 \section{脱壳功能}

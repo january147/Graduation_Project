@@ -20,7 +20,7 @@
 \contentsline {subsection}{\numberline {2.4.3}Application Instrumentation}{20}{subsection.2.4.3}
 \contentsline {subsection}{\numberline {2.4.4}DVM/ART Instrumentation}{21}{subsection.2.4.4}
 \contentsline {subsection}{\numberline {2.4.5}Hooking技术}{21}{subsection.2.4.5}
-\contentsline {subsection}{\numberline {2.4.6}Frida}{21}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.6}Frida}{22}{subsection.2.4.6}
 \contentsline {subsection}{\numberline {2.4.7}Xposed}{22}{subsection.2.4.7}
 \contentsline {subsection}{\numberline {2.4.8}Valgrind}{22}{subsection.2.4.8}
 \contentsline {section}{\numberline {2.5}Android应用保护技术}{22}{section.2.5}

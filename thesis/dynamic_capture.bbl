@@ -29,6 +29,11 @@ Kantar.
 \newblock 腾讯移动安全实验室2018年手机安全报告.
 \newblock \url{https://m.qq.com/security\_lab/news\_detail\_489.html}, 2018.
 
+\bibitem{chinese2}
+谌力 文伟平, 汤炀.
+\newblock 一种基于android内核的app敏感行为检测方法及实现.
+\newblock {\em 信息网络安全}, (8):18--23, 2016.
+
 \bibitem{taintdroid}
 William Enck, Peter Gilbert, Byung-Gon Chun, Landon~P Cox, Jaeyeon Jung,
   Patrick McDaniel, and Anmol~N Sheth.
@@ -78,6 +83,36 @@ Paul Irolla and Eric Filiol.
   on real devices.
 \newblock {\em arXiv preprint arXiv:1609.04718}, 2016.
 
+\bibitem{droidtrace}
+Min Zheng, Mingshen Sun, and John~CS Lui.
+\newblock Droidtrace: A ptrace based android dynamic analysis system with
+  forward execution capability.
+\newblock In {\em 2014 International Wireless Communications and Mobile
+  Computing Conference (IWCMC)}, pages 128--133. IEEE, 2014.
+
+\bibitem{droidward}
+Yubin Yang, Zongtao Wei, Yong Xu, Haiwu He, and Wei Wang.
+\newblock Droidward: an effective dynamic analysis method for vetting android
+  applications.
+\newblock {\em Cluster Computing}, 21(1):265--275, 2018.
+
+\bibitem{condroid}
+Julian Sch{\"u}tte, Rafael Fedler, and Dennis Titze.
+\newblock Condroid: Targeted dynamic analysis of android applications.
+\newblock In {\em 2015 IEEE 29th International Conference on Advanced
+  Information Networking and Applications}, pages 571--578. IEEE, 2015.
+
+\bibitem{droidcat}
+Haipeng Cai, Na~Meng, Barbara Ryder, and Daphne Yao.
+\newblock Droidcat: Unified dynamic detection of android malware.
+\newblock Technical report, Department of Computer Science, Virginia
+  Polytechnic Institute \& State~…, 2016.
+
+\bibitem{artdroid}
+Valerio Costamagna and Cong Zheng.
+\newblock Artdroid: A virtual-method hooking framework on android art runtime.
+\newblock In {\em IMPS@ ESSoS}, pages 20--28, 2016.
+
 \bibitem{reaper}
 Michalis Diamantaris, Elias~P Papadopoulos, Evangelos~P Markatos, Sotiris
   Ioannidis, and Jason Polakis.
@@ -103,11 +138,7 @@ ac~pm.
 \bibitem{chinese1}
 孙国梓 邱凌志, 张梓雄.
 \newblock Insightdroid—动态追踪android应用方法.
-
-\bibitem{chinese2}
-谌力 文伟平, 汤炀.
-\newblock 一种基于android内核的app敏感行为检测方法及实现.
-\newblock {\em 信息网络安全}, (8):18--23, 2016.
+\newblock {\em 小型微型计算机系统}, 35(11):2482--2487, 2014.
 
 \bibitem{valgrind}
 Nicholas Nethercote and Julian Seward.
@@ -124,6 +155,12 @@ Lei Xue, Xiapu Luo, Le~Yu, Shuai Wang, and Dinghao Wu.
 丰生强.
 \newblock {\em Android软件安全权威指南}.
 \newblock 电子工业出版社, 2019.
+
+\bibitem{tiro}
+Michelle~Y Wong and David Lie.
+\newblock Tackling runtime-based obfuscation in android with $\{$TIRO$\}$.
+\newblock In {\em 27th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$
+  Security 18)}, pages 1247--1262, 2018.
 
 \bibitem{emdetection}
 Yiming Jing, Ziming Zhao, Gail~Joon Ahn, and Hongxin Hu.
