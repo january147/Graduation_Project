@@ -2,6 +2,24 @@
 %% 请使用 XeLaTeX 编译本文.
 % \documentclass{WHUBachelor}% 选项 forprint: 交付打印时添加, 避免彩色链接字迹打印偏淡. 即使用下一行:
 \documentclass[forprint]{WHUBachelor}
+\usepackage{listings}
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=4,
+	frame=single,
+	xleftmargin=2em,
+	xrightmargin=2em
+}
+\usepackage{multirow}
 \newcommand{\juhao}{。}
 \newcommand{\dunhao}{、}
 \begin{document}

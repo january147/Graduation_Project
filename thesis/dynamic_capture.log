@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  7 MAY 2019 11:25
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  8 MAY 2019 09:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1481,32 +1481,72 @@ Package tocloft Info: The document has chapter divisions on input line 51.
 \cfttabindent=\skip116
 \cfttabnumwidth=\skip117
 ))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count322
+\lst@gtempboxa=\box54
+\lst@token=\toks53
+\lst@length=\count323
+\lst@currlwidth=\dimen267
+\lst@column=\count324
+\lst@pos=\count325
+\lst@lostspace=\dimen268
+\lst@width=\dimen269
+\lst@newlines=\count326
+\lst@lineno=\count327
+\lst@maxwidth=\dimen270
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count328
+\lst@skipnumbers=\count329
+\lst@framebox=\box55
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
+\multirow@colwidth=\skip118
+\multirow@cntb=\count330
+\multirow@dima=\skip119
+\bigstrutjot=\dimen271
+)
+(/usr/local/texlive/2018/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
+Package: xeCJK-listings 2018/04/07 v3.7.0 xeCJK patch file for listings
+\l__xeCJK_listings_max_char_int=\count331
+\l__xeCJK_listings_flag_int=\count332
+)
 (./dynamic_capture.aux (./includefile/frontmatter.aux)
 (./includefile/backmatter.aux))
 \openout1 = `dynamic_capture.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
  ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 7.
+LaTeX Info: Redefining \selectfont on input line 25.
 .................................................
 . fontspec info: "setup-math"
 . 
@@ -1514,65 +1554,65 @@ LaTeX Info: Redefining \selectfont on input line 7.
 .................................................
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 7.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 7.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 7.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 7.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 7.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 7.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 7.
-LaTeX Font Info:    Redeclaring math accent \check on input line 7.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 7.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 7.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 7.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 7.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 7.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 25.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 25.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 25.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 25.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 25.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 25.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 25.
+LaTeX Font Info:    Redeclaring math accent \check on input line 25.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 25.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 25.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 25.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 25.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 7.
+(Font)              `operators' in the math version `normal' on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 7
-.
+(Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 2
+5.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 7.
+(Font)              `operators' in the math version `bold' on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/m/n on input line 
-7.
+25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on 
-input line 7.
+input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/TimesNewRoman(0)/m/it on input line
- 7.
+ 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/bx/n on input line
- 7.
+ 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 7.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 7.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/bx/n on
- input line 7.
+ input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> TU/TimesNewRoman(0)/bx/it on input li
-ne 7.
+ne 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 7.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 7.
-\AtBeginShipoutBox=\box54
-Package hyperref Info: Link coloring OFF on input line 7.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 25.
+\AtBeginShipoutBox=\box56
+Package hyperref Info: Link coloring OFF on input line 25.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1580,11 +1620,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count322
+\c@section@level=\count333
 )
-LaTeX Info: Redefining \ref on input line 7.
-LaTeX Info: Redefining \pageref on input line 7.
-LaTeX Info: Redefining \nameref on input line 7.
+LaTeX Info: Redefining \ref on input line 25.
+LaTeX Info: Redefining \pageref on input line 25.
+LaTeX Info: Redefining \nameref on input line 25.
 
 (./dynamic_capture.out) (./dynamic_capture.out)
 \@outlinefile=\write3
@@ -1625,7 +1665,9 @@ LaTeX Info: Redefining \nameref on input line 7.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count334
 (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 
@@ -1635,7 +1677,7 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 * 
 * Font 'FandolHei-Regular' does not contain script 'CJK'.
 *************************************************
-\g__fontspec_family_FandolHei-Regular_int=\count323
+\g__fontspec_family_FandolHei-Regular_int=\count335
 .................................................
 . fontspec info: "defining-font"
 . 
@@ -1649,16 +1691,16 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 . - 'bold' (bx/n) with NFSS spec.: <->"[FandolHei-Bold.otf]/OT"
 . - 'bold small caps'  (bx/sc) with NFSS spec.: 
 .................................................
-LaTeX Font Info:    Try loading font information for U+msa on input line 28.
+LaTeX Font Info:    Try loading font information for U+msa on input line 46.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 28.
+LaTeX Font Info:    Try loading font information for U+msb on input line 46.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (5.32085pt too wide) in paragraph at lines 28--28
+Overfull \hbox (5.32085pt too wide) in paragraph at lines 46--46
  [] 
  []
 
@@ -1681,7 +1723,7 @@ Overfull \hbox (5.32085pt too wide) in paragraph at lines 28--28
 . - 'bold small caps'  (bx/sc) with NFSS spec.: 
 .................................................
 
-Overfull \hbox (4.90009pt too wide) detected at line 28
+Overfull \hbox (4.90009pt too wide) detected at line 46
 \TU/FandolSong-Regular(1)/m/n/26.09749 武 汉 大 学 本 科 毕 业 论 文
  []
 
@@ -1791,9 +1833,9 @@ Overfull \hbox (26.53406pt too wide) in paragraph at lines 163--164
 
 [17] [18] [19] [20] [21]
 
-LaTeX Warning: Citation `tiro' on page 22 undefined on input line 200.
+LaTeX Warning: Citation `tiro' on page 22 undefined on input line 202.
 
-[22]) [23]
+[22] [23]) [24]
 \zihao {-2}3
 (./implementation.tex
 File: figures/em_overview.jpg Graphic file (type bmp)
@@ -1806,27 +1848,83 @@ x/n/12.045 , \TU/FandolSong-Regular(0)/m/n/12.045 加 粗 的 矩 形 部 分 �
   其 中 \TU/TimesNewRoman(0)/bx/n/12.045 EvMonitor-
  []
 
-[24
+[25
 
-] [25]
+]
+Overfull \hbox (0.20407pt too wide) in paragraph at lines 21--22
+\TU/TimesNewRoman(0)/bx/n/12.045 gAppStartAndSetTarget_em \TU/FandolSong-Regula
+r(0)/m/n/12.045 加 入 了 \TU/TimesNewRoman(0)/bx/n/12.045 com.android.internal.os.
+Zygote \TU/FandolSong-Regular(0)/m/n/12.045 类 中\TU/TimesNewRoman(0)/bx/n/12.045
+ , \TU/FandolSong-Regular(0)/m/n/12.045 并 通 过 在 \TU/TimesNewRoman(0)/bx/n/12.04
+5 Zy-
+ []
 
-LaTeX Warning: Reference `classLoadA' on page 26 undefined on input line 32.
-
-) [26]
+[26]
+File: figures/dex_file_code.jpg Graphic file (type bmp)
+<figures/dex_file_code.jpg>
+ [27] [28]) [29]
 \zihao {-2}4
-(./experiment.tex) [27
+(./experiment.tex
+Overfull \hbox (0.44344pt too wide) in paragraph at lines 20--21
+[]\TU/FandolSong-Regular(0)/m/n/12.045 本 次 功 能 测 试 使 用 了 支 付 宝 应 用 的 \TU/TimesN
+ewRoman(0)/bx/n/12.045 10.1.62 \TU/FandolSong-Regular(0)/m/n/12.045 版 本 \TU/Tim
+esNewRoman(0)/bx/n/12.045 (\TU/FandolSong-Regular(0)/m/n/12.045 应 用 软 件 包 名 \TU
+/TimesNewRoman(0)/bx/n/12.045 com.eg.android. 
+ []
+
+
+Overfull \hbox (9.11452pt too wide) in paragraph at lines 20--21
+\TU/TimesNewRoman(0)/bx/n/12.045 AlipayGphone) \TU/FandolSong-Regular(0)/m/n/12
+.045 本 文 作 者 开 发 的 一 款 名 为 \TU/TimesNewRoman(0)/bx/n/12.045 noticer \TU/FandolS
+ong-Regular(0)/m/n/12.045 的 应 用 \TU/TimesNewRoman(0)/bx/n/12.045 (\TU/FandolSon
+g-Regular(0)/m/n/12.045 应 用 软 件 包 名 \TU/TimesNewRoman(0)/bx/n/12.045 top.januar
+y147 
+ []
+
+[30
 
 ]
+File: figures/test_app_start_1.png Graphic file (type bmp)
+<figures/test_app_start_1.png>
+
+Overfull \hbox (3.0861pt too wide) in paragraph at lines 24--32
+\TU/FandolSong-Regular(0)/m/n/12.045 录 了 支 付 宝 启 动 的 两 个 进 程\TU/TimesNewRoman(0
+)/bx/n/12.045 ,com.eg.android.AlipayGphone:tools \TU/FandolSong-Regular(0)/m/n/
+12.045 和 \TU/TimesNewRoman(0)/bx/n/12.045 com.eg.android.A-
+ []
+
+File: figures/test_noticer.png Graphic file (type bmp)
+<figures/test_noticer.png>
+File: figures/test_javacall.png Graphic file (type bmp)
+<figures/test_javacall.png>
+File: figures/test_log_file.png Graphic file (type bmp)
+<figures/test_log_file.png>
+[31]
+File: figures/test_service_start.png Graphic file (type bmp)
+<figures/test_service_start.png>
+File: figures/test_service_stop.png Graphic file (type bmp)
+<figures/test_service_stop.png>
+ [32]
+File: figures/test_dex_file.png Graphic file (type bmp)
+<figures/test_dex_file.png>
+ [33]
+File: figures/test_org_class.png Graphic file (type bmp)
+<figures/test_org_class.png>
+File: figures/test_native_call.png Graphic file (type bmp)
+<figures/test_native_call.png>
+File: figures/test_overhead.png Graphic file (type bmp)
+<figures/test_overhead.png>
+ [34] [35]) [36]
 \zihao {-2}5
-(./summary.tex) (./dynamic_capture.bbl [28
+(./summary.tex [37
 
-]
+]) (./dynamic_capture.bbl [38]
 *************************************************
 * fontspec warning: "script-not-exist"
 * 
 * Font 'FandolFang-Regular' does not contain script 'CJK'.
 *************************************************
-\g__fontspec_family_FandolFang-Regular_int=\count324
+\g__fontspec_family_FandolFang-Regular_int=\count336
 .................................................
 . fontspec info: "defining-font"
 . 
@@ -1860,12 +1958,12 @@ olution.  []$[][][][][] [] [] [] [][][] []
 LaTeX Font Warning: Font shape `TU/TimesNewRoman(0)/m/it' undefined
 (Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 37.
 
-[29
+[39
 
-] [30]) [31]
+] [40]) [41]
 \openout2 = `includefile/backmatter.aux'.
 
- (./includefile/backmatter.tex) [32
+ (./includefile/backmatter.tex) [42
 
 
 
@@ -1873,19 +1971,14 @@ LaTeX Font Warning: Font shape `TU/TimesNewRoman(0)/m/it' undefined
 \tf@thm=\write5
 \openout5 = `dynamic_capture.thm'.
 
-
-
-Package caption Warning: Unused \captionsetup[table] on input line 225.
-See the caption package documentation for explanation.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 58.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 58.
-(./dynamic_capture.aux (./includefile/frontmatter.aux)
-(./includefile/backmatter.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 58.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 58.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 76.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 76.
+ (./dynamic_capture.aux
+(./includefile/frontmatter.aux) (./includefile/backmatter.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 76.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 76.
 Package rerunfilecheck Info: File `dynamic_capture.out' has not changed.
-(rerunfilecheck)             Checksum: 9BD7788B379982427DE2D228D2989768.
+(rerunfilecheck)             Checksum: E9844CD667A20A4035A48CFC67BE0D66.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1893,15 +1986,15 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 58.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 76.
  ) 
 Here is how much of TeX's memory you used:
- 26090 strings out of 492970
- 527209 string characters out of 6133939
- 606305 words of memory out of 5000000
- 29781 multiletter control sequences out of 15000+600000
+ 27414 strings out of 492970
+ 548141 string characters out of 6133939
+ 649178 words of memory out of 5000000
+ 31070 multiletter control sequences out of 15000+600000
  544719 words of font info for 116 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 59i,12n,76p,10473b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 59i,12n,76p,10472b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dynamic_capture.pdf (40 pages).
+Output written on dynamic_capture.pdf (50 pages).

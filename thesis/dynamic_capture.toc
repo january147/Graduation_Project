@@ -4,7 +4,7 @@
 \contentsline {section}{\numberline {1.1}研究背景与意义}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}国内外研究现状和发展方向}{2}{section.1.2}
 \contentsline {section}{\numberline {1.3}论文主要工作}{4}{section.1.3}
-\contentsline {section}{\numberline {1.4}论文组织结构}{4}{section.1.4}
+\contentsline {section}{\numberline {1.4}论文组织结构}{5}{section.1.4}
 \contentsline {chapter}{\numberline {\zihao {-2}2\hspace {.3em}}背景技术分析}{6}{chapter.2}
 \contentsline {section}{\numberline {2.1}Android系统架构}{6}{section.2.1}
 \contentsline {section}{\numberline {2.2}Android应用结构}{9}{section.2.2}
@@ -24,17 +24,25 @@
 \contentsline {subsection}{\numberline {2.4.7}Xposed}{22}{subsection.2.4.7}
 \contentsline {subsection}{\numberline {2.4.8}Valgrind}{22}{subsection.2.4.8}
 \contentsline {section}{\numberline {2.5}Android应用保护技术}{22}{section.2.5}
-\contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{24}{chapter.3}
-\contentsline {section}{\numberline {3.1}概览}{24}{section.3.1}
-\contentsline {section}{\numberline {3.2}监控应用启动}{24}{section.3.2}
-\contentsline {section}{\numberline {3.3}Java方法调用监控}{26}{section.3.3}
-\contentsline {section}{\numberline {3.4}本地函数调用监控}{26}{section.3.4}
-\contentsline {section}{\numberline {3.5}脱壳功能}{26}{section.3.5}
-\contentsline {section}{\numberline {3.6}日志系统}{26}{section.3.6}
-\contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{27}{chapter.4}
-\contentsline {section}{\numberline {4.1}实验环境}{27}{section.4.1}
-\contentsline {section}{\numberline {4.2}功能测试}{27}{section.4.2}
-\contentsline {section}{\numberline {4.3}性能测试}{27}{section.4.3}
-\contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{28}{chapter.5}
-\contentsline {chapter}{参考文献}{28}{section*.25}
-\contentsline {chapter}{致谢}{32}{chapter*.27}
+\contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{25}{chapter.3}
+\contentsline {section}{\numberline {3.1}概览}{25}{section.3.1}
+\contentsline {section}{\numberline {3.2}监控应用启动}{25}{section.3.2}
+\contentsline {section}{\numberline {3.3}监控Java方法调用}{27}{section.3.3}
+\contentsline {section}{\numberline {3.4}监控本地函数调用}{27}{section.3.4}
+\contentsline {section}{\numberline {3.5}脱壳功能}{27}{section.3.5}
+\contentsline {section}{\numberline {3.6}日志系统}{28}{section.3.6}
+\contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{30}{chapter.4}
+\contentsline {section}{\numberline {4.1}实验总体方案}{30}{section.4.1}
+\contentsline {section}{\numberline {4.2}实验运行环境}{30}{section.4.2}
+\contentsline {section}{\numberline {4.3}功能测试}{30}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}监控应用启动功能测试}{31}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}监控Java方法调用功能测试}{31}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}脱壳功能测试}{33}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}监控本地函数调用功能测试}{34}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}性能测试}{35}{section.4.4}
+\contentsline {section}{\numberline {4.5}结果分析}{36}{section.4.5}
+\contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{37}{chapter.5}
+\contentsline {section}{\numberline {5.1}论文工作总结}{37}{section.5.1}
+\contentsline {section}{\numberline {5.2}进一步工作展望}{37}{section.5.2}
+\contentsline {chapter}{参考文献}{38}{section*.39}
+\contentsline {chapter}{致谢}{42}{chapter*.41}

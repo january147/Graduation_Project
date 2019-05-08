@@ -32,45 +32,45 @@ Warning--empty journal in chinese1
 Warning--empty year in chinese1
 Warning--there's a number but no volume in chinese2
 Warning--can't use both volume and number fields in valgrind
-You've used 23 entries,
+You've used 24 entries,
             1791 wiz_defined-function locations,
-            563 strings with 7197 characters,
-and the built_in function-call counts, 4708 in all, are:
-= -- 401
-> -- 190
+            566 strings with 7255 characters,
+and the built_in function-call counts, 4808 in all, are:
+= -- 409
+> -- 191
 < -- 7
-+ -- 75
++ -- 76
 - -- 52
 * -- 205
-:= -- 698
-add.period$ -- 70
-call.type$ -- 23
-change.case$ -- 22
+:= -- 707
+add.period$ -- 72
+call.type$ -- 24
+change.case$ -- 23
 chr.to.int$ -- 0
-cite$ -- 28
-duplicate$ -- 238
-empty$ -- 527
+cite$ -- 29
+duplicate$ -- 243
+empty$ -- 545
 format.name$ -- 52
-if$ -- 1113
+if$ -- 1140
 int.to.chr$ -- 0
-int.to.str$ -- 23
+int.to.str$ -- 24
 missing$ -- 15
-newline$ -- 116
+newline$ -- 120
 num.names$ -- 22
-pop$ -- 123
+pop$ -- 129
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 143
+skip$ -- 149
 stack$ -- 0
 substring$ -- 178
-swap$ -- 77
+swap$ -- 78
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 5
 while$ -- 41
-width$ -- 25
-write$ -- 231
+width$ -- 26
+write$ -- 238
 (There were 5 error messages)
