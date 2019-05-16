@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  8 MAY 2019 11:42
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.4.1)  16 MAY 2019 09:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1735,41 +1735,35 @@ Overfull \hbox (4.90009pt too wide) detected at line 46
  (./includefile/frontmatter.tex
 
 LaTeX Font Warning: Font shape `TU/TimesNewRoman(0)/bx/n' undefined
-(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 11.
+(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 13.
 
 
-LaTeX Font Warning: Font shape `TU/TimesNewRoman(0)/m/sc' undefined
-(Font)              using `TU/TimesNewRoman(0)/m/n' instead on input line 21.
+Underfull \hbox (badness 10000) in paragraph at lines 19--24
 
-File: figures/whu.eps Graphic file (type eps)
-<figures/whu.eps>
+ []
+
 [1
 
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 57--62
-
- []
-
-[2] [3
+] [2
 
 ]
-Overfull \hbox (1.18707pt too wide) in paragraph at lines 100--101
-\TU/TimesNewRoman(0)/bx/n/12.045 a high-performance application dynamic behavio
-r capture system, which can run on Nexus
+Overfull \hbox (1.18707pt too wide) in paragraph at lines 62--63
+\TU/TimesNewRoman(0)/m/n/12.045 a high-performance application dynamic behavior
+ capture system, which can run on Nexus
  []
 
 Missing character: There is no ​ in font Times New Roman/OT:mapping=tex-text;!
 Missing character: There is no ​ in font Times New Roman/OT:mapping=tex-text;!
-) [4
+) [3
 
-] [5] (./dynamic_capture.toc [6
+] [4] (./dynamic_capture.toc [5
 
 ])
 \tf@toc=\write4
 \openout4 = `dynamic_capture.toc'.
 
- [7]
+ [6]
 \zihao {-2}1
 (./introduction.tex [1
 
@@ -1982,12 +1976,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 76.
  ) 
 Here is how much of TeX's memory you used:
- 27412 strings out of 492970
- 547582 string characters out of 6133939
- 649178 words of memory out of 5000000
- 31068 multiletter control sequences out of 15000+600000
+ 27405 strings out of 492970
+ 547438 string characters out of 6133939
+ 648178 words of memory out of 5000000
+ 31063 multiletter control sequences out of 15000+600000
  544719 words of font info for 116 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  59i,12n,76p,10472b,538s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dynamic_capture.pdf (50 pages).
+Output written on dynamic_capture.pdf (49 pages).
