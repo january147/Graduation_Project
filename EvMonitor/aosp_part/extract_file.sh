@@ -23,7 +23,7 @@ zygote_cpp=$fcore_jni/com_android_internal_os_Zygote.cpp
 files=($art_method_cc $art_method_h $dex_file_cc $Evmonitor_h $zygote_java $activity_thread_java $zygote_cpp)
 for file in ${files[*]}
 do
-    cp $file ./source/
+    cp $file ./sourcecode/
 done
 
 
