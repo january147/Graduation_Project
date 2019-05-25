@@ -20,9 +20,6 @@
 \contentsline {subsection}{\numberline {2.4.3}Application Instrumentation}{20}{subsection.2.4.3}
 \contentsline {subsection}{\numberline {2.4.4}DVM/ART Instrumentation}{21}{subsection.2.4.4}
 \contentsline {subsection}{\numberline {2.4.5}Hooking技术}{21}{subsection.2.4.5}
-\contentsline {subsection}{\numberline {2.4.6}Frida}{22}{subsection.2.4.6}
-\contentsline {subsection}{\numberline {2.4.7}Xposed}{22}{subsection.2.4.7}
-\contentsline {subsection}{\numberline {2.4.8}Valgrind}{22}{subsection.2.4.8}
 \contentsline {section}{\numberline {2.5}Android应用保护技术}{22}{section.2.5}
 \contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{25}{chapter.3}
 \contentsline {section}{\numberline {3.1}概览}{25}{section.3.1}
@@ -44,5 +41,5 @@
 \contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{37}{chapter.5}
 \contentsline {section}{\numberline {5.1}论文工作总结}{37}{section.5.1}
 \contentsline {section}{\numberline {5.2}进一步工作展望}{37}{section.5.2}
-\contentsline {chapter}{参考文献}{38}{section*.39}
-\contentsline {chapter}{致谢}{42}{chapter*.41}
+\contentsline {chapter}{参考文献}{38}{section*.40}
+\contentsline {chapter}{致谢}{42}{chapter*.42}

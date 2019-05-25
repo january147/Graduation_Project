@@ -66,7 +66,7 @@ META-INF文件夹包含了与APK文件的签名和校验相关的文件, 一般�
 
 assets文件夹包括了res中定义类型之外的其他类型的资源文件，例如音频文件，视频文件等媒体文件\juhao 该文件夹内的文件不会被编译处理, 因此可以放入任意格式的文件, 应用甚至可以把本地库文件放在这个文件里在运行时根据需要动态的加载\juhao
 
-res文件夹内包含了除了字符串外其他较复杂资源文件, 例如布局文件, 字体文件, 图标文件, 颜色文件等\juhao 这些文件会在应用运行时根据resources.arsc中记录的资源ID对应的路径进行调用\juhao
+res文件夹内包含了除了字符串外其他较复杂资源文件, 例如布局文件, 字体文件, 图标文件, 颜色文件等\juhao 应用运行时会根据资源ID在resources.arsc中查找对应的路径来调用对应的资源文件\juhao
 
 lib文件夹包括了应用的本地库文件， 根据适用的Application Binary Interface(ABI)不同，这些本地库文件会被放在不同的子文件夹里\juhao 当APK被安装时, 系统会选择合适的本地库文件进行安装, 在启动应用时系统会自动加载对应的本地库文件\juhao
 
@@ -163,21 +163,23 @@ PathClassLoader用于加载应用APK文件中包含的dex文件中的类\juhao P
 \end{figure}
 图\ref{methodExec}主要描述了调用ArtMethod::Invoke来执行一个方法的情况\juhao ArtMethod::Invoke有两个入口, 第一个入口是使用Java反射(Java.lang.reflect.method.invoke方法)或JNI反射机制(Android源代码/art/runtime/reflection.cc中的一系列Call*Method函数)经过一系列调用后会调用InvokeWithArgArray\juhao InvokeWithArgArray会打包好方法的参数然后调用ArtMethod::Invoke来执行方法\juhao 该路径的调用的方法可能没有本地代码可以执行, 因此方法的入口点(entry\_point\_from\_quick\_code)可能会为artQuickToInterpreterBridge, 执行方法的入口后会进入解释模式并调用Execute来完成方法的执行; 第二个入口是解释模式执行的方法通过ArtInterpreterToCompiledCodeBridge调用有本地代码的方法, 此时若应用没有运行在调试模式, 会执行应用的本地代码\juhao 以上两个入口, 在应用处于调试模式时, 都会调用EnterInterpreterFromInvoke进入解释模式最后调用Execute执行目标方法\juhao 
 
-图\ref{methodExec}主要描述了调用Execute来执行一个方法的情况\juhao Execute函数有三个入口, 第一个是EnterInterpreterFromInvoke, 用于从ArtMethod::Invoke中进入解释模式执行; 第二个是ArtInterpreterToInterpreterBridge, 用于解释执行的方法调用解释执行的方法; 第三个是artQuickToInterpreterBridge, 用于从本地代码中进入解释模式执行\juhao
+图\ref{methodExec2}主要描述了调用Execute来执行一个方法的情况\juhao Execute函数有三个入口, 第一个是EnterInterpreterFromInvoke, 用于从ArtMethod::Invoke中进入解释模式执行; 第二个是ArtInterpreterToInterpreterBridge, 用于解释执行的方法调用解释执行的方法; 第三个是artQuickToInterpreterBridge, 用于从本地代码中进入解释模式执行\juhao
 在通过Execute函数解释执行方法时, 可能会启动JIT机制编译当前方法然后通过ArtInterpreterToCompiledCodeBridge进入ArtMethod::Invoke执行编译生成的本地代码, 而JIT机制没有启动时会调用解释器函数开始执行方法\juhao Android8.1系统中有两个不同实现方案的解释器函数:第一个是ExecuteMterpImpl, 该函数通过汇编代码实现, 效率很高, 但实现复杂, 不支持调试; 第二个是ExecuteSwitchImpl, 该函数通过switch语句实现, 支持单步调试, 实现也比较简单但运行效率很低, 只有在调试模式的情况下使用\juhao 解释器函数在执行到调用其他方法的字节码时, 会依次调用DoInvoke\dunhao DoCall\dunhao performCall\juhao performCall会根据方法的类型和是否处于调试模式来决定调用ArtInterpreterToInterpreterBridge以解释模式执行还是调用ArtInterpreterToCompiledCodeBridge执行方法的本地代码\juhao 
 
 
 \section{Android动态分析相关技术和实现工具}
-Android平台的动态分析同传统PC环境有相似之处, 即都是通过追踪应用软件的控制流和数据流实现对应用软件行为的揭示\juhao 但Android系统的多层次架构使得动态分析系统需要能够同时对本地层和Java层对应用的执行进行监控才能够获取到应用的完整行为\juhao 对各层次的监控, 常用的技术如下:
+Android平台的动态分析同传统PC环境有相似之处, 即都是通过追踪应用软件的控制流和数据流实现对应用软件行为的揭示\juhao 但Android系统的多层次架构使得动态分析系统需要能够同时对本地层和Java层对应用的执行进行监控才能够获取到应用的完整行为\juhao 对于各层次的监控, 常用的技术如下:
+
+
 
 \subsection{Virtual Machine Introspection}
 Virtual Machine Introspection(VMI)是一种实时监控虚拟机运行状态的技术\juhao 通过该技术, 能够实现在指令层面监控应用的运行, 因此也可以实现对系统调用, 本地函数调用的监控\juhao 并且由于监控代码运行于客户系统之外, 客户系统内被监控的应用无法检测到自己处于被监控状态, 因此是一种十分有效的监控应用运行的技术\juhao 对于Android平台的动态监控而言, 使用VMI技术无需修改Android源代码, 可以适应Android版本的变化, 但该技术的运用依赖于模拟器, 一般通过修改模拟器加入监控代码来实现, 但由于依赖模拟器, 容易受到应用对模拟器环境检测的影响\juhao Cooperdroid\upcite{copperdroid}、DroidScope\upcite{droidscope}使用了该技术来实现动态监控\juhao
 
 \subsection{ptrace系统调用}
-ptrace系统调用是Unix和一些类Unix系统中的一种系统调用\juhao 通过使用ptrace系统调用, 一个进程可以监控另外一个进程的执行, 读取和修改其内存和寄存器\juhao 具体来说, ptrace系统调用能够实现监控应用调用系统调用的情况, 能够实现指令单步执行和断点, 许多调试工具都依赖于ptrace系统调用实现, 如gdb, lldb, strace, ltrace等\juhao 由于ptrace系统调用能够实现单步执行, 通过ptrace系统调用也能实现在指令层面监控应用的执行\juhao 加上ptrace系统调用能够监控应用调用系统调用的情况, 通过ptrace系统调用可以实现对本地函数调用的监控\juhao 对于Android平台的动态监控而言, 使用ptrace系统调用也无需修改Android源代码, 可以适应Android版本的变化, 并且相比VMI技术, ptrace系统调用不依赖于模拟器, 可以运行于真机上, 但存在一些反ptrace跟踪的技术, 例如一个进程只能被一个进程跟踪, 所以应用可以跟踪自身, 从而防止被其他工具跟踪\juhao ptrace系统调用一般还会和hooking技术结合起来使用, 可以实现对目标函数的劫持和监控\juhao Crowdroid\upcite{crowdroid}\dunhao Glassbox\upcite{glassbox}和DroidTrace\upcite{droidtrace}使用了该技术来实现动态监控\juhao
+ptrace系统调用是Unix和一些类Unix系统中的一种系统调用\juhao 通过使用ptrace系统调用, 一个进程可以监控另外一个进程的执行, 读取和修改其内存和寄存器\juhao 具体来说, ptrace系统调用能够实现监控应用调用系统调用的情况, 能够实现指令单步执行和断点, 许多调试工具都依赖于ptrace系统调用实现, 例如gdb, lldb, strace, ltrace等\juhao 由于ptrace系统调用能够实现单步执行, 通过ptrace系统调用也能实现在指令层面监控应用的执行\juhao 加上ptrace系统调用能够监控应用调用系统调用的情况, 通过ptrace系统调用可以实现对本地函数调用的监控\juhao 对于Android平台的动态监控而言, 使用ptrace系统调用也无需修改Android源代码, 可以适应Android版本的变化, 并且相比VMI技术, ptrace系统调用不依赖于模拟器, 可以运行于真机上, 但存在一些反ptrace跟踪的技术, 例如一个进程只能被一个进程跟踪, 所以应用可以跟踪自身, 从而防止被其他工具跟踪\juhao ptrace系统调用一般还会和hooking技术结合起来使用, 可以实现对目标函数的劫持和监控\juhao Crowdroid\upcite{crowdroid}\dunhao Glassbox\upcite{glassbox}和DroidTrace\upcite{droidtrace}使用了该技术来实现动态监控\juhao
 
 \subsection{Application Instrumentation}
-Application Instrumentation指通过修改需要监控的目标应用, 向其中插入监控代码实现监控应用执行的技术\juhao 对于Android平台而言, 该技术一般用于监控应用调用Java层API的情况, 具体来说, 通过反编译应用的dex文件得到smali代码, 搜索其中调用敏感API的代码, 将监控代码插入调用敏感API代码的周围, 再将修改后的smali代码编译重新打包成包含监控代码的应用, 这样在应用执行时就会执行监控代码, 输出监控信息\juhao 该技术不需要修改Android系统源代码, 但受到Android系统API变化的影响, 因此会在一定程度上受Android版本变化的影响\juhao 此外, 由于应用完整性校验以及加壳和混淆技术的广泛应用, 修改后的应用很可能无法运行, 并且一般无法从应用安装包获取到包含应用真实逻辑的dex文件, 因此该技术目前几乎已经失效\juhao APIMonitor\upcite{apimonitor}\dunhao Droidward\upcite{droidward}\dunhao ConDroid\upcite{condroid} 和Droidcat\upcite{droidcat} 使用了该技术实现动态监控\juhao
+Application Instrumentation指通过修改需要监控的目标应用, 向其中插入监控代码实现监控应用执行的技术\juhao 对于Android平台而言, 该技术一般用于监控应用调用Java层API的情况, 具体来说, 通过反编译应用的dex文件得到smali代码, 搜索其中调用敏感API的代码, 将监控代码插入调用敏感API代码的周围, 再将修改后的smali代码编译重新打包成包含监控代码的应用, 这样在应用执行时就会执行监控代码, 输出监控信息\juhao 该技术不需要修改Android系统源代码, 但受到Android系统API变化的影响, 因此会在一定程度上受Android版本变化的影响\juhao 此外, 由于应用完整性校验以及加壳和混淆技术的广泛应用, 修改后的应用很可能无法运行, 并且一般无法从应用安装包获取到包含应用真实逻辑的dex文件, 因此单独使用该技术已经难以有效的监控应用的行为\juhao APIMonitor\upcite{apimonitor}\dunhao Droidward\upcite{droidward}\dunhao ConDroid\upcite{condroid} 和Droidcat\upcite{droidcat} 使用了该技术实现动态监控\juhao
 
 \subsection{DVM/ART Instrumentation}
 \label{artInstr}
@@ -187,17 +189,26 @@ Android源代码的修改, 并且Android运行时环境在不同版本上变化�
 \subsection{Hooking技术}
 hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们可以获取目标函数的参数和返回值, 可以改变目标函数的行为从而实现对目标函数的监控\juhao 对于Android平台, hooking技术可以用于监控本地函数也可以用于监控Java方法, 其具体的实现方式有很多种, 例如针对本地函数有Procedure Link Table(PLT) hooking\dunhao inline hooking\dunhao Import Address Table(IAT) hooking; 针对Java方法有修改vtable, 修改ArtMethod对象的入口地址等\juhao hooking技术一般比较灵活, 结合一些动态代码追踪工具, 例如frida, 能够动态的调整监控目标\juhao 由于ptrace系统调用能够修改被追踪进程的内存, linux系统的hooking技术一般会利用ptrace系统调用实现\juhao ARTdroid\upcite{artdroid}和REAPER\upcite{reaper}使用了该技术实现动态监控\juhao
 
-\subsection{Frida}
-\label{frida}
-Frida\upcite{frida}是一个著名的开源跨平台动态代码追踪工具\juhao 该工具支持几乎所有常见的桌面或者移动操作系统, 并且提供了Javascript API来实现简单快速的开发\juhao 利用该工具的Javascript API, 可以实现劫持本地或者Java层的函数, 调用本地函数, 读写内存, 操作文件和socket, 修改指令等许多操作\juhao 但Frida框架在Andriod系统下存在一些兼容性问题, 容易导致应用崩溃\juhao 
+表\ref{daTech}总结了上述几种技术的特点和局限性\juhao 
 
-\subsection{Xposed}
- Xposed\upcite{xposed} 是一个著名的Android平台的开源动态代码劫持框架\juhao
- Xposed框架可以在不修改应用APK文件的情况下劫持应用的Java方法从而执行一些操作从而改变应用的行为\juhao Xposed框架通过使用修改后的app\_process程序替换Android系统中/system/bin/app\_process程序来实现对Zygote进程的控制，并在启动时加载XposedBridge.jar提供从Java层调用Xposed框架的接口\juhao 根据\ref{appStartA}节介绍的Zygote进程与应用启动的关系, 可以看到应用会保留Zygote进程中加载的所有内容, 因此控制了Zygote进程就实现了对所有应用进程的控制\juhao Xposed框架提供了劫持Java方法的API
-但不支持对本地函数劫持\juhao  Inspeckage\upcite{inspeckage}\dunhao InsightDroid\upcite{chinese1} 文献\cite{chinese2}中的系统使用该技术实现了动态监控\juhao 
+\begin{table}[ht]
+	\caption{Android动态分析常用技术}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{llll}
+			\hline
+			\textbf{实现技术}                                     & \textbf{特点}                                                                                                      & \textbf{局限性}                                                                                                          & \textbf{工具代表}                          \\ \hline
+			\multicolumn{1}{c}{Virtual Machine Introspection} & \begin{tabular}[c]{@{}l@{}}1. 监控系统运行于被监控应用所在系统之外, \\ 不会受被监控应用影响\\ 2. 能够获取到所有客户系统的数据\\ 以及本地指令层面的执行信息\end{tabular} & \begin{tabular}[c]{@{}l@{}}1. 客户机系统指令解释执行, 性能开销较大\\ 2. 其实现依赖于模拟器, 受到模拟器检测技\\ 术的影响\\ 3. 无法直接获取到Java层的调用信息\end{tabular} & DroidScope, CopperDroid                \\ \hline
+			ptrace系统调用                                        & \begin{tabular}[c]{@{}l@{}}1. 可以在真机上实现对所有系统调用和本地\\ 指令执行的监控\end{tabular}                                          & 1. 易受到应用反ptrace调试技术的影响                                                                                                & DroidTrace, strace, ltrace             \\ \hline
+			Application Instrumentation                       & 1. 不需要对运行被监控应用的系统进行修改                                                                                            & 1. 易受到应用自身完整性校验技术的影响                                                                                                  & APIMonitor                             \\ \hline
+			DVM/ART Instrumentation                           & \begin{tabular}[c]{@{}l@{}}1. 能够获取到Java层面的所有数据和调用信\\ 息\end{tabular}                                              & \begin{tabular}[c]{@{}l@{}}1. 需要修改Android源代码因此跨Android\\ 版本的兼容性较低\end{tabular}                                        & DroidScope                             \\ \hline
+			Linux kernel Instrumentation                      & 1. 能够监控到所有调用系统调用的行为                                                                                              & \begin{tabular}[c]{@{}l@{}}1. 需要修改Android系统内核源代码因此\\ 跨Android版本的兼容性较低\end{tabular}                                    & 文献\cite{chinese2}提出的系统 \\ \hline
+			Hooking技术                                         & \begin{tabular}[c]{@{}l@{}}1. 实现方法灵活容易扩展\\ 2. 适合对特定方法或函数调用的监控,\end{tabular}                                      & \begin{tabular}[c]{@{}l@{}}1. 稳定性相对较差, 容易导致应用异常崩溃\\ 2. 易受到Android版本变化的影响\end{tabular}                                 & Xposed, Frida                          \\ \hline
+			&                                                                                                                  &                                                                                                                       &                                       
+		\end{tabular}%
+	}
+	\label{daTech}
+\end{table}
 
-\subsection{Valgrind}
-Valgrind\upcite{valgrind}是一个用于构建动态分析工具的开源代码追踪框架, 可以被编译运行在许多类Unix系统中\juhao Android系统基于Linux构建, 因此利用Valgrind来构建动态分析系统\juhao Malton\upcite{malton}\dunhao PackerGrind\upcite{packergrind}使用了该技术来实现动态监控\juhao 
 
 \section{Android应用保护技术}
 为保护知识产权, 防止逆向分析, 许多Android应用都采用了加固技术来保护自己的代码, 目前常用的技术包括完整性校验\upcite{androidsecure}\dunhao 名称混淆\dunhao 方法执行混淆\upcite{tiro}\dunhao dex文件动态加载\upcite{packergrind}\dunhao dex文件动态修改\upcite{packergrind}\dunhao 类动态加载\upcite{packergrind}\dunhao 方法本地实现\upcite{packergrind}\dunhao 模拟器检测\upcite{emdetection}\dunhao 反调试\upcite{packergrind} 等\juhao
