@@ -3,7 +3,7 @@
 \contentsline {chapter}{\numberline {\zihao {-2}1\hspace {.3em}}绪论}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}研究背景与意义}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}国内外研究现状和发展方向}{2}{section.1.2}
-\contentsline {section}{\numberline {1.3}论文主要工作}{4}{section.1.3}
+\contentsline {section}{\numberline {1.3}论文主要工作}{5}{section.1.3}
 \contentsline {section}{\numberline {1.4}论文组织结构}{5}{section.1.4}
 \contentsline {chapter}{\numberline {\zihao {-2}2\hspace {.3em}}背景技术分析}{6}{chapter.2}
 \contentsline {section}{\numberline {2.1}Android系统架构}{6}{section.2.1}
@@ -12,34 +12,35 @@
 \contentsline {subsection}{\numberline {2.2.2}应用组织结构}{11}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}Android运行时环境}{12}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}应用的启动}{12}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}类的加载}{14}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}方法的执行}{16}{subsection.2.3.3}
-\contentsline {section}{\numberline {2.4}Android动态分析相关技术和实现工具}{19}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Virtual Machine Introspection}{19}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}ptrace系统调用}{20}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Application Instrumentation}{20}{subsection.2.4.3}
-\contentsline {subsection}{\numberline {2.4.4}DVM/ART Instrumentation}{21}{subsection.2.4.4}
-\contentsline {subsection}{\numberline {2.4.5}Hooking技术}{21}{subsection.2.4.5}
-\contentsline {section}{\numberline {2.5}Android应用保护技术}{22}{section.2.5}
-\contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{25}{chapter.3}
-\contentsline {section}{\numberline {3.1}概览}{25}{section.3.1}
-\contentsline {section}{\numberline {3.2}监控应用启动}{25}{section.3.2}
-\contentsline {section}{\numberline {3.3}监控Java方法调用}{27}{section.3.3}
-\contentsline {section}{\numberline {3.4}监控本地函数调用}{27}{section.3.4}
-\contentsline {section}{\numberline {3.5}脱壳功能}{27}{section.3.5}
-\contentsline {section}{\numberline {3.6}日志系统}{28}{section.3.6}
-\contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{30}{chapter.4}
-\contentsline {section}{\numberline {4.1}实验总体方案}{30}{section.4.1}
-\contentsline {section}{\numberline {4.2}实验运行环境}{30}{section.4.2}
-\contentsline {section}{\numberline {4.3}功能测试}{30}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}监控应用启动功能测试}{31}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}监控Java方法调用功能测试}{31}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}脱壳功能测试}{33}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}监控本地函数调用功能测试}{34}{subsection.4.3.4}
-\contentsline {section}{\numberline {4.4}性能测试}{35}{section.4.4}
-\contentsline {section}{\numberline {4.5}结果分析}{36}{section.4.5}
-\contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{37}{chapter.5}
-\contentsline {section}{\numberline {5.1}论文工作总结}{37}{section.5.1}
-\contentsline {section}{\numberline {5.2}进一步工作展望}{37}{section.5.2}
-\contentsline {chapter}{参考文献}{38}{section*.40}
-\contentsline {chapter}{致谢}{42}{chapter*.42}
+\contentsline {subsection}{\numberline {2.3.2}类的加载}{15}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}方法的执行}{17}{subsection.2.3.3}
+\contentsline {section}{\numberline {2.4}Android动态分析相关技术和实现工具}{18}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Virtual Machine Introspection}{18}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}ptrace系统调用}{19}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Application Instrumentation}{19}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}DVM/ART Instrumentation}{20}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}Linux kernel Instrumentation}{20}{subsection.2.4.5}
+\contentsline {subsection}{\numberline {2.4.6}Hooking技术}{20}{subsection.2.4.6}
+\contentsline {section}{\numberline {2.5}Android应用保护技术}{21}{section.2.5}
+\contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{26}{chapter.3}
+\contentsline {section}{\numberline {3.1}概览}{26}{section.3.1}
+\contentsline {section}{\numberline {3.2}监控应用启动}{26}{section.3.2}
+\contentsline {section}{\numberline {3.3}监控Java方法调用}{28}{section.3.3}
+\contentsline {section}{\numberline {3.4}监控本地函数调用}{28}{section.3.4}
+\contentsline {section}{\numberline {3.5}脱壳功能}{28}{section.3.5}
+\contentsline {section}{\numberline {3.6}日志系统}{29}{section.3.6}
+\contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{31}{chapter.4}
+\contentsline {section}{\numberline {4.1}实验总体方案}{31}{section.4.1}
+\contentsline {section}{\numberline {4.2}实验运行环境}{31}{section.4.2}
+\contentsline {section}{\numberline {4.3}功能测试}{31}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}监控应用启动功能测试}{32}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}监控Java方法调用功能测试}{32}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}脱壳功能测试}{34}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}监控本地函数调用功能测试}{35}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}性能测试}{36}{section.4.4}
+\contentsline {section}{\numberline {4.5}结果分析}{37}{section.4.5}
+\contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{38}{chapter.5}
+\contentsline {section}{\numberline {5.1}论文工作总结}{38}{section.5.1}
+\contentsline {section}{\numberline {5.2}进一步工作展望}{38}{section.5.2}
+\contentsline {chapter}{参考文献}{39}{section*.40}
+\contentsline {chapter}{致谢}{43}{chapter*.42}

@@ -1,7 +1,7 @@
 \section{概览}
 本文的背景技术分析部分介绍了当前的动态分析相关技术和实现工具以及Android系统的部分运行原理\juhao 结合前面的分析和系统实现的可行性, 本系统整体实现方案如下:
 
-采用\ref{artInstr}节提到的ART Instrumentation的技术, 修改Android8.1系统源代码中ART虚拟机部分来实现Java层次的方法调用监控和简单的脱壳功能\juhao 通过Frida工具来实现对本地函数调用以及Java层特定方法的监控, 同时增加监控系统的灵活性和可扩展性\juhao 修改Android源代码中与应用启动相关的部分实现监控应用的启动情况, 在目标应用启动时开启其他监控功能\juhao 通过简化日志内容和使用内存缓存日志的方式实现更为高效的日志系统用于保存监控系统记录的数据\juhao 通过系统属性来实现目标应用和其他配置选项的设置\juhao 
+采用\ref{artInstr}节提到的ART Instrumentation的技术, 修改Android8.1系统源代码中ART虚拟机部分来实现Java层次的方法调用监控和简单的脱壳功能\juhao 通过Frida工具来实现对本地函数调用以及Java层特定方法的监控, 同时增加监控系统的灵活性和可扩展性\juhao 修改Android源代码中与应用启动相关的部分实现监控应用的启动情况, 在目标应用启动时开启监控功能\juhao 通过简化日志内容和使用内存缓存日志的方式实现更为高效的日志系统来提高本系统的性能\juhao
 
 图\ref{emOverview}描述了系统的总体设计, 加粗的矩形部分为本系统的模块\juhao 其中EvMonitor-core模块运行在ART内部, 负责监控Java方法调用, dex文件解析, 并且实现了日志系统\juhao 该部分还通过JNI给运行在应用层的EvMonitor-startLogger模块提供了接口, 可以启动和关闭监控功能, 调用日志系统等, 这些接口也通过导出函数的方式提供给EvMonitor-Frida调用\juhao EvMonitor-Frida是一个本地动态链接库, 用于实现对本地层函数调用以及某些特别感兴趣的Java层方法的监控, 在目标应用进程加载应用文件之前被加载到目标进程中, 开启对目标应用的监控\juhao 
 \begin{figure}[ht]
@@ -29,7 +29,7 @@ ART虚拟机中的每个Java方法都使用一个ArtMethod类型的对象来表�
 本系统在ArtMethod::Invoke和Execute函数的入口和所有出口位置调用了上述log\_em函数记录方法执行的开始和结束\juhao 
 
 \section{监控本地函数调用}
-本功能由EvMonitor-Frida实现\juhao 本系统使用Frida工具的动态链接库形式(frida-gadget), 通过在应用加载自身代码之前加载frida-gadget并执行监控代码来实现对本地层函数调用的监控\juhao 目前的监控较为简单, 主要是利用了Frida工具提供的Interceptor来hook了open\dunhao execve\dunhao connect\dunhao dlsym函数来监控它们的调用情况\juhao 由于Frida工具实现了Javascript的API, 因此可以灵活的添加监控函数和其他监控逻辑, 增强本系统\juhao 
+本功能由EvMonitor-Frida实现\juhao 本系统使用Frida工具的动态链接库形式(frida-gadget), 通过在应用加载自身代码之前加载frida-gadget并执行监控代码来实现对本地层函数调用的监控\juhao 目前的监控较为简单, 主要是利用了Frida工具提供的Interceptor来hook了open\dunhao execve\dunhao connect\dunhao dlsym函数来监控它们的调用情况\juhao 由于Frida工具实现了Javascript的API, 因此可以通过脚本文件灵活的添加监控函数和其他监控逻辑, 增强本系统\juhao 
 
 
 \section{脱壳功能}

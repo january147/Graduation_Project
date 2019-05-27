@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{androidDeviceMonitor}
+Google.
+\newblock Android device monitor.
+\newblock https://developer.android.com/studio/profile/monitor.
+
 \bibitem{smartphone2018statistics}
 newzoo.
 \newblock Top 50 countries/markets by smartphone users and penetration.
@@ -71,6 +76,11 @@ Lei Xue, Yajin Zhou, Ting Chen, Xiapu Luo, and Guofei Gu.
 \newblock In {\em 26th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$
   Security 17)}, pages 289--306, 2017.
 
+\bibitem{valgrind}
+Nicholas Nethercote and Julian Seward.
+\newblock Valgrind: a framework for heavyweight dynamic binary instrumentation.
+\newblock In {\em ACM Sigplan notices}, volume~42, pages 89--100. ACM, 2007.
+
 \bibitem{crowdroid}
 Iker Burguera, Urko Zurutuza, and Simin Nadjm-Tehrani.
 \newblock Crowdroid: behavior-based malware detection system for android.
@@ -120,37 +130,6 @@ Michalis Diamantaris, Elias~P Papadopoulos, Evangelos~P Markatos, Sotiris
   system.
 \newblock 2019.
 
-\bibitem{frida}
-oleavr.
-\newblock Frida.
-\newblock https://www.frida.re/.
-
-\bibitem{xposed}
-rovo89.
-\newblock Xposed.
-\newblock https://github.com/rovo89/Xposed.
-
-\bibitem{inspeckage}
-ac~pm.
-\newblock Inspeckage.
-\newblock https://github.com/ac-pm/Inspeckage.
-
-\bibitem{chinese1}
-孙国梓 邱凌志, 张梓雄.
-\newblock Insightdroid—动态追踪android应用方法.
-\newblock {\em 小型微型计算机系统}, 35(11):2482--2487, 2014.
-
-\bibitem{valgrind}
-Nicholas Nethercote and Julian Seward.
-\newblock Valgrind: a framework for heavyweight dynamic binary instrumentation.
-\newblock In {\em ACM Sigplan notices}, volume~42, pages 89--100. ACM, 2007.
-
-\bibitem{packergrind}
-Lei Xue, Xiapu Luo, Le~Yu, Shuai Wang, and Dinghao Wu.
-\newblock Adaptive unpacking of android apps.
-\newblock In {\em 2017 IEEE/ACM 39th International Conference on Software
-  Engineering (ICSE)}, pages 358--369. IEEE, 2017.
-
 \bibitem{androidsecure}
 丰生强.
 \newblock {\em Android软件安全权威指南}.
@@ -161,6 +140,12 @@ Michelle~Y Wong and David Lie.
 \newblock Tackling runtime-based obfuscation in android with $\{$TIRO$\}$.
 \newblock In {\em 27th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$
   Security 18)}, pages 1247--1262, 2018.
+
+\bibitem{packergrind}
+Lei Xue, Xiapu Luo, Le~Yu, Shuai Wang, and Dinghao Wu.
+\newblock Adaptive unpacking of android apps.
+\newblock In {\em 2017 IEEE/ACM 39th International Conference on Software
+  Engineering (ICSE)}, pages 358--369. IEEE, 2017.
 
 \bibitem{emdetection}
 Yiming Jing, Ziming Zhao, Gail~Joon Ahn, and Hongxin Hu.

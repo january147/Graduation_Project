@@ -14,47 +14,47 @@ Repeated entry---line 121 of file ref.bib
  :                      ,
 I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in chinese2
-Warning--empty journal in reaper
 Warning--can't use both volume and number fields in valgrind
-You've used 30 entries,
+Warning--empty journal in reaper
+You've used 27 entries,
             1791 wiz_defined-function locations,
-            600 strings with 8443 characters,
-and the built_in function-call counts, 6844 in all, are:
-= -- 614
-> -- 260
+            586 strings with 8291 characters,
+and the built_in function-call counts, 6364 in all, are:
+= -- 572
+> -- 248
 < -- 11
-+ -- 101
-- -- 71
-* -- 328
-:= -- 985
-add.period$ -- 93
-call.type$ -- 30
-change.case$ -- 30
++ -- 95
+- -- 68
+* -- 310
+:= -- 912
+add.period$ -- 84
+call.type$ -- 27
+change.case$ -- 27
 chr.to.int$ -- 0
-cite$ -- 33
-duplicate$ -- 343
-empty$ -- 745
-format.name$ -- 71
-if$ -- 1633
+cite$ -- 30
+duplicate$ -- 324
+empty$ -- 683
+format.name$ -- 68
+if$ -- 1521
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 20
-newline$ -- 151
-num.names$ -- 28
-pop$ -- 151
+int.to.str$ -- 27
+missing$ -- 19
+newline$ -- 136
+num.names$ -- 25
+pop$ -- 140
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 215
+skip$ -- 202
 stack$ -- 0
-substring$ -- 358
-swap$ -- 124
+substring$ -- 331
+swap$ -- 121
 text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 3
-while$ -- 62
-width$ -- 32
-write$ -- 310
+while$ -- 58
+width$ -- 29
+write$ -- 281
 (There were 2 error messages)

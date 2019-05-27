@@ -36,7 +36,7 @@
 \begin{cnabstract}
 智能移动终端设备的盛行使得针对移动操作系统的恶意应用迅速增加. 目前的移动操作系统中, 安卓系统巨大的市场份额和其相对开放的应用分发和权限管理方式使得其成为的攻击者的主要目标. 为了识别出恶意应用并阻止其传播, 我们需要对应用的行为进行分析. 然而单纯的静态分析在如今安卓应用成熟的混淆和加壳机制的保护下无法很好的揭示应用的行为, 因此需要动态的对安卓应用的行为进行捕获和分析\juhao 
 
-本文分析了目前已有的一些安卓系统动态分析系统, 并且通过hook技术以及对安卓8.1源代码的修改设计和实现了一个运行于Nexus 5x(Google的一款智能手机)的高性能应用动态行为捕获系统. 该系统能够捕获到Java层的所有方法调用以及Native层的重要函数调用, 并且支持动态地调整需要监控的目标方法(Java层)和函数(Native层). 本文使用常用应用对该系统进行了测试, 结果显示与同样能捕获到所有java层方法调用的Android Device Monitor相比本系统的性能开销明显更低\juhao 
+本文分析了目前已有的一些安卓系统动态分析系统的实现技术, 并且利用hooking技术以及对安卓8.1源代码的修改设计和实现了一个运行于Nexus 5x(Google的一款智能手机)的高性能应用动态行为捕获系统. 该系统能够捕获到Java层的所有方法调用以及本地层的重要函数调用, 并且支持动态地调整需要监控的目标函数(本地层). 本文使用常用应用对该系统进行了测试, 结果显示与同样能捕获到所有java层方法调用的Android Device Monitor\upcite{androidDeviceMonitor}相比本系统的性能开销明显更低\juhao 
 
 本文设计思路结合了hooking技术带来的灵活性和以及修改源代码的稳定性以及高性能, 对其他开源平台的类似工具设计有一定参考作用, 但在应用中应当注意两种方式可能的冲突问题\juhao 
 
@@ -59,9 +59,9 @@
 \begin{enabstract}
 Malicious applications on mobile operating systems boom with the prevalence of smart mobile devices. The huge market share of Android, one of current mobile operation systems, and its relatively open application distribution and privilege management make it attackers' major target. In order to identify malicious applications and prevent them from spreading, we need to analyze the behavior of applications. However,  only static analysis can not handle the mature obfuscation and packing mechanism of Android applications, so it is necessary to dynamically capture and analyze the behavior of Android apps.
 
-In this paper, I analyze some existing Android dynamic analysis systems and present a high-performance application dynamic behavior capture system, which can run on Nexus 5x and is implemented by using hooking and modifying Android source code. The system captures all method invocations of Java layer and important function calls of Native layer, and supports dynamic adjustment of the target methods (Java layer) and functions (Native layer) that need monitoring. I evaluate the system with common applications and the result shows that the overhead is significantly lower than that of Android Device Monitor when capturing all java layer method invocations.
+In this paper, I analyze some existing Android dynamic analysis systems and present a high-performance application dynamic behavior capture system, which can run on Nexus 5x and is implemented by using hooking and modifying Android source code. The system captures all method invocations of Java layer and important function calls of Native layer, and supports dynamic adjustment of the target functions (Native layer) that need monitoring. I evaluate the system with common applications and the result shows that the overhead is significantly lower than that of Android Device Monitor when capturing all java layer method invocations.
 
-The design of the system in ​​this paper combines the flexibility of hooking and the stability and high performance brought by modification of source code, which can be used for similar tools on other open source platforms, but we should pay attention to the possible conflicts between the two approaches;
+The design of the system in ​​this paper combines the flexibility brought by hooking and the stability and high performance brought by modification of source code, which can be used for similar tools on other open source platforms, but we should pay attention to the possible conflicts between the two approaches;
 
 \end{enabstract}
 \par
