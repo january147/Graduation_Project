@@ -17,9 +17,11 @@
 	\label{environment}
 \end{table}
 \section{功能测试}
-本次功能测试使用了支付宝应用的10.1.62版本(应用软件包名com.eg.android.\\AlipayGphone)本文作者开发的一款名为noticer的应用(应用软件包名top.january147\\.noticer)来进行\juhao noticer应用经过360加固保\upcite{360jiagubao}加固, 以检测本系统功能的有效性\juhao 
+本次功能测试使用了支付宝应用的10.1.62版本(应用软件包名com.eg.android.\\AlipayGphone)本文作者开发的一款名为noticer的应用(应用软件包名top.january147\\.noticer)来进行\juhao noticer是一款监听来电和短信状态并在有新来电或短信时通过预先设置的邮箱发送通知的应用\juhao noticer应用经过360加固保\upcite{360jiagubao}加固, 以检测本系统功能的有效性\juhao 
+
+测试前首先将设备2通过USB连接到设备1, 然后执行脚本phone\_init.sh, 该脚本会把EvMonitor\_agent, 配置文件和Frida的动态链接库发送到设备2上的/data/local/tmp目录中完成系统的部署\juhao 
 \subsection{监控应用启动功能测试}
-在设备1上开启终端, 输入adb logcat|grep EvMonitor等待读取本系统监控应用启动的记录\juhao 然后执行如下操作:在设备2上启动支付宝应用, 然后退出支付宝应用再启动noticer应用\juhao
+在设备1上开启终端, 然后输入adb shell进入设备2的终端, 输入setprop em.target\_app <应用包名>来设置监控的目标应用, 之后启动/data/local/tmp中的EvMonitor\_agent\juhao 再在设备1上开启另外一个终端, 输入adb logcat|grep EvMonitor等待读取本系统监控应用启动的记录\juhao 然后执行如下操作:在设备2上启动支付宝应用, 然后退出支付宝应用再启动noticer应用\juhao
 
 从终端中读取的监控记录如图\ref{testAppStart1}所示\juhao
 \begin{figure}[ht]
@@ -97,15 +99,15 @@
 \end{figure}
 
 \section{性能测试}
-由于本系统的主要性能开销在于记录方法调用时的性能开销, 针对cpu性能的性能测试工具无法成功检测本系统的性能, 因此本文开发了一个简单的测试Java方法调用性能检测的应用, 该应用将一个简单的无内部调用的java方法执行固定次数并测量总用时用于评价Java方法调用性能\juhao 本文使用了该应用对本系统和Android Device Monitor的Method Profile功能进行了测试, 结果如图\ref{testOverhead}所示\juhao 
+由于本系统的主要性能开销在于记录方法调用时的性能开销, 针对cpu性能的性能测试工具无法成功检测本系统的性能, 因此本文开发了一个简单的测试Java方法调用性能检测的应用, 该应用将一个简单的无内部调用的java方法执行固定次数并测量总用时用于评价Java方法调用性能\juhao 本文使用了该应用对本系统和Android Device Monitor\upcite{androidDeviceMonitor}的Method Profile功能进行了测试, 结果如图\ref{testOverhead}所示\juhao 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=8cm]{test_overhead.png}
-	\caption{本地函数调用记录}
+	\caption{性能测试结果}
 	\label{testOverhead}
 \end{figure}
 其中的执行时间为10次测量结果取平均值得到的\juhao
 
 \section{结果分析}
-功能测试的结果显示本系统的基本功能正常, 能够实现对应用启动\dunhao Java方法调用\dunhao 本地函数调用的监控和以及脱壳功能, 系统设计原理可行\juhao 性能测试的结果显示本系统的执行耗时约为正常执行时的两倍, 而Android Device Monitor执行耗时约为正常执行的14倍, 本系统为Android Device Monitor的Method Profile功能运行效率的7倍, 因此十分高效\juhao 
+功能测试的结果显示本系统的基本功能正常, 能够实现对应用启动\dunhao Java方法调用\dunhao 本地函数调用的监控和以及脱壳功能, 系统设计原理可行\juhao 性能测试的结果显示本系统的执行耗时约为正常执行时的两倍, 而Android Device Monitor执行耗时约为正常执行的14倍, 本系统为Android Device Monitor的Method Profile功能运行效率的7倍, 因此较为高效, 但Android Device Monitor的Method Profile功能提供了每个方法的执行总时间, cpu占用总时长的信息, 比本系统全面\juhao 
 

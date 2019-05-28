@@ -16,45 +16,45 @@ I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in chinese2
 Warning--can't use both volume and number fields in valgrind
 Warning--empty journal in reaper
-You've used 27 entries,
+You've used 28 entries,
             1791 wiz_defined-function locations,
-            586 strings with 8291 characters,
-and the built_in function-call counts, 6364 in all, are:
-= -- 572
-> -- 248
+            590 strings with 8328 characters,
+and the built_in function-call counts, 6489 in all, are:
+= -- 582
+> -- 252
 < -- 11
-+ -- 95
-- -- 68
++ -- 97
+- -- 69
 * -- 310
-:= -- 912
-add.period$ -- 84
-call.type$ -- 27
-change.case$ -- 27
+:= -- 931
+add.period$ -- 87
+call.type$ -- 28
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 30
-duplicate$ -- 324
-empty$ -- 683
-format.name$ -- 68
-if$ -- 1521
+cite$ -- 31
+duplicate$ -- 329
+empty$ -- 701
+format.name$ -- 69
+if$ -- 1551
 int.to.chr$ -- 0
-int.to.str$ -- 27
+int.to.str$ -- 28
 missing$ -- 19
-newline$ -- 136
-num.names$ -- 25
-pop$ -- 140
+newline$ -- 141
+num.names$ -- 26
+pop$ -- 145
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 202
+skip$ -- 207
 stack$ -- 0
 substring$ -- 331
-swap$ -- 121
+swap$ -- 122
 text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 3
-while$ -- 58
-width$ -- 29
-write$ -- 281
+while$ -- 59
+width$ -- 30
+write$ -- 290
 (There were 2 error messages)

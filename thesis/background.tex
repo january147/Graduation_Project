@@ -149,8 +149,8 @@ PathClassLoader用于加载应用APK文件中包含的dex文件中的类\juhao P
 \subsection{方法的执行}
 \label{methodExecA}
 为了提高运行效率, ART虚拟机的运行机制一直在发生变化, 在Android8.1中, 应用的dex文件已经不会在安装时通过dex2oat全部编译, 而是在之后根据应用运行的情况按需编译\juhao 同时JIT机制被再次启用, 并增加了对方法执行情况的统计功能, 从而在系统空闲时根据方法执行情况的统计数据编译特定方法\juhao 因此, 一个非JNI方法有三种执行方式:第一种是通过解释器执行; 第二种是通过Just-In-Time(JIT)编译后的机器码执行; 第三种是通过Ahead Of Time(AOT)编译后的机器码执行\juhao 但总的说来, 方法的执行只有两种, 一种是解释执行字节码, 另一种是执行机器码\juhao 
-所有执行机器码的方法, 都会调用Android源代码中的/art/runtime/ArtMethod.cc中的ArtMethod::Invoke函数来执行, 所有执行字节码的方法都会调用Android源代码中的/art/runtime/interpreter/interpreter.cc中的Execute函数来执行, 此外经过Java反射机制从Java层或者JNI反射机制从本地层调用的Java方法会经过ArtMethod::Invoke来执行\juhao 图\ref{methodExec}和\ref{methodExec2}描述了ART几种不同类型方法的执行流程\juhao 
-\begin{figure}[ht]
+所有执行机器码的方法, 都会调用Android源代码中的/art/runtime/ArtMeth-od.cc中的ArtMethod::Invoke函数来执行, 所有执行字节码的方法都会调用Android源代码中的/art/runtime/interpreter/interpreter.cc中的Execute函数来执行, 此外经过Java反射机制从Java层或者JNI反射机制从本地层调用的Java方法会经过ArtMethod::Invoke来执行\juhao 图\ref{methodExec}和\ref{methodExec2}描述了ART几种不同类型方法的执行流程\juhao 
+\begin{figure}[]
 	\centering
 	\includegraphics[width=\textwidth]{method_exec.jpg}
 	\caption{ART中方法执行过程-1}
@@ -163,7 +163,7 @@ PathClassLoader用于加载应用APK文件中包含的dex文件中的类\juhao P
 	\caption{ART中方法执行过程-2}
 	\label{methodExec2}
 \end{figure}
-图\ref{methodExec}主要描述了调用ArtMethod::Invoke来执行一个方法的情况\juhao ArtMethod::Invoke有两个入口, 第一个入口是使用Java反射(Java.lang.reflect.method.invoke方法)或JNI反射机制(Android源代码/art/runtime/reflection.cc中的一系列Call*Method函数)经过一系列调用后调用InvokeWithArgArray,  InvokeWithArgArray会打包好方法的参数然后调用ArtMethod::Invoke来执行方法\juhao 该路径的调用的方法可能没有本地代码可以执行, 因此方法的入口点(entry\_point\_from\_quick\_code)可能会在方法链接时设置为artQuickToInterpreterBridge, 执行该方法的入口后会进入解释模式并调用Execute来完成方法的执行; 第二个入口是解释模式执行的方法通过ArtInterpreterToCompiledCodeBridge调用有本地代码的方法, 此时若应用没有运行在调试模式, 会执行应用的本地代码\juhao 以上两个入口, 在应用处于调试模式时, 都会调用EnterInterpreterFromInvoke进入解释模式最后调用Execute执行目标方法\juhao 
+图\ref{methodExec}主要描述了调用ArtMethod::Invoke来执行一个方法的情况\juhao ArtMethod::-Invoke有两个入口, 第一个入口是使用Java反射(Java.lang.reflect.method.invoke方法)或JNI反射机制(Android源代码/art/runtime/reflection.cc中的一系列Call*Method函数)经过一系列调用后调用InvokeWithArgArray,  InvokeWithArgArray会打包好方法的参数然后调用ArtMethod::Invoke来执行方法\juhao 该路径的调用的方法可能没有本地代码可以执行, 因此方法的入口点(entry\_point\_from\_quick\_code)可能会在方法链接时设置为artQuickToInterpreterBridge, 执行该方法的入口后会进入解释模式并调用Execute来完成方法的执行; 第二个入口是解释模式执行的方法通过ArtInterpreterToCompiledCodeBridge调用有本地代码的方法, 此时若应用没有运行在调试模式, 会执行应用的本地代码\juhao 以上两个入口, 在应用处于调试模式时, 都会调用EnterInterpreterFromInvoke进入解释模式最后调用Execute执行目标方法\juhao 
 
 图\ref{methodExec2}主要描述了调用Execute来执行一个方法的情况\juhao Execute函数有三个入口, 第一个是EnterInterpreterFromInvoke, 用于从ArtMethod::Invoke中进入解释模式执行; 第二个是ArtInterpreterToInterpreterBridge, 用于解释执行的方法调用解释执行的方法; 第三个是artQuickToInterpreterBridge, 用于从本地代码中进入解释模式执行\juhao
 在通过Execute函数解释执行方法时, 可能会启动JIT机制编译当前方法然后通过ArtInterpreterToCompiledCodeBridge进入ArtMethod::Invoke执行编译生成的本地代码, 而JIT机制没有启动时会调用解释器函数开始执行方法\juhao Android8.1系统中有两个不同实现方案的解释器函数:第一个是ExecuteMterpImpl, 该函数通过汇编代码实现, 效率很高, 但实现复杂, 不支持调试; 第二个是ExecuteSwitchImpl, 该函数通过switch语句实现, 支持单步调试, 实现也比较简单但运行效率很低, 只有在调试模式的情况下使用\juhao 解释器函数在执行到调用其他方法的字节码时, 会依次调用DoInvoke\dunhao DoCall\dunhao performCall\juhao performCall会根据方法的类型和是否处于调试模式来决定调用ArtInterpreterToInterpreterBridge以解释模式执行还是调用ArtInterpreterToCompiledCodeBridge执行方法的本地代码\juhao 
@@ -242,6 +242,16 @@ hooking技术是一类劫持函数调用的技术, 通过hooking技术, 我们�
 
 \paragraph*{反调试}
 该技术通过多种方式检测应用是否处于被调试状态, 并阻止对应用的调试\juhao 例如, 应用通过调用ptrace追踪自身从而避免被其他监控进程追踪; 应用通过搜索内存中某些著名调试工具的名称, 如strace, ltrace, valgrind等来确定自身是否被调试; 应用hook自身的某些函数,如open, wrtie等来阻止自己的数据被调试工具输出\juhao 反调试技术给真机上的动态分析系统带来了较大的障碍而基于模拟器的动态分析系统可以把监控功能部署在Android系统的外部, 使得应用无法检测到监控工具的存在从而避免反调试技术的影响\juhao 
+
+\section{Frida}
+Frida\upcite{frida}是一个著名的开源跨平台动态代码插桩工具(hook框架), 支持常见的许多操作系统, 包括windows\dunhao linux\dunhao macOS\dunhao Android和iOS, 并且支持x86和arm等不同架构\juhao Frida可以对本地函数和Java方法进行hook, 从而实现对被hook函数和方法的监控\juhao 
+
+Frida提供了丰富的Javascript API来编写hook逻辑脚本, 例如内存读取\dunhao 文件操作和网络操作等, 可以通过配置文件预先设置要执行的脚本或者通过在目标应用运行时传输脚本来执行hook操作\juhao 
+
+Frida提供了两种使用方式, 第一种是在目标系统运行frida-server程序, 然后该程序会利用ptrace系统调用将frida-agent注入到目标进程来解析和执行传递给frida-server的hook逻辑脚本\juhao 第二种是通过向目标进程加载frida-gadget动态链接库并设置hook脚本来执行hook操作\juhao 
+
+Frida使用了inline hook技术, 因此通过Frida劫持的函数的调用可以被全部监控\juhao 
+
 
 
 

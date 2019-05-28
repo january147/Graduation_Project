@@ -14,33 +14,35 @@
 \contentsline {subsection}{\numberline {2.3.1}应用的启动}{12}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}类的加载}{15}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3}方法的执行}{17}{subsection.2.3.3}
-\contentsline {section}{\numberline {2.4}Android动态分析相关技术和实现工具}{18}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Virtual Machine Introspection}{18}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}ptrace系统调用}{19}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Application Instrumentation}{19}{subsection.2.4.3}
-\contentsline {subsection}{\numberline {2.4.4}DVM/ART Instrumentation}{20}{subsection.2.4.4}
-\contentsline {subsection}{\numberline {2.4.5}Linux kernel Instrumentation}{20}{subsection.2.4.5}
-\contentsline {subsection}{\numberline {2.4.6}Hooking技术}{20}{subsection.2.4.6}
-\contentsline {section}{\numberline {2.5}Android应用保护技术}{21}{section.2.5}
+\contentsline {section}{\numberline {2.4}Android动态分析相关技术和实现工具}{20}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Virtual Machine Introspection}{20}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}ptrace系统调用}{20}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Application Instrumentation}{21}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}DVM/ART Instrumentation}{21}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}Linux kernel Instrumentation}{22}{subsection.2.4.5}
+\contentsline {subsection}{\numberline {2.4.6}Hooking技术}{22}{subsection.2.4.6}
+\contentsline {section}{\numberline {2.5}Android应用保护技术}{22}{section.2.5}
+\contentsline {section}{\numberline {2.6}Frida}{25}{section.2.6}
 \contentsline {chapter}{\numberline {\zihao {-2}3\hspace {.3em}}系统设计实现}{26}{chapter.3}
-\contentsline {section}{\numberline {3.1}概览}{26}{section.3.1}
-\contentsline {section}{\numberline {3.2}监控应用启动}{26}{section.3.2}
-\contentsline {section}{\numberline {3.3}监控Java方法调用}{28}{section.3.3}
-\contentsline {section}{\numberline {3.4}监控本地函数调用}{28}{section.3.4}
-\contentsline {section}{\numberline {3.5}脱壳功能}{28}{section.3.5}
-\contentsline {section}{\numberline {3.6}日志系统}{29}{section.3.6}
-\contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{31}{chapter.4}
-\contentsline {section}{\numberline {4.1}实验总体方案}{31}{section.4.1}
-\contentsline {section}{\numberline {4.2}实验运行环境}{31}{section.4.2}
-\contentsline {section}{\numberline {4.3}功能测试}{31}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}监控应用启动功能测试}{32}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}监控Java方法调用功能测试}{32}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}脱壳功能测试}{34}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}监控本地函数调用功能测试}{35}{subsection.4.3.4}
+\contentsline {section}{\numberline {3.1}概述}{26}{section.3.1}
+\contentsline {section}{\numberline {3.2}系统的配置和控制}{27}{section.3.2}
+\contentsline {section}{\numberline {3.3}监控应用启动}{27}{section.3.3}
+\contentsline {section}{\numberline {3.4}监控Java方法调用}{28}{section.3.4}
+\contentsline {section}{\numberline {3.5}监控本地函数调用}{29}{section.3.5}
+\contentsline {section}{\numberline {3.6}脱壳功能}{29}{section.3.6}
+\contentsline {section}{\numberline {3.7}日志系统}{30}{section.3.7}
+\contentsline {chapter}{\numberline {\zihao {-2}4\hspace {.3em}}实验与结果分析}{32}{chapter.4}
+\contentsline {section}{\numberline {4.1}实验总体方案}{32}{section.4.1}
+\contentsline {section}{\numberline {4.2}实验运行环境}{32}{section.4.2}
+\contentsline {section}{\numberline {4.3}功能测试}{32}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}监控应用启动功能测试}{33}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}监控Java方法调用功能测试}{33}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}脱壳功能测试}{35}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}监控本地函数调用功能测试}{36}{subsection.4.3.4}
 \contentsline {section}{\numberline {4.4}性能测试}{36}{section.4.4}
 \contentsline {section}{\numberline {4.5}结果分析}{37}{section.4.5}
-\contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{38}{chapter.5}
-\contentsline {section}{\numberline {5.1}论文工作总结}{38}{section.5.1}
-\contentsline {section}{\numberline {5.2}进一步工作展望}{38}{section.5.2}
-\contentsline {chapter}{参考文献}{39}{section*.40}
-\contentsline {chapter}{致谢}{43}{chapter*.42}
+\contentsline {chapter}{\numberline {\zihao {-2}5\hspace {.3em}}总结与展望}{39}{chapter.5}
+\contentsline {section}{\numberline {5.1}论文工作总结}{39}{section.5.1}
+\contentsline {section}{\numberline {5.2}进一步工作展望}{39}{section.5.2}
+\contentsline {chapter}{参考文献}{40}{section*.40}
+\contentsline {chapter}{致谢}{44}{chapter*.42}

@@ -1,9 +1,14 @@
-\section{概览}
-本文的背景技术分析部分介绍了当前的动态分析相关技术和实现工具以及Android系统的部分运行原理\juhao 结合前面的分析和系统实现的可行性, 本系统整体实现方案如下:
+\section{概述}
+本文的背景技术分析部分介绍了当前的用于动态分析相关技术和实现工具以及Android系统的部分运行原理\juhao 结合前面的分析和系统实现的可行性, 本系统整体实现方案如下:
 
-采用\ref{artInstr}节提到的ART Instrumentation的技术, 修改Android8.1系统源代码中ART虚拟机部分来实现Java层次的方法调用监控和简单的脱壳功能\juhao 通过Frida工具来实现对本地函数调用以及Java层特定方法的监控, 同时增加监控系统的灵活性和可扩展性\juhao 修改Android源代码中与应用启动相关的部分实现监控应用的启动情况, 在目标应用启动时开启监控功能\juhao 通过简化日志内容和使用内存缓存日志的方式实现更为高效的日志系统来提高本系统的性能\juhao
+采用\ref{artInstr}节提到的ART Instrumentation的技术, 修改Android8.1系统源代码中ART虚拟机部分来实现Java层次的方法调用监控和简单的脱壳功能\juhao 通过Frida工具来实现对本地函数调用以及Java层特定方法的监控, 同时增加监控系统的灵活性和可扩展性\juhao 修改Android源代码中与应用启动相关的部分实现监控应用的启动情况, 在目标应用启动时开启监控功能\juhao 通过简化日志内容和使用内存缓存日志的方式实现更为高效的日志系统来提高本系统的性能\juhao 通过代理程序读取配置文件和接收用户输入并利用进程间通信机制发送到被监控的应用进程来实现运行时对本系统的配置和控制\juhao 
 
-图\ref{emOverview}描述了系统的总体设计, 加粗的矩形部分为本系统的模块\juhao 其中EvMonitor-core模块运行在ART内部, 负责监控Java方法调用, dex文件解析, 并且实现了日志系统\juhao 该部分还通过JNI给运行在应用层的EvMonitor-startLogger模块提供了接口, 可以启动和关闭监控功能, 调用日志系统等, 这些接口也通过导出函数的方式提供给EvMonitor-Frida调用\juhao EvMonitor-Frida是一个本地动态链接库, 用于实现对本地层函数调用以及某些特别感兴趣的Java层方法的监控, 在目标应用进程加载应用文件之前被加载到目标进程中, 开启对目标应用的监控\juhao 
+图\ref{emOverview}描述了系统的模块设计和运行层次, 其中加粗的矩形部分为本系统的模块\juhao 
+EvMonitor\_agent单独的程序，用于读取配置文件和用户输入指令，控制监控系统\juhao 
+EvMonitor\_nativeLogger运行于应用进程的本地层中，用于捕获本地函数调用\juhao
+EvMonitor\_core运行于应用进程中，包含初始化系统，记录日志，记录Java层方法调用，脱壳等功能\juhao
+EvMonitor\_startLogger运行于应用进程中，记录应用程序进程的启动，并在检测到目标应用启动时激活监控系统\juhao 
+EvMonitor\_utils运行于桌面电脑端的一些辅助性脚本文件，用于配置监控系统环境，过滤生成的监控日志等
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{em_overview.jpg}
@@ -11,8 +16,12 @@
 	\label{emOverview}
 \end{figure}
 
+下面的内容从系统的配置和控制\dunhao 监控应用启动\dunhao 监控Java方法调用\dunhao 监控本地函数调用\dunhao 脱壳功能和日志系统功能方面介绍了应用的实现原理\juhao
+\section{系统的配置和控制}
+本功能由EvMonitor\_agent实现\juhao EvMonitor\_agent启动后开启域套接字(Linux系统的一种进程间通信机制)监听/data/local/tmp/EvMonitor/sock路径, 并开启一个线程用来接收用户指令发送到各个被监控的应用进程\juhao 当被监控的应用启动时, 其每个进程都通过域套接字连接到EvMonitor\_agent\juhao 在每个进程连接时, EvMonitor\_agent读取并解析配置文件将结果发送到目标进程, 并记录此连接的文件描述符用于之后发送用户指令, 然后开启一个线程来监控此连接的状态\juhao 当被监控应用的某个进程退出时, 监控该进程连接状态的线程会将记录此进程与EvMonitor\_agent连接的文件描述符删除\juhao 用户输入指令时, 接收用户指令的线程会读取用户输入的指令并通过记录的文件描述符发送给被监控应用运行中的每个进程\juhao 
+
 \section{监控应用启动}
-本功能由EvMonitor-startLogger实现\juhao 
+本功能由EvMonitor\_startLogger实现\juhao 
 \ref{appStartA}节详细介绍了Android系统应用的启动过程\juhao 由于Android应用进程不是通过直接使用应用APK文件启动, 而是通过Zygote进程fork产生, 因此无法按照传统PC上启动子进程, 然后加载监控模块开启监控, 最后再加载目标应用开始执行的方式来实现在应用加载前启动对应用的监控\juhao 只有通过监控应用的启动, 在能够获取到应用的名称并且应用自身代码还未执行时开启完成监控应用的初始化操作\juhao ActivityThread类的handleBindApplication方法开始的位置符合上述条件, 因此本系统选择在handleBindApplication方法的适当位置添加监控代码\juhao 
 
 监控代码的实现逻辑如下:
@@ -21,7 +30,7 @@
 为了便于调用JNI和被调用, 我将上述监控代码作为一个新的静态方法logAppStartAndSetTarget\_em加入了com.android.internal.os.Zygote类中, 并通过在Zygote类中增加本地方法nativeEnableMonitor的方式调用了EvMonitor-core提供的本地层接口\juhao 
 
 \section{监控Java方法调用}
-本功能由EvMonitor-core实现\juhao 
+本功能由EvMonitor\_core实现\juhao 
 为了能够获取到应用所有Java方法调用行为, 本系统选择在ART内执行方法的函数中加入监控代码\juhao  \ref{methodExecA}节详细介绍了ART虚拟机执行方法的过程\juhao 根据分析, 在ArtMethod::Invoke和Execute函数中插入监控代码就能够记录所有的Java方法调用情况\juhao  
 
 ART虚拟机中的每个Java方法都使用一个ArtMethod类型的对象来表示, 而在ArtMethod::Invoke和Execute执行方法时都能够获取到代表正在执行的方法的ArtMethod对象, 因此本系统在ArtMethod类(/art/runtime/artmethod.cc)中加入一个方法log\_em用于记录当前方法并写入日志中\juhao log\_em方法会调用当前ArtMethod对象的PrettyMethod方法获取方法信息然后调用EvMonitor-core中的日志系统将其写入日志\juhao 
@@ -29,11 +38,11 @@ ART虚拟机中的每个Java方法都使用一个ArtMethod类型的对象来表�
 本系统在ArtMethod::Invoke和Execute函数的入口和所有出口位置调用了上述log\_em函数记录方法执行的开始和结束\juhao 
 
 \section{监控本地函数调用}
-本功能由EvMonitor-Frida实现\juhao 本系统使用Frida工具的动态链接库形式(frida-gadget), 通过在应用加载自身代码之前加载frida-gadget并执行监控代码来实现对本地层函数调用的监控\juhao 目前的监控较为简单, 主要是利用了Frida工具提供的Interceptor来hook了open\dunhao execve\dunhao connect\dunhao dlsym函数来监控它们的调用情况\juhao 由于Frida工具实现了Javascript的API, 因此可以通过脚本文件灵活的添加监控函数和其他监控逻辑, 增强本系统\juhao 
+本功能由EvMonitor\_nativeLogger实现\juhao 本系统使用Frida工具的动态链接库形式(frida-gadget), 通过在应用加载自身代码之前加载frida-gadget并执行监控代码来实现对本地层函数调用的监控\juhao 目前的监控较为简单, 主要是利用了Frida工具提供的Interceptor来hook了open\dunhao execve\dunhao connect\dunhao dlsym函数来监控它们的调用情况\juhao 由于Frida工具实现了Javascript的API, 因此可以通过脚本文件灵活的添加监控函数和其他监控逻辑, 增强本系统\juhao 
 
 
 \section{脱壳功能}
-本功能由EvMonitor-core实现\juhao 
+本功能由EvMonitor\_core实现\juhao 
 目前Android平台应用加固工具的加壳机制十分复杂, 本系统根据\ref{classLoadA}节介绍的类加载过程, 通过在用于dex文件加载的关键函数, 即位于安卓源代码中/art/runtime/DexFile.cc中DexFile类的构造函数DexFile()中加入代码来实现简单脱壳获取dex文件的功能\juhao 
 DexFile类的构造函数原型图\ref{dexFileCode}所示\juhao 
 \begin{figure}[ht]
@@ -42,11 +51,11 @@ DexFile类的构造函数原型图\ref{dexFileCode}所示\juhao
 	\caption{DexFile()原型}
 	\label{dexFileCode}
 \end{figure}
-其中第一个参数是dex文件被加载到内存的起始地址, 第二个dex文件的大小\juhao 本系统插入该函数的监控代码会先检查是否开启对当前进程的监控, 如果监控功能没有开启则不在执行后续操作\juhao 如果监控功能开启会先调用日志系统记录当前加载的dex文件起始地址和大小, 然后再检查是否启动脱壳功能\juhao 如果脱壳功能启动则读取这两个参数后会调用EvMonitor-core中用于保存dex文件的dumpDex函数, 将加载的dex文件写入初始化时设定的位置\juhao 
+其中第一个参数是dex文件被加载到内存的起始地址, 第二个dex文件的大小\juhao 本系统插入该函数的监控代码会先检查是否开启对当前进程的监控, 如果监控功能没有开启则不在执行后续操作\juhao 如果监控功能开启会先调用日志系统记录当前加载的dex文件起始地址和大小, 然后再检查是否启动脱壳功能\juhao 如果脱壳功能启动则读取这两个参数后会调用EvMonitor\_core中用于保存dex文件的dumpDex函数, 将加载的dex文件写入配置文件设定的位置\juhao 
 
 
 \section{日志系统}
-本功能由EvMonitor-core实现\juhao 各种动态分析系统中, 输入监控记录都是一个十分重要的功能, 但由于IO的速度很慢, 在频繁的调用中记录日志信息对应用本身的执行速度影响很大\juhao 在最初的测试中本系统使用Android系统本身的日志系统接口来记录监控信息, 但在测试中发现Java层方法的调用很多, 通过Android系统本身的日志系统输出会导致应用运行变得非常慢, 所以开发了本系统的日志部分\juhao 
+本功能由EvMonitor\_core实现\juhao 各种动态分析系统中, 输出监控记录都是一个十分重要的功能, 但由于IO的速度很慢, 在频繁的调用中记录日志信息对应用本身的执行速度影响很大\juhao 在最初的测试中本系统使用Android系统本身的日志系统接口来记录监控信息, 但在测试中发现Java层方法的调用很多, 通过Android系统本身的日志系统输出会导致应用运行变得非常慢, 所以开发了本系统的日志部分\juhao 
 
 表\ref{logValue}描述了日志系统用到的一些变量和提供的接口函数\juhao 
 % Please add the following required packages to your document preamble:
@@ -66,6 +75,7 @@ DexFile类的构造函数原型图\ref{dexFileCode}所示\juhao
 	\end{tabular}
 \label{logValue}
 \end{table}
-日志系统会在初始化时使用mmap创建一个4M的内存缓冲区, 并在被监控应用的目录下以当前时间和进程号创建一个文件夹用来保存此次执行时的日志数据\juhao 缓冲区的起始地址会使用log\_base来记录, 并且log\_data会被初始化为同log\_base一致\juhao 
-当log函数被调用来记录日志时, 其会先检查log\_spare\_space, 如果空间足够就会把接收到的日志信息加上当前线程号写入log\_data位置处的内存缓冲区中并更新log\_spare\_space\dunhao log\_data的值 \juhao 如果空间不足就会调用writeLog函数试图把缓冲区的日志写入文件\juhao writeLog函数会检查log\_file\_amount的值确定日志文件数量是否达到最大, 如果是, 则通过Android系统的log系统记录一个日志文件以达到数量上限的错误, 并不在执行后续操作, 如果不是则将缓冲区的数据写入文件, 并将log\_base的值赋给log\_data, 设置log\_spare\_space的值为缓冲区最大容量, 同时把log\_file\_amount加1\juhao 
+日志系统会在初始化时使用mmap创建一个4M的内存缓冲区, 并在被监控应用的目录下以当前进程号创建一个文件夹用来保存此次执行时的日志数据\juhao 缓冲区的起始地址会使用log\_base来记录, 并且log\_data会被初始化为同log\_base一致\juhao 
+
+log函数被调用来记录日志时, 会先检查log\_spare\_space, 如果空间足够就会把接收到的日志信息加上当前线程号写入log\_data位置处的内存缓冲区中并更新log\_spare\_space\dunhao log\_data的值 \juhao 如果空间不足就会调用writeLog函数试图把缓冲区的日志写入文件\juhao writeLog函数会检查log\_file\_amount的值确定日志文件数量是否达到最大, 如果是, 则通过Android系统的log系统记录一个日志文件以达到数量上限的错误, 并不在执行后续操作, 如果不是则将缓冲区的数据写入文件, 并将log\_base的值赋给log\_data, 设置log\_spare\_space的值为缓冲区最大容量, 同时把log\_file\_amount加1\juhao 
 

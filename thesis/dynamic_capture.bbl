@@ -112,6 +112,12 @@ Julian Sch{\"u}tte, Rafael Fedler, and Dennis Titze.
 \newblock In {\em 2015 IEEE 29th International Conference on Advanced
   Information Networking and Applications}, pages 571--578. IEEE, 2015.
 
+\bibitem{tiro}
+Michelle~Y Wong and David Lie.
+\newblock Tackling runtime-based obfuscation in android with $\{$TIRO$\}$.
+\newblock In {\em 27th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$
+  Security 18)}, pages 1247--1262, 2018.
+
 \bibitem{droidcat}
 Haipeng Cai, Na~Meng, Barbara Ryder, and Daphne Yao.
 \newblock Droidcat: Unified dynamic detection of android malware.
@@ -135,12 +141,6 @@ Michalis Diamantaris, Elias~P Papadopoulos, Evangelos~P Markatos, Sotiris
 \newblock {\em Android软件安全权威指南}.
 \newblock 电子工业出版社, 2019.
 
-\bibitem{tiro}
-Michelle~Y Wong and David Lie.
-\newblock Tackling runtime-based obfuscation in android with $\{$TIRO$\}$.
-\newblock In {\em 27th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$
-  Security 18)}, pages 1247--1262, 2018.
-
 \bibitem{packergrind}
 Lei Xue, Xiapu Luo, Le~Yu, Shuai Wang, and Dinghao Wu.
 \newblock Adaptive unpacking of android apps.
@@ -152,6 +152,11 @@ Yiming Jing, Ziming Zhao, Gail~Joon Ahn, and Hongxin Hu.
 \newblock Morpheus: Automatically generating heuristics to detect android
   emulators.
 \newblock In {\em Computer Security Applications Conference}, 2014.
+
+\bibitem{frida}
+oleavr.
+\newblock Frida.
+\newblock https://www.frida.re/.
 
 \bibitem{360jiagubao}
 360加固保.
