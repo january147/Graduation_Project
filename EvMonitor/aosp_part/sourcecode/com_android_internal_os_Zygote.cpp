@@ -68,12 +68,20 @@
 #include <cutils/properties.h>
 #include <android/log.h>
 #include "EvMonitor.h"
+// end EvMonitor
+
+// EvMonitor
+namespace art{
+extern EvMonitor em;
+}
+// end EvMonitor
 
 namespace {
 
 using android::String8;
 using android::base::StringPrintf;
 using android::base::WriteStringToFile;
+
 
 static pid_t gSystemServerPid = 0;
 
@@ -689,11 +697,6 @@ static pid_t ForkAndSpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArra
 }
 }  // anonymous namespace
 
-namespace art{
-  extern void setMonitorPid(int pid);
-  extern EvMonitor em;
-}
-
 namespace android {
 
 static void com_android_internal_os_Zygote_nativePreApplicationInit(JNIEnv*, jclass) {
@@ -825,17 +828,23 @@ static void com_android_internal_os_Zygote_nativeUnmountStorageOnInit(JNIEnv* en
     UnmountTree("/storage");
 }
 
-// add by myself
-static void com_android_internal_os_Zygote_nativeEnableMonitor(JNIEnv* env, jclass, jint jpid){
+// EvMonitor
+static void com_android_internal_os_Zygote_nativeEnableMonitor(JNIEnv* env, jclass){
   char target_app[92];
   std::string app_name;
-  property_get("target_app", target_app, "0");
+  
+  // 读取em.target_app系统属性获取当前app名称
+  property_get("em.target_app", target_app, "0");
   if (target_app[0] != '0'){
     app_name = target_app;
+  } else {
+    EMLOGE("No target_app appointed");
+    return;
   }
   art::em.init(app_name);
-  __android_log_print(ANDROID_LOG_DEBUG, "EvMonitor", "native interface seted up");
+ 
 }
+// end EvMonitor
 
 static const JNINativeMethod gMethods[] = {
     { "nativeForkAndSpecialize",
@@ -849,7 +858,8 @@ static const JNINativeMethod gMethods[] = {
       (void *) com_android_internal_os_Zygote_nativeUnmountStorageOnInit },
     { "nativePreApplicationInit", "()V",
       (void *) com_android_internal_os_Zygote_nativePreApplicationInit },
-    { "nativeEnableMonitor","(I)V",
+    // EvMonitor, 给com.android.internal.os.Zygote类增加一个本地方法来初始化EvMonitor
+    { "nativeEnableMonitor","()V",
       (void *) com_android_internal_os_Zygote_nativeEnableMonitor}
 };
 

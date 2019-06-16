@@ -398,6 +398,7 @@ class ArtMethod FINAL {
   // EvMonitor--(method invocation log)
   void log_em(const char* info)
       REQUIRES_SHARED(Locks::mutator_lock_);
+  // end EvMonitor
 
   void Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue* result, const char* shorty)
       REQUIRES_SHARED(Locks::mutator_lock_);

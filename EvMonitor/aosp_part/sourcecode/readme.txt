@@ -1,0 +1,9 @@
+文件说明:
+EvMonitor.h包含了EvMonitor类的定义
+EvMonitor.cc包含了EvMonitor核心功能的实现
+em_agent.h包含了配置文件在内存中的结构体定义
+以上三个文件为我编写的代码, 需要在编译时加入Android源代码中的/aosp/art/runtime目录下(aosp为Android源代码根目录)
+其他文件为修改过的Android源代码文件, 所有插入的代码都添加了EvMonitor注释, 因此在文件中搜索EvMonitor关键字就可以找到所有插入的代码
+
+编译说明:
+需要在/aosp/art/runtime目录下的Android.bp文件的cc_defaults模块的srcs属性中加入EvMonitor.cc文件才能编译

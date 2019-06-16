@@ -1,0 +1,9 @@
+aosp_part是修改或者加入Android源代码的部分, 其中有详细说明
+em_agent是用于用户控制EvMonitor的部分, 其作为单独的程序运行在手机端
+EvMonitor_utils包含了加载frida的脚本和从手机中抽取log文件夹的脚本
+setup_EvMonitor.sh会做EvMonitor的初始化工作
+
+通过设置系统属性em.target_type为app或者process来选择监控目标是某个应用还是某个进程
+设置em.target_type为app时, 通过系统属性em.target_app指定监控目标的包名(一个应用可以启动多个进程)
+设置em.target_type为process时, 通过系统属性em.target_process执行监控目标的进程名
+默认的em.target_type为process

@@ -5451,26 +5451,11 @@ public final class ActivityThread {
         }
 
         // send up app name; do this *before* waiting for debugger
+        
         // EvMonitor--monitor app starting and do some setup work.
-        Log.d("EvMonitor:", "app started--ProcessName:[" + data.processName + "]--PackageName:[" + data.appInfo.packageName + "]");
-        String monitor_target = SystemProperties.get("target_app");
-        if(monitor_target != null && monitor_target.equals(data.processName)) {
-            int pid = Process.myPid();
-            Zygote.nativeEnableMonitor(pid);
-            Log.d("EvMonitor:", "enable monitor, pid is " + String.valueOf(pid));
-            try{
-                if(VMRuntime.getRuntime().is64Bit()) {
-                    System.load("/data/local/tmp/frida64.so");
-                }else {
-                    System.load("/data/local/tmp/frida.so");
-                }
-            }catch(Exception ex) {
-                ex.printStackTrace();
-                Log.e("EvMonitor", "Error when loading frida");
-            }
-            
-        }
+        Zygote.logAppStartAndSetTarget_em(data.processName, data.appInfo.packageName);
         // end EvMonitor
+
         Process.setArgV0(data.processName);
         android.ddm.DdmHandleAppName.setAppName(data.processName,
                                                 UserHandle.myUserId());

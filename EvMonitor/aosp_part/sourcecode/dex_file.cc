@@ -50,12 +50,13 @@
 // EvMonitor--log head file
 #include "android/log.h"
 #include "EvMonitor.h"
-namespace art{
-  extern EvMonitor em;
-}
+// end EvMonitor
 namespace art {
 
 using android::base::StringPrintf;
+// EvMonitor
+extern EvMonitor em;
+// end EvMonitor
 
 static_assert(sizeof(dex::StringIndex) == sizeof(uint32_t), "StringIndex size is wrong");
 static_assert(std::is_trivially_copyable<dex::StringIndex>::value, "StringIndex not trivial");

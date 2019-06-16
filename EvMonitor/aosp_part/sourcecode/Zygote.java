@@ -235,7 +235,7 @@ public final class Zygote {
     // EvMonitor--java api used to monitor
     private static String em_PROCESS = "process";
     private static String em_APP = "app";
-    native public static void nativeEnableMonitor(int pid);
+    native public static void nativeEnableMonitor();
     // EvMonitor--monitor app starting and do some setup work.
     public static void logAppStartAndSetTarget_em(String process_name, String app_name ){
         boolean enable_monitor = false;
@@ -258,7 +258,7 @@ public final class Zygote {
 
         if (enable_monitor) {
             int pid = Process.myPid();
-            Zygote.nativeEnableMonitor(pid);
+            Zygote.nativeEnableMonitor();
             try{
                 if(VMRuntime.getRuntime().is64Bit()) {
                     System.load("/data/local/tmp/frida64.so");
@@ -271,6 +271,6 @@ public final class Zygote {
             }
             Log.d("EvMonitor", "monitor enabled, pid is " + String.valueOf(pid));
         }
-        // end EvMonitor
     }
+    // end EvMonitor
 }

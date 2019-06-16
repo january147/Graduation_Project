@@ -18,26 +18,7 @@
 
 #include <cstddef>
 //EvMonitor--head file
-#define EM_DEBUG
-#include<unistd.h>
-#include <ctime>
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<sys/un.h>
-#include<sys/stat.h>
-#include<fcntl.h> 
-#include "android/log.h"
-#include<sys/mman.h>
 #include "EvMonitor.h"
-#include<errno.h>
-#include <sys/syscall.h>
-#include <pthread.h>
-
-#define gettid() syscall(SYS_gettid)
-#define getpid() syscall(SYS_getpid)
-#define EMLOGE(log_info, ...) __android_log_print(ANDROID_LOG_ERROR, "EvMonitor", log_info, ##__VA_ARGS__)
-#define EMLOGD(log_info, ...) __android_log_print(ANDROID_LOG_DEBUG, "EvMonitor", log_info, ##__VA_ARGS__)
-#define ISCMD(cmd_str) (strcmp(cmd, cmd_str) == 0)
 //end EvMonitor
 
 #include "android-base/stringprintf.h"
@@ -71,6 +52,9 @@
 namespace art {
 
 using android::base::StringPrintf;
+// EvMonitor
+extern EvMonitor em;
+//end EvMonitor
 
 extern "C" void art_quick_invoke_stub(ArtMethod*, uint32_t*, uint32_t, Thread*, JValue*,
                                       const char*);
@@ -82,415 +66,6 @@ DEFINE_RUNTIME_DEBUG_FLAG(ArtMethod, kCheckDeclaringClassState);
 // Enforce that we he have the right index for runtime methods.
 static_assert(ArtMethod::kRuntimeMethodDexMethodIndex == DexFile::kDexNoIndex,
               "Wrong runtime-method dex method index");
-
-//EvMonitor--native
-// 打印读取到内存的配置信息
-void printConfig(CONFIG* config) {
-    EMLOGD("######EvMonitor Config########\n"
-    "only_native       [%d]\n"
-    "only_method_name  [%d]\n"
-    "enable_dex_dump   [%d]\n"
-    "log_dir           [%s]\n"
-    "file_dump_dir     [%s]\n", 
-    config->only_native, 
-    config->only_method_name, 
-    config->enable_dex_dump,
-    config->log_dir,
-    config->file_dump_dir);
-}
-
-EvMonitor::EvMonitor() {
-  srand((unsigned)time(NULL));
-}
-
-void EvMonitor::setTargetApp(std::string app_name) {
-  target_app_name = app_name;
-  app_root = "/data/data/" + app_name; 
-}
-
-bool EvMonitor::enableMonitor(bool enable) {
-  if (!enable) {
-    monitor_enabled = false;
-    return true;
-  }
-
-  if (monitor_enabled) {
-    return true;
-  }
-  monitor_enabled = enable;
-  return enableEmbedLog(true);
-
-}
-
-bool EvMonitor::enableEmbedLog(bool enable) {
-  if (!enable) {
-    embeded_log_enabled = false;
-    if (log_base != NULL) {
-      munmap(log_base, LOG_MAX);
-      log_base = NULL;
-      log_data = NULL;
-    }
-    return true;
-  }
- 
-  if (embeded_log_enabled) {
-    return true;
-  } 
-
-  if (!setLogFilePath()) {
-    EMLOGE("no log file dir");
-    return false;
-  }
-
-  log_data = (char*)mmap(NULL, LOG_MAX, PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0);
-  if ((void*)log_data == (void*)-1) {
-    EMLOGE("can't allocate log buff, error[%s]", strerror(errno));
-    return false;
-  }
-  log_base = log_data;
-  embeded_log_enabled = true;
-#ifdef EM_DEBUG
-  EMLOGD("embeded log enabled, log buff address[%p]", log_base);
-  EMLOGD("log buff size[%d]", LOG_MAX);
-#endif
-  return true;
-}
-
-bool EvMonitor::connectToAgent(bool enable) {
-  int sock_fd;
-  struct sockaddr_un agent_addr;
-
-  if (!enable) {
-    agent_connected = false;
-    if (rm_sock != DISCONNECTED) {
-      close(rm_sock);
-      rm_sock = DISCONNECTED;
-    }
-    return true;
-  }
-
-  if (agent_connected) {
-    return true;
-  }
-
-  sock_fd = socket(AF_UNIX, SOCK_STREAM, 0);
-  if (sock_fd == -1) {
-    EMLOGE("can't create domain socket, error[%s]", strerror(errno));
-    return false;
-  }
-
-  memset(&agent_addr, 0, sizeof(agent_addr));
-  agent_addr.sun_family = AF_UNIX;
-  strcpy(agent_addr.sun_path, agent_sock_path.c_str());
-
-  if (connect(sock_fd, (struct sockaddr *)&agent_addr, sizeof(agent_addr)) < 0) {
-    EMLOGE("can't connect to control agent, error[%s]", strerror(errno));
-    return false;
-  }
-#ifdef EM_DEBUG
-  EMLOGD("agent connected");
-#endif
-  rm_sock = sock_fd;
-  agent_connected = true;
-  return true;
-}
-
-bool EvMonitor::readConfigFromAgent() {
-  int config_len = read(rm_sock, &config_buff, sizeof(CONFIG));
-      if (config_len != sizeof(CONFIG)) {
-        EMLOGE("bad config");
-        return false;
-      }
-      printConfig(&config_buff);
-      return true;
-}
-
-bool EvMonitor::enableRemoteCtrl(bool enable) {
-  pthread_t mtid;
-  if (!enable) {
-    remote_ctrl_enabled = false;
-    return true;
-  }
-  if (remote_ctrl_enabled) {
-    return true;
-  }
-
-  if (rm_sock == DISCONNECTED) {
-    EMLOGE("not connect to agent");
-    return false;
-  }
-
-  if (pthread_create(&mtid, NULL, commandHandler, this) != 0) {
-    EMLOGE("can't create remote command handler thread");
-    return false;
-  }
-#ifdef EM_DEBUG
-  EMLOGD("commandHandler started");
-#endif
-  return true;
-}
-
-void EvMonitor::init(std::string app_name) {
-  setTargetApp(app_name);
-  if (!connectToAgent(true)) {
-    EMLOGE("can't connect to agent, monitor stoped");
-    return;
-  }
-  if (!readConfigFromAgent()) {
-    EMLOGE("can't read config, monitor stoped");
-    return;
-  }
-
-  if (config_buff.enable_dex_dump) {
-    enableDexDump(true);
-  }
-
-  if (config_buff.only_native) {
-    only_native = true;
-  }
-
-  if (config_buff.only_method_name) {
-    only_method_name = true;
-  }
-  if (!enableRemoteCtrl(true)) {
-    EMLOGD("remote control failed to start");
-  }
-
-  if (!enableMonitor(true)) {
-    EMLOGE("Monitor failed to start");
-  }
-  
-}
-
-bool EvMonitor::enableDexDump(bool enable) {
-  if (!enable) {
-    dex_dump_enabled = false;
-    return true;
-  }
-
-  if (dex_dump_enabled) {
-    return true;
-  }
-
-  if (!setDumpFilePath()) {
-    EMLOGE("no dump file dir");
-    return false;
-  }
-
-  dex_dump_enabled = true;
-#ifdef EM_DEBUG
-  EMLOGD("dex file dump enabled");
-#endif
-  return true;
-}
-
-void EvMonitor::log(const char* tag, const char* log_content) {
-  int log_item_len= strlen(tag) + strlen(log_content) + 9;
-  mutex_lock.lock();
-  if (log_spare_space < log_item_len) {
-    writeLog();
-  } 
-  log_item_len = sprintf(log_data, "%6ld %s %s\n", gettid(), tag, log_content);
-  log_data += log_item_len;
-  log_spare_space -= log_item_len;
-  mutex_lock.unlock();
-}
-
-std::string EvMonitor::getTime() {
-  time_t timep;
-  time (&timep);
-  char tmp[64];
-  strftime(tmp, sizeof(tmp), "%Y-%m-%d_%H:%M:%S",localtime(&timep));
-  return tmp;
-}
-
-bool EvMonitor::setDumpFilePath() {
-  std::stringstream file_name_builder;
-  if (app_root.length() == 0) {
-    EMLOGE("no app root dir");
-    return false;
-  }
-
-  file_name_builder << app_root << "/" << config_buff.file_dump_dir;
-  file_dump_dir_root = file_name_builder.str();
-  if (access(file_dump_dir_root.c_str(), F_OK) < 0) {
-    if (mkdir(file_dump_dir_root.c_str(), 0755) < 0) {
-      EMLOGE("can't create root dumped file dir[%s], error[%s]", file_dump_dir_root.c_str(), strerror(errno));
-      return false;
-    }
-  }
-  #ifdef EM_DEBUG
-  EMLOGD("file_dump_dir_root[%s]", file_dump_dir_root.c_str());
-  #endif
-
-  file_name_builder << "/" << getpid();
-  file_dump_dir = file_name_builder.str();
-  if (access(file_dump_dir_root.c_str(), F_OK) < 0) {
-    if (mkdir(file_dump_dir_root.c_str(), 0755) < 0) {
-      EMLOGE("can't create dumped file dir[%s] for current process, error[%s]", file_dump_dir.c_str(), strerror(errno));
-      return false;
-    }
-  }
-  #ifdef EM_DEBUG
-  EMLOGD("file_dump_dir[%s]", file_dump_dir.c_str());
-  #endif
-  return true;
-}
-
-bool EvMonitor::setLogFilePath() {
-  std::stringstream file_name_builder;
-  //return false if no target_app_name specified.
-  if(app_root.length() == 0){
-    EMLOGE("no target_app specified");
-    return false;
-  }
-  file_name_builder << app_root << "/" << config_buff.log_dir;
-  log_dir_root = file_name_builder.str();
-  if (access(log_dir_root.c_str(), F_OK) < 0) {
-    if (mkdir(log_dir_root.c_str(), 0755) < 0) {
-      EMLOGE("can't create root log dir[%s], error[%s]", log_dir_root.c_str(), strerror(errno));
-      return false;
-    }
-  }
-
-  file_name_builder << "/" << getpid() << "_" <<getRandomStr(5);
-  current_log_dir = file_name_builder.str();
-  if (access(current_log_dir.c_str(), F_OK) < 0) {
-    if (mkdir(current_log_dir.c_str(), 0755) < 0) {
-      EMLOGE("can't create log dir[%s] for current process, error[%s]", current_log_dir.c_str(), strerror(errno));
-      return false;
-    }
-  }
-#ifdef EM_DEBUG
-  EMLOGD("log file dir[%s]", current_log_dir.c_str());
-#endif
-  return true;
-}
-
-bool EvMonitor::writeLog() {
-  std::stringstream file_name_builder;
-  if (log_spare_space >= LOG_MAX) {
-    EMLOGE("no log to write");
-    return false;
-  }
-
-  if (log_file_amount > LOG_FILE_MAX) {
-    EMLOGE("log file reached max size");
-    return false;
-  }
-
-  file_name_builder << current_log_dir << "/em_" << log_file_amount << ".log";
-  if (!dumpFile(log_base, LOG_MAX - log_spare_space, file_name_builder.str())) {
-    EMLOGE("can't save log file, error[%s]", strerror(errno));
-    return false;
-  }
-  log_file_amount++;
-  log_data = log_base;
-  log_spare_space = LOG_MAX;
-  return true;
-}
-
-void EvMonitor::dumpDex(const void* base, long size) {
-  std::stringstream file_name_builder;
-  if (dex_dump_enabled) {
-    file_name_builder << file_dump_dir << "/" << getRandomStr(6) << ".dex";
-    if (!dumpFile(base, size, file_name_builder.str())) {
-      __android_log_print(ANDROID_LOG_DEBUG, "EvMonitor", "can't dump dex file, error[%s]", strerror(errno));
-    }else{
-      __android_log_print(ANDROID_LOG_DEBUG, "EvMonitor", "file dumped, path[%s]", file_name_builder.str().c_str());
-    }
-  }
-}
-
-inline bool EvMonitor::dumpFile(const void* base, long size, std::string file_path) {
-  int fd;
-  fd = open(file_path.c_str(), O_WRONLY|O_CREAT, 0644);
-  if (fd < 0) {
-    return false;
-  }
-  if (write(fd, base, size) < 0 ){
-    return false;
-  };
-  close(fd);
-  return true;
-}
-
-std::string EvMonitor::getRandomStr(int len) {
-  int size;
-  int i = 0;
-  char tmp[21];
-  char init = 'a';
-  size = (len < 20)? len : 20;
-  for(i=0; i<len; i++){
-    tmp[i] = init + rand() % 26;
-  }
-  tmp[i] = '\0';
-  return tmp;
-}
-
-//deprecated
-int my_target_pid = 0;
-void setMonitorPid(int pid){
-  my_target_pid = pid;
-}
-//main native component
-EvMonitor em;
-
-void* commandHandler(void* args) {
-  EvMonitor* mEm = (EvMonitor*)args;
-  int error_count = 0;
-  int cmd_len;
-  int sock_fd = mEm->rm_sock;
-  char cmd[CMD_MAX_LEN + 1];
-
-  mEm->remote_ctrl_enabled = true;
-  while (mEm->remote_ctrl_enabled) {
-    cmd_len = read(sock_fd, cmd, CMD_MAX_LEN);
-    cmd[cmd_len] = '\0';
-
-    if (cmd_len == 0) {
-      EMLOGE("agent stoped the connection");
-      mEm->remote_ctrl_enabled = false;
-      return NULL;
-    }
-
-    if (cmd_len < 0) {
-      if (error_count > 10) {
-        mEm->remote_ctrl_enabled = false;
-        return NULL;
-      }
-      EMLOGE("commandHanlder failed to read cmd, error[%s]", strerror(errno));
-      error_count++;
-      continue;
-    }
-#ifdef EM_DEBUG
-  EMLOGD("cmdHandler getcmd[%s], size[%d]", cmd, cmd_len);
-#endif
-    if (ISCMD("FL")) {
-      mEm->mutex_lock.lock();
-      mEm->writeLog();
-      mEm->mutex_lock.unlock();
-#ifdef EM_DEBUG
-      EMLOGD("cmd[%s] finished", cmd);
-#endif
-    } else if(ISCMD("RC")) {
-      mEm->readConfigFromAgent();
-    }
-  }
-  return NULL;
-}
-
-extern "C" void ex_log_em(const char* tag, const char* log_info){
-  if (em.embeded_log_enabled) {
-    em.log(tag, log_info);
-  }
-}
-extern "C" void ex_dump_log_buff_em(){
-  if (em.embeded_log_enabled) {
-    em.writeLog();
-  }
-}
-//end EvMonitor
 
 
 ArtMethod* ArtMethod::GetCanonicalMethod(PointerSize pointer_size) {
@@ -739,18 +314,24 @@ uint32_t ArtMethod::FindCatchBlock(Handle<mirror::Class> exception_type,
   return found_dex_pc;
 }
 
-// add by myself
+// EvMonitor
+// 加入ArtMethod对象的一个方法, 该方法参数为额外的提示信息
 void ArtMethod::log_em(const char* info) {
   if(em.monitor_enabled){
-    em.log(info, PrettyMethod(true).c_str());
+    if (em.only_native && !this->IsNative()) {
+      return;
+    }
+    // PrettyMethod为ArtMethod对象的一个方法, 该方法返回ArtMethod对象表示的Java方法的参数和返回值信息
+    em.log(info, PrettyMethod(!em.only_method_name).c_str());
   }
 }
 
 void ArtMethod::Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue* result,
                        const char* shorty) {
-  // EvMonitor(log method in)
-  this->log_em("II--");
-  // end
+  // EvMonitor(log method in), II中第一个I表示进入该方法, 第二个I表示通过Invoke执行
+  this->log_em("II");
+  // end EvMonitor
+  
   if (UNLIKELY(__builtin_frame_address(0) < self->GetStackEnd())) {
     ThrowStackOverflowError(self);
     return;
@@ -829,8 +410,11 @@ void ArtMethod::Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue*
 
   // Pop transition.
   self->PopManagedStackFragment(fragment);
+
   // EvMonitor(log method out)
-  this->log_em("OI--");
+  this->log_em("OI");
+  // end EvMonitor
+
 }
 
 const void* ArtMethod::RegisterNative(const void* native_method, bool is_fast) {

@@ -1,5 +1,6 @@
 #!/bin/sh
 des=/data/local/tmp
+
 adb push frida.so $des
 adb push frida64.so $des
 adb push frida.config $des
